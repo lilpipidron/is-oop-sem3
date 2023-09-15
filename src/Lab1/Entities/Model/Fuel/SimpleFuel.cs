@@ -7,7 +7,7 @@ public class SimpleFuel : IFuel
         Amount = amount;
     }
 
-    private int Amount { get; init; }
+    private int Amount { get; set; }
 
     public int Use(int distance)
     {
