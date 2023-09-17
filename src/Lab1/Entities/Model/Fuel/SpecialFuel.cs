@@ -9,7 +9,7 @@ public class SpecialFuel : IFuel
 
     private int Amout { get; set; }
 
-    public int Use(int distance)
+    public int Use(double time)
     {
         throw new System.NotImplementedException();
     }

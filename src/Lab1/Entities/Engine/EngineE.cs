@@ -7,8 +7,10 @@ public class EngineE : Engine
     {
     }
 
-    public override bool Move(int distace)
+    public override bool Move(int distance)
     {
-        throw new System.NotImplementedException();
+        Speed = double.Exp(distance);
+        double time = distance / Speed;
+        return Fuel.Use(time * 1.5) > 0;
     }
 }

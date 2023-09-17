@@ -7,8 +7,9 @@ public class EngineC : Engine
     {
     }
 
-    public override bool Move(int distace)
+    public override bool Move(int distance)
     {
-        throw new System.NotImplementedException();
+        double time = distance / Speed;
+        return Fuel.Use(time) >= 0;
     }
 }

@@ -10,8 +10,8 @@ public abstract class Engine
         Fuel = new SimpleFuel(fuelAmount);
     }
 
-    private double Speed { get; init; }
-    private SimpleFuel Fuel { get; init; }
+    protected double Speed { get; set; }
+    protected SimpleFuel Fuel { get; set; }
 
-    public abstract bool Move(int distace);
+    public abstract bool Move(int distance);
 }
