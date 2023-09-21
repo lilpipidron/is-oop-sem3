@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 
-public class SpecialFuel : IFuel
+public class SpecialFuel : Fuel
 {
     public SpecialFuel(int fuelAmount)
     {
@@ -9,7 +9,7 @@ public class SpecialFuel : IFuel
 
     private int Amout { get; set; }
 
-    public int Use(double time)
+    public override double Use(double time)
     {
         throw new System.NotImplementedException();
     }

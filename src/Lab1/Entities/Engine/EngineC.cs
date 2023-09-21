@@ -2,8 +2,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
 public class EngineC : Engine
 {
-    public EngineC(double speed, int fuelAmount)
-        : base(speed, fuelAmount)
+    public EngineC(double speed, int startCost, int fuelAmount)
+        : base(speed, startCost, fuelAmount)
     {
     }
 

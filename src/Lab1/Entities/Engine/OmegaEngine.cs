@@ -1,14 +1,14 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
-public class AlphaEngine : JumpEngine
+public class OmegaEngine : JumpEngine
 {
-    public AlphaEngine(int fuelAmount, int jumpDistance)
+    public OmegaEngine(int fuelAmount, double jumpDistance)
         : base(fuelAmount, jumpDistance)
     {
     }
 
     public override bool Move(int distance)
     {
-        return Fuel.Use(distance) >= 0;
+        return Fuel.Use(double.Log(distance)) >= 0;
     }
 }

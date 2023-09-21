@@ -4,10 +4,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
 public abstract class JumpEngine
 {
-    protected JumpEngine(int fuelAmount)
+    protected JumpEngine(int fuelAmount, double jumpDistance)
     {
         Fuel = new SpecialFuel(fuelAmount);
+        JumpDistance = jumpDistance;
     }
 
-    private SpecialFuel Fuel { get; init; }
+    protected SpecialFuel Fuel { get; init; }
+    protected double JumpDistance { get; init; }
+
+    public abstract bool Move(int distance);
 }

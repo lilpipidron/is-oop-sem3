@@ -1,16 +1,17 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 
-public class SimpleFuel : IFuel
+public class SimpleFuel : Fuel
 {
-    public SimpleFuel(int amount)
+    public SimpleFuel(double amount)
     {
         Amount = amount;
     }
 
-    private int Amount { get; set; }
+    private double Amount { get; set; }
 
-    public int Use(double time)
+    public override double Use(double time)
     {
-        throw new System.NotImplementedException();
+        Amount -= time * 1.2;
+        return Amount;
     }
 }
