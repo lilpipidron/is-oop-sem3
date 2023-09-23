@@ -3,9 +3,9 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Model.FuelExchnge;
 
-public class FuelExchnge
+public class FuelExchange
 {
-    public FuelExchnge(double simpleFuelCost, double specialFuelCost)
+    public FuelExchange(double simpleFuelCost, double specialFuelCost)
     {
         SimpleFuelCost = simpleFuelCost;
         SpecialFuelCost = specialFuelCost;
