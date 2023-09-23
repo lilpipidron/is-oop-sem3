@@ -15,18 +15,11 @@ public class FuelExchange
 
     private double SpecialFuelCost { get; }
 
-    public double TotalCost(Fuel fuel)
+    public double TotalCost(Fuel fuel) => fuel switch
     {
-        switch (fuel)
-        {
-         case null:
-             throw new ArgumentNullException(nameof(fuel));
-         case SimpleFuel:
-             return SimpleFuelCost * fuel.Amount;
-         case SpecialFuel:
-             return SpecialFuelCost * fuel.Amount;
-         default:
-             throw new ArgumentException("We have no information about this type of fuel");
-        }
-    }
+        null => throw new ArgumentNullException(nameof(fuel)),
+        SimpleFuel simpleFuel => SimpleFuelCost * simpleFuel.Amount,
+        SpecialFuel specialFuel => SpecialFuelCost * specialFuel.Amount,
+        _ => throw new ArgumentException("We have no information about this type of fuel"),
+    };
 }
