@@ -2,12 +2,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 
 public class SimpleFuel : Fuel
 {
-    public SimpleFuel(double amount)
+    public SimpleFuel(int amount)
+        : base(amount)
     {
-        Amount = amount;
     }
-
-    private double Amount { get; set; }
 
     public override double Use(double time)
     {

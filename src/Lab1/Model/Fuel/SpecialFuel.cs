@@ -2,9 +2,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 
 public class SpecialFuel : Fuel
 {
-    public SpecialFuel(int fuelAmount)
+    public SpecialFuel(int amount)
+        : base(amount)
     {
-        Amout = fuelAmount;
     }
 
     private int Amout { get; set; }
