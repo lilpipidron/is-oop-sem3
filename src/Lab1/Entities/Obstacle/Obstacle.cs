@@ -2,6 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 public abstract class Obstacle
 {
+    private double _healthPoint;
     protected Obstacle() { }
 
     protected Obstacle(int population)
@@ -9,13 +10,18 @@ public abstract class Obstacle
         Population = population;
     }
 
-    protected Obstacle(int health, int dw)
+    protected Obstacle(double health, int dw)
     {
-        HealthPoint = health;
+        _healthPoint = health;
         DoW = dw;
     }
 
-    protected int HealthPoint { get; set; }
     protected int DoW { get; set; }
+
     protected int Population { get; set; }
+
+    public void GetDamage(double damageCoefficient)
+    {
+        _healthPoint -= _healthPoint * damageCoefficient;
+    }
 }

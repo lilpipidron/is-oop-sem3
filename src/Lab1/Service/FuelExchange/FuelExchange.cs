@@ -1,7 +1,7 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Model.FuelExchnge;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Service.FuelExchange;
 
 public class FuelExchange
 {
