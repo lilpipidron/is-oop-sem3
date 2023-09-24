@@ -13,6 +13,7 @@ public abstract class Deflector
         Works = true;
     }
 
+    private int PhotonDeflector { get; set; }
     private int AsteroidDamage { get; }
     private int MeteoriteDamage { get; }
     private int WhaleDamage { get; }
@@ -46,6 +47,14 @@ public abstract class Deflector
                 }
 
                 break;
+            case Antimatter:
+                if (PhotonDeflector == 0)
+                {
+                    return obstacle;
+                }
+
+                PhotonDeflector--;
+                return null;
         }
 
         if (HealthPoints < 0)
@@ -55,5 +64,10 @@ public abstract class Deflector
         }
 
         return null;
+    }
+
+    public virtual void AddPhotonDeflector()
+    {
+        PhotonDeflector = 3;
     }
 }
