@@ -20,7 +20,7 @@ public abstract class Deflector
     private int HealthPoints { get; set; }
     private bool Works { get; set; }
 
-    public virtual Obstacle? GetDamage(Obstacle obstacle)
+    public Obstacle? GetDamage(Obstacle obstacle)
     {
         if (Works == false || obstacle == null)
         {
@@ -66,7 +66,7 @@ public abstract class Deflector
         return null;
     }
 
-    public virtual void AddPhotonDeflector()
+    public void AddPhotonDeflector()
     {
         PhotonDeflector = 3;
     }
