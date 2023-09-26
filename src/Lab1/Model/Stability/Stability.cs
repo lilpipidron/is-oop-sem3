@@ -17,9 +17,9 @@ public abstract class Stability
     private int MeteoriteDamage { get; }
     private bool Alive { get; set; }
 
-    public Obstacle? GetDamage(Obstacle obstacle)
+    public Obstacle? GetDamage(Obstacle? obstacle)
     {
-        if (Alive == false || obstacle == null)
+        if (Alive == false || obstacle is null)
         {
             return obstacle;
         }

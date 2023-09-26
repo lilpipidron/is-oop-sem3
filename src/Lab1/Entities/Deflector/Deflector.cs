@@ -20,9 +20,9 @@ public abstract class Deflector
     private int HealthPoints { get; set; }
     private bool Works { get; set; }
 
-    public Obstacle? GetDamage(Obstacle obstacle)
+    public Obstacle? GetDamage(Obstacle? obstacle)
     {
-        if (Works == false || obstacle == null)
+        if (Works == false || obstacle is null)
         {
             return obstacle;
         }

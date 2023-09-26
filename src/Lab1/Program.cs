@@ -9,6 +9,6 @@ public static class Program
     {
         var df = new Deflector2();
         df.AddPhotonDeflector();
-        df.GetDamage(new Asteroid(100, 100));
+        df.GetDamage(new Asteroid());
     }
 }
