@@ -19,7 +19,7 @@ public abstract class Engine
 
     public abstract bool Move(int distance);
 
-    protected void Refill(int fuelAmount)
+    public void Refill(int fuelAmount)
     {
         Fuel.Fill(fuelAmount);
     }
