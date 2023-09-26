@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 
-public class NitrineNebula : Enivorment
+public class NitrineNebula : Environment
 {
     private int _whaleAmount;
 

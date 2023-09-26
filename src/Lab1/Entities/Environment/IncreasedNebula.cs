@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 
-public class IncreasedNebula : Enivorment
+public class IncreasedNebula : Environment
 {
     private int _antimatterAmount;
 
