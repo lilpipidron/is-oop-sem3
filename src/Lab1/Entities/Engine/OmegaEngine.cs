@@ -2,8 +2,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
 public class OmegaEngine : JumpEngine
 {
-    public OmegaEngine(int fuelAmount, double jumpDistance)
-        : base(fuelAmount, jumpDistance)
+    public OmegaEngine()
+        : base(20)
     {
     }
 

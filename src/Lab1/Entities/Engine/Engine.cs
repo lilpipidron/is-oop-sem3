@@ -4,14 +4,23 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
 public abstract class Engine
 {
-    protected Engine(double speed, int startCost, int fuelAmount)
+    protected Engine(double speed, int startCost)
     {
         Speed = speed;
-        Fuel = new SimpleFuel(fuelAmount - startCost);
+        StartCost = startCost;
+        Fuel = new SimpleFuel();
     }
 
     protected double Speed { get; set; }
+
+    protected int StartCost { get; set; }
+
     protected SimpleFuel Fuel { get; set; }
 
     public abstract bool Move(int distance);
+
+    protected void Refill(int fuelAmount)
+    {
+        Fuel.Fill(fuelAmount);
+    }
 }
