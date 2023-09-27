@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 using Environment = Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment.Environment;
@@ -24,6 +25,19 @@ public class TravelWay
     {
         foreach (Environment environment in Environments)
         {
+            if ((ship is Shuttle || ship is Meredian) && environment is IncreasedNebula)
+            {
+                return new LostShip();
+            }
+
+            if (environment is IncreasedNebula)
+            {
+                if (environment.JumpDistance > ship.JumpDistance)
+                {
+                    return new LostShip();
+                }
+            }
+
             Collection<Obstacle> obstacle = environment.GetAllObstacles();
             foreach (Obstacle obs in obstacle)
             {

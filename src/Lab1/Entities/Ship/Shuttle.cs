@@ -13,9 +13,7 @@ public class Shuttle : Ship
     }
 
     private EngineC Engine { get; set; }
-
     private Stability1 Stability { get; set; }
-
     private int DoW { get; set; }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)

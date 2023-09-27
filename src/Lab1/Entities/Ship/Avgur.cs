@@ -9,20 +9,17 @@ public class Avgur : Ship
     public Avgur()
     {
         EngineE = new EngineE();
-        AlphaEngine = new AlphaEngine();
+        JumpEngine = new AlphaEngine();
+        JumpDistance = JumpEngine.JumpDistance;
         Deflector = new Deflector3();
         Stability = new Stability3();
         DoW = 40;
     }
 
     private EngineE EngineE { get; set; }
-
-    private AlphaEngine AlphaEngine { get; set; }
-
+    private AlphaEngine JumpEngine { get; set; }
     private Deflector3 Deflector { get; set; }
-
     private Stability3 Stability { get; set; }
-
     private int DoW { get; set; }
 
     public void AddPhotonDeflector()

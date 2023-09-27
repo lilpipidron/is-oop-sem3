@@ -10,6 +10,7 @@ public class Vaklas : Ship
     {
         EngineE = new EngineE();
         GammaEngine = new GammaEngine();
+        JumpDistance = GammaEngine.JumpDistance;
         Deflector = new Deflector1();
         Stability = new Stability2();
         DoW = 30;

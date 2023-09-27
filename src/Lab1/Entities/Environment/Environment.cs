@@ -4,6 +4,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 
 public abstract class Environment
 {
-    public abstract bool CanMove(Engine.Engine engine);
+    protected Environment()
+    {
+    }
+
+    protected Environment(int jumpDistance)
+    {
+        JumpDistance = jumpDistance;
+    }
+
+    public int JumpDistance { get; private set; }
     public abstract Collection<Obstacle.Obstacle> GetAllObstacles();
 }

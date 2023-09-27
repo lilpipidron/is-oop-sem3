@@ -8,25 +8,13 @@ public class IncreasedNebula : Environment
     private int _antimatterAmount;
 
     public IncreasedNebula(int jumpDistance)
+        : base(jumpDistance)
     {
-        JumpDistance = jumpDistance;
-    }
-
-    private int JumpDistance { get; set; }
-
-    public bool CanMove(Engine.JumpEngine? engine)
-    {
-        return !(engine is null) && engine.JumpDistance >= JumpDistance;
     }
 
     public void AddAntimatter()
     {
         _antimatterAmount++;
-    }
-
-    public override bool CanMove(Engine.Engine engine)
-    {
-        return false;
     }
 
     public override Collection<Obstacle.Obstacle> GetAllObstacles()

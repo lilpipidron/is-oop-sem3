@@ -19,11 +19,6 @@ public class Space : Environment
         _meteoriteAmount++;
     }
 
-    public override bool CanMove(Engine.Engine engine)
-    {
-        return true;
-    }
-
     public override Collection<Obstacle.Obstacle> GetAllObstacles()
     {
         var obstacles = new Collection<Obstacle.Obstacle>();

@@ -10,6 +10,7 @@ public class Stella : Ship
     {
         EngineC = new EngineC();
         OmegaEngine = new OmegaEngine();
+        JumpDistance = OmegaEngine.JumpDistance;
         Deflector = new Deflector1();
         Stability = new Stability1();
         DoW = 20;
@@ -20,11 +21,6 @@ public class Stella : Ship
     private Deflector1 Deflector { get; set; }
     private Stability1 Stability { get; set; }
     private int DoW { get; set; }
-
-    public void AddPhotonDeflector()
-    {
-        Deflector.AddPhotonDeflector();
-    }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
