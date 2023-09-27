@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
@@ -21,13 +20,8 @@ public class TravelWay
         Environments.Add(environment);
     }
 
-    public void Travel(Ship ship)
+    public Result Travel(Ship ship)
     {
-        if (ship == null)
-        {
-            return;
-        }
-
         foreach (Environment environment in Environments)
         {
             Collection<Obstacle> obstacle = environment.GetAllObstacles();
@@ -36,13 +30,15 @@ public class TravelWay
                 switch (ship.GetDamage(obs))
                 {
                     case Antimatter:
-                        throw new AggregateException("The crew died");
+                        return new CrewDied();
                     case null:
                         break;
                     default:
-                        throw new AggregateException("The ship is destroyed");
+                        return new DestroyShip();
                 }
             }
         }
+
+        return new Success();
     }
 }
