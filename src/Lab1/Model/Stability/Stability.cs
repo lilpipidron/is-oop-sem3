@@ -19,7 +19,7 @@ public abstract class Stability
 
     public Obstacle? GetDamage(Obstacle? obstacle)
     {
-        if (Alive == false || obstacle is null)
+        if (!Alive || obstacle == null || obstacle is Antimatter || obstacle is CosmoWhale)
         {
             return obstacle;
         }
@@ -39,6 +39,11 @@ public abstract class Stability
         if (HealthPoints <= 0)
         {
             Alive = false;
+        }
+
+        if (Alive)
+        {
+            return null;
         }
 
         return obstacle;
