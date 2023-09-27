@@ -7,9 +7,9 @@ public class EngineC : Engine
     {
     }
 
-    public override bool Move(int distance)
+    public override void Move(int distance)
     {
         double time = distance / Speed;
-        return Fuel.Use(time) >= 0;
+        Fuel.Use(time + StartCost);
     }
 }

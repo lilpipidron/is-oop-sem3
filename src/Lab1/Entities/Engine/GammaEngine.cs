@@ -7,8 +7,8 @@ public class GammaEngine : JumpEngine
     {
     }
 
-    public override bool Move(int distance)
+    public override void Move(int distance)
     {
-        return Fuel.Use(distance * distance) >= 0;
+        Fuel.Use(distance * distance);
     }
 }

@@ -17,10 +17,5 @@ public abstract class Engine
 
     protected SimpleFuel Fuel { get; set; }
 
-    public abstract bool Move(int distance);
-
-    public void Refill(int fuelAmount)
-    {
-        Fuel.Fill(fuelAmount);
-    }
+    public abstract void Move(int distance);
 }

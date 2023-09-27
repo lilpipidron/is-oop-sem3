@@ -10,13 +10,7 @@ public abstract class JumpEngine
         JumpDistance = jumpDistance;
     }
 
+    public double JumpDistance { get; private set; }
     protected SpecialFuel Fuel { get; init; }
-    protected double JumpDistance { get; init; }
-
-    public void Refill(int amount)
-    {
-        Fuel.Fill(amount);
-    }
-
-    public abstract bool Move(int distance);
+    public abstract void Move(int distance);
 }
