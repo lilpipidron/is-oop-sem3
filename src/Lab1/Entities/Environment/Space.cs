@@ -6,7 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 public class Space : Environment
 {
     private int _asteroidAmount;
-    private int _meteorinteAmount;
+
+    private int _meteoriteAmount;
 
     public void AddAsteroid()
     {
@@ -15,7 +16,7 @@ public class Space : Environment
 
     public void AddMeteorite()
     {
-        _meteorinteAmount++;
+        _meteoriteAmount++;
     }
 
     public override bool CanMove(Engine.Engine engine)
@@ -31,7 +32,7 @@ public class Space : Environment
             obstacles.Add(new Asteroid());
         }
 
-        for (int i = 0; i < _meteorinteAmount; i++)
+        for (int i = 0; i < _meteoriteAmount; i++)
         {
             obstacles.Add(new Meteorite());
         }

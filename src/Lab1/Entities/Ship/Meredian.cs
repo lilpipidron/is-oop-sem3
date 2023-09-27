@@ -21,6 +21,11 @@ public class Meredian : Ship
     private int DoW { get; set; }
     private bool Emitter { get; set; }
 
+    public void AddPhotonDeflector()
+    {
+        Deflector.AddPhotonDeflector();
+    }
+
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
         Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);

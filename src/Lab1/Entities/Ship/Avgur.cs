@@ -16,10 +16,19 @@ public class Avgur : Ship
     }
 
     private EngineE EngineE { get; set; }
+
     private AlphaEngine AlphaEngine { get; set; }
+
     private Deflector3 Deflector { get; set; }
+
     private Stability3 Stability { get; set; }
+
     private int DoW { get; set; }
+
+    public void AddPhotonDeflector()
+    {
+        Deflector.AddPhotonDeflector();
+    }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {

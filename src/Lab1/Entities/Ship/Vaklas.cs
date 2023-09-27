@@ -21,6 +21,11 @@ public class Vaklas : Ship
     private Stability2 Stability { get; set; }
     private int DoW { get; set; }
 
+    public void AddPhotonDeflector()
+    {
+        Deflector.AddPhotonDeflector();
+    }
+
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
         Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);
