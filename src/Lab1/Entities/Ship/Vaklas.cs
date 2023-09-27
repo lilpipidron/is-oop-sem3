@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
-public class Vaklas
+public class Vaklas : Ship
 {
     public Vaklas()
     {
@@ -20,4 +20,10 @@ public class Vaklas
     private Deflector1 Deflector { get; set; }
     private Stability2 Stability { get; set; }
     private int DoW { get; set; }
+
+    public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
+    {
+        Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);
+        return Stability.GetDamage(obs);
+    }
 }
