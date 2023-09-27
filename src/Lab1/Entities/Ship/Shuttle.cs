@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
-public class Shuttle
+public class Shuttle : Ship
 {
     public Shuttle()
     {
@@ -17,8 +17,9 @@ public class Shuttle
     private Stability1 Stability { get; set; }
 
     private int DoW { get; set; }
-    public void AddFuel(int fuelAmount)
+
+    public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
-        Engine.Refill(fuelAmount);
+        return Stability.GetDamage(obstacle);
     }
 }

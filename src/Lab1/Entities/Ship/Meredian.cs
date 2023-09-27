@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
-public class Meredian
+public class Meredian : Ship
 {
     public Meredian()
     {
@@ -20,4 +20,10 @@ public class Meredian
     private Stability2 Stability { get; set; }
     private int DoW { get; set; }
     private bool Emitter { get; set; }
+
+    public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
+    {
+        Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);
+        return Stability.GetDamage(obs);
+    }
 }
