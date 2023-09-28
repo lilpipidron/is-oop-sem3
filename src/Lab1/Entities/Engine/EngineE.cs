@@ -3,7 +3,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 public class EngineE : Engine
 {
     public EngineE()
-        : base(40, 20)
+        : base(40, 50)
     {
     }
 
