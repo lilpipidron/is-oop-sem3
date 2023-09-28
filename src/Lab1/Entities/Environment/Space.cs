@@ -6,8 +6,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 public class Space : Environment
 {
     private int _asteroidAmount;
-
     private int _meteoriteAmount;
+
+    public Space(int distance)
+        : base(distance)
+    {
+    }
 
     public void AddAsteroid()
     {

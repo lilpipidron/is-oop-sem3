@@ -7,6 +7,11 @@ public class NitrineNebula : Environment
 {
     private int _whaleAmount;
 
+    public NitrineNebula(int distance)
+        : base(distance)
+    {
+    }
+
     public void AddWhale()
     {
         _whaleAmount++;
