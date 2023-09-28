@@ -1,4 +1,7 @@
+using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
@@ -31,5 +34,25 @@ public class Vaklas : Ship
     {
         Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);
         return Stability.GetDamage(obs);
+    }
+
+    public override Collection<Fuel> FuelSpend()
+    {
+        var allFuel = new Collection<Fuel>();
+        allFuel.Add(EngineE.Fuel);
+        allFuel.Add(GammaEngine.Fuel);
+        return allFuel;
+    }
+
+    public override void Move(Environment environment)
+    {
+        if (environment is IncreasedNebula)
+        {
+            GammaEngine.Move(environment.JumpDistance);
+        }
+        else
+        {
+            EngineE.Move(environment.JumpDistance);
+        }
     }
 }
