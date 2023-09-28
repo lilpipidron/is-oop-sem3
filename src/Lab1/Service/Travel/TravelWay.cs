@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 using Environment = Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment.Environment;
@@ -9,12 +10,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 
 public class TravelWay
 {
-    public TravelWay()
+    public TravelWay(FuelExchange.FuelExchange fuelExchange)
     {
         Environments = new List<Environment>();
+        FuelExchange = fuelExchange;
     }
 
     private List<Environment> Environments { get; set; }
+    private FuelExchange.FuelExchange FuelExchange { get; set; }
 
     public void AddEnviroment(Environment environment)
     {
@@ -51,8 +54,17 @@ public class TravelWay
                         return new DestroyShip();
                 }
             }
+
+            ship.Move(environment);
         }
 
-        return new Success();
+        Collection<Fuel> allFuel = ship.FuelSpend();
+        double cost = 0;
+        foreach (Fuel fuel in allFuel)
+        {
+            cost += FuelExchange.TotalCost(fuel);
+        }
+
+        return new Success(cost);
     }
 }
