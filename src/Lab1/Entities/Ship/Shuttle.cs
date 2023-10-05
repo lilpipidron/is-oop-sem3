@@ -8,8 +8,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Shuttle : Ship
 {
-    private readonly EngineC _engine;
-    private readonly Stability1 _stability;
+    private readonly Engine.Engine _engine;
+    private readonly Stability _stability;
 
     public Shuttle()
     {

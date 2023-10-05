@@ -10,10 +10,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Meredian : Ship
 {
-    private readonly EngineE _engineE;
-
-    private readonly Deflector2 _deflector;
-    private readonly Stability2 _stability;
+    private readonly Engine.Engine _engineE;
+    private readonly Stability _stability;
+    private Deflector _deflector;
 
     public Meredian()
     {
@@ -29,7 +28,7 @@ public class Meredian : Ship
 
     public void AddPhotonDeflector()
     {
-        _deflector.AddPhotonDeflector();
+        _deflector = new PhotonDeflector(_deflector);
     }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)

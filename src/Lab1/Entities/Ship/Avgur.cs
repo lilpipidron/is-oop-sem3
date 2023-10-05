@@ -9,10 +9,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Avgur : Ship
 {
-    private readonly EngineE _engineE;
-    private readonly AlphaEngine _jumpEngine;
-    private readonly Deflector3 _deflector;
-    private readonly Stability3 _stability;
+    private readonly Engine.Engine _engineE;
+    private readonly JumpEngine _jumpEngine;
+    private readonly Stability _stability;
+    private Deflector _deflector;
 
     public Avgur()
     {
@@ -28,7 +28,7 @@ public class Avgur : Ship
 
     public void AddPhotonDeflector()
     {
-        _deflector.AddPhotonDeflector();
+        _deflector = new PhotonDeflector(_deflector);
     }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)

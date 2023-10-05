@@ -9,10 +9,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Vaklas : Ship
 {
-    private readonly EngineE _engineE;
+    private readonly Engine.Engine _engineE;
     private readonly GammaEngine _gammaEngine;
-    private readonly Deflector1 _deflector;
-    private readonly Stability2 _stability;
+    private readonly Stability _stability;
+    private Deflector _deflector;
 
     public Vaklas()
     {
@@ -28,7 +28,7 @@ public class Vaklas : Ship
 
     public void AddPhotonDeflector()
     {
-        _deflector.AddPhotonDeflector();
+        _deflector = new PhotonDeflector(_deflector);
     }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)

@@ -7,9 +7,12 @@ public abstract class Deflector
     private readonly int _asteroidDamage;
     private readonly int _meteoriteDamage;
     private readonly int _whaleDamage;
-    private int _photonDeflector;
     private int _healthPoints;
     private bool _works;
+
+    protected Deflector()
+    {
+    }
 
     protected Deflector(int asteroidDamage, int meteoriteDamage, int whaleDamage, int healthPoints)
     {
@@ -20,7 +23,7 @@ public abstract class Deflector
         _works = true;
     }
 
-    public Obstacle? GetDamage(Obstacle? obstacle)
+    public virtual Obstacle? GetDamage(Obstacle? obstacle)
     {
         if (_works == false || obstacle is null)
         {
@@ -48,26 +51,16 @@ public abstract class Deflector
 
                 break;
             case Antimatter:
-                if (_photonDeflector == 0)
+                if (this is PhotonDeflector photonDeflector)
                 {
-                    return obstacle;
+                    return photonDeflector.Use() is false ? obstacle : null;
                 }
 
-                _photonDeflector--;
-                return null;
+                return obstacle;
         }
 
-        if (_healthPoints < 0)
-        {
-            _works = false;
-            return obstacle;
-        }
-
-        return null;
-    }
-
-    public void AddPhotonDeflector()
-    {
-        _photonDeflector = 3;
+        if (_healthPoints >= 0) return null;
+        _works = false;
+        return obstacle;
     }
 }
