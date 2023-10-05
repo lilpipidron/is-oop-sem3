@@ -1,12 +1,11 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
-
-namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Deflector;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
 public class PhotonDeflector : DeflectorDecorator
 {
     private int _charge = 3;
 
-    public PhotonDeflector(Deflector deflector)
+    public PhotonDeflector(Model.Deflector.Deflector deflector)
         : base(deflector)
     {
     }
@@ -17,7 +16,7 @@ public class PhotonDeflector : DeflectorDecorator
         return _charge >= 0;
     }
 
-    public override Obstacle? GetDamage(Obstacle? obstacle)
+    public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle? obstacle)
     {
         if (obstacle is Antimatter)
         {

@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Deflector;

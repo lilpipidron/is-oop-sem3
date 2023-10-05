@@ -1,6 +1,6 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Deflector;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
-public class Deflector3 : Deflector
+public class Deflector3 : Model.Deflector.Deflector
 {
     public Deflector3()
         : base(1, 4, 40, 40)

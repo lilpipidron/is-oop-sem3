@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
-using Environment = Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment.Environment;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
+using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+using Environment = Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment.Environment;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 
@@ -20,12 +21,12 @@ public class TravelWay
         _fuelExchange = fuelExchange;
     }
 
-    public void AddEnviroment(Environment environment)
+    public void AddEnvironment(Environment environment)
     {
         _environments.Add(environment);
     }
 
-    public Result Travel(Ship ship)
+    public Result.Result Travel(Ship ship)
     {
         foreach (Environment environment in _environments)
         {
@@ -59,7 +60,7 @@ public class TravelWay
             ship.Move(environment);
         }
 
-        Collection<Fuel> allFuel = ship.FuelSpend();
+        IEnumerable<Fuel> allFuel = ship.FuelSpend();
         double cost = 0;
         double time = 0;
         cost = allFuel.Sum(fuel => _fuelExchange.TotalCost(fuel));

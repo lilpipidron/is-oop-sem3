@@ -41,11 +41,6 @@ public abstract class Stability
             Alive = false;
         }
 
-        if (Alive)
-        {
-            return null;
-        }
-
-        return obstacle;
+        return Alive ? null : obstacle;
     }
 }

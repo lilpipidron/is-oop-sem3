@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 public abstract record Result
 {

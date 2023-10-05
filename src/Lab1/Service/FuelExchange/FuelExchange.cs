@@ -1,5 +1,5 @@
 using System;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Service.FuelExchange;
 

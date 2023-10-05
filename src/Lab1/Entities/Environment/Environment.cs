@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public abstract class Environment
 {

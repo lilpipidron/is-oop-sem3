@@ -1,4 +1,4 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 
 public abstract class Fuel
 {

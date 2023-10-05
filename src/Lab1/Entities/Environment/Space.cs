@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 
-public class Space : Environment
+public class Space : Environment.Environment
 {
     private int _asteroidAmount;
     private int _meteoriteAmount;

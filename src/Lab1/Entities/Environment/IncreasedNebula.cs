@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 
-public class IncreasedNebula : Environment
+public class IncreasedNebula : Environment.Environment
 {
     private int _antimatterAmount;
 

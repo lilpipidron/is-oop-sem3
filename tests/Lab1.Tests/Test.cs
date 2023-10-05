@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Service.FuelExchange;
+using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 using Xunit;
 
@@ -46,7 +47,7 @@ public class Test
         var increasedNebula = new IncreasedNebula(20);
         var fuelExchange = new FuelExchange(10, 20);
         var travel = new TravelWay(fuelExchange);
-        travel.AddEnviroment(increasedNebula);
+        travel.AddEnvironment(increasedNebula);
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
         Assert.True(result1 is LostShip && result2 is LostShip);
@@ -60,7 +61,7 @@ public class Test
         var fuelExchange = new FuelExchange(10, 20);
         var travel = new TravelWay(fuelExchange);
         increasedNebula.AddAntimatter();
-        travel.AddEnviroment(increasedNebula);
+        travel.AddEnvironment(increasedNebula);
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
         Assert.True(result1 is CrewDied && result2 is Success);
@@ -74,7 +75,7 @@ public class Test
         nitrineNebula.AddWhale();
         var fuelExchange = new FuelExchange(10, 20);
         var travel = new TravelWay(fuelExchange);
-        travel.AddEnviroment(nitrineNebula);
+        travel.AddEnvironment(nitrineNebula);
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
         Result result3 = travel.Travel(ship3);
@@ -89,7 +90,7 @@ public class Test
         var fuelExchange = new FuelExchange(10, 20);
         var space = new Space(30);
         var travel = new TravelWay(fuelExchange);
-        travel.AddEnviroment(space);
+        travel.AddEnvironment(space);
         var chooseShip = new ChooseShip(travel);
         chooseShip.AddShip(shuttle);
         chooseShip.AddShip(valkas);
@@ -105,7 +106,7 @@ public class Test
         var increasedNebula = new IncreasedNebula(20);
         var fuelExchange = new FuelExchange(10, 20);
         var travel = new TravelWay(fuelExchange);
-        travel.AddEnviroment(increasedNebula);
+        travel.AddEnvironment(increasedNebula);
         var chooseShip = new ChooseShip(travel);
         chooseShip.AddShip(avgur);
         chooseShip.AddShip(stella);
@@ -121,7 +122,7 @@ public class Test
         var nitrineNebula = new NitrineNebula(50000);
         var fuelExchange = new FuelExchange(10, 20);
         var travel = new TravelWay(fuelExchange);
-        travel.AddEnviroment(nitrineNebula);
+        travel.AddEnvironment(nitrineNebula);
         var chooseShip = new ChooseShip(travel);
         chooseShip.AddShip(shuttle);
         chooseShip.AddShip(valkas);
@@ -144,9 +145,9 @@ public class Test
         increasedNebula.AddAntimatter();
         var fuelExchange = new FuelExchange(10, 20);
         var travel = new TravelWay(fuelExchange);
-        travel.AddEnviroment(increasedNebula);
-        travel.AddEnviroment(nitrineNebula);
-        travel.AddEnviroment(space);
+        travel.AddEnvironment(increasedNebula);
+        travel.AddEnvironment(nitrineNebula);
+        travel.AddEnvironment(space);
         Result result = travel.Travel(valkas);
         Assert.True(result is Success);
     }

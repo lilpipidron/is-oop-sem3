@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Deflector;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
@@ -12,7 +13,7 @@ public class Vaklas : Ship
     private readonly Engine.Engine _engineE;
     private readonly GammaEngine _gammaEngine;
     private readonly Stability _stability;
-    private Deflector _deflector;
+    private Model.Deflector.Deflector _deflector;
 
     public Vaklas()
     {
@@ -37,15 +38,17 @@ public class Vaklas : Ship
         return _stability.GetDamage(obs);
     }
 
-    public override Collection<Fuel> FuelSpend()
+    public override IEnumerable<Fuel> FuelSpend()
     {
-        var allFuel = new Collection<Fuel>();
-        allFuel.Add(_engineE.Fuel);
-        allFuel.Add(_gammaEngine.Fuel);
+        var allFuel = new Collection<Fuel>
+        {
+            _engineE.Fuel,
+            _gammaEngine.Fuel,
+        };
         return allFuel;
     }
 
-    public override void Move(Environment environment)
+    public override void Move(Environment.Environment environment)
     {
         if (environment is IncreasedNebula)
         {

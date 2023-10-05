@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Deflector;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
@@ -32,15 +34,17 @@ public class Stella : Ship
         return _stability.GetDamage(obs);
     }
 
-    public override Collection<Fuel> FuelSpend()
+    public override IEnumerable<Fuel> FuelSpend()
     {
-        var allFuel = new Collection<Fuel>();
-        allFuel.Add(_engineC.Fuel);
-        allFuel.Add(_omegaEngine.Fuel);
+        var allFuel = new Collection<Fuel>
+        {
+            _engineC.Fuel,
+            _omegaEngine.Fuel,
+        };
         return allFuel;
     }
 
-    public override void Move(Environment environment)
+    public override void Move(Environment.Environment environment)
     {
         if (environment is IncreasedNebula)
         {
