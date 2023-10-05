@@ -6,6 +6,10 @@
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <NoWarn>$(NoWarn);CA1707</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\..\src\Lab1\Lab1.csproj"/>
     </ItemGroup>
