@@ -5,27 +5,27 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 
 public class ChooseShip
 {
+    private readonly List<Ship> _allShips;
+    private readonly TravelWay _travelWay;
+
     public ChooseShip(TravelWay travelWay)
     {
-        AllShips = new List<Ship>();
-        TravelWay = travelWay;
+        _allShips = new List<Ship>();
+        _travelWay = travelWay;
     }
-
-    private List<Ship> AllShips { get; set; }
-    private TravelWay TravelWay { get; set; }
 
     public void AddShip(Ship ship)
     {
-        AllShips.Add(ship);
+        _allShips.Add(ship);
     }
 
     public Ship? ChooseBest()
     {
         Ship? topShip = null;
         double minCost = -1;
-        foreach (Ship ship in AllShips)
+        foreach (Ship ship in _allShips)
         {
-            Result result = TravelWay.Travel(ship);
+            Result result = _travelWay.Travel(ship);
             if (result is Success success)
             {
                 if (success.FlyCost < minCost || minCost == -1)

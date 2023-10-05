@@ -9,38 +9,39 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Vaklas : Ship
 {
+    private readonly EngineE _engineE;
+    private readonly GammaEngine _gammaEngine;
+    private readonly Deflector1 _deflector;
+    private readonly Stability2 _stability;
+
     public Vaklas()
     {
-        EngineE = new EngineE();
-        GammaEngine = new GammaEngine();
-        JumpDistance = GammaEngine.JumpDistance;
-        Deflector = new Deflector1();
-        Stability = new Stability2();
+        _engineE = new EngineE();
+        _gammaEngine = new GammaEngine();
+        JumpDistance = _gammaEngine.JumpDistance;
+        _deflector = new Deflector1();
+        _stability = new Stability2();
         DoW = 30;
     }
 
-    private EngineE EngineE { get; set; }
-    private GammaEngine GammaEngine { get; set; }
-    private Deflector1 Deflector { get; set; }
-    private Stability2 Stability { get; set; }
     private int DoW { get; set; }
 
     public void AddPhotonDeflector()
     {
-        Deflector.AddPhotonDeflector();
+        _deflector.AddPhotonDeflector();
     }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
-        Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);
-        return Stability.GetDamage(obs);
+        Obstacle.Obstacle? obs = _deflector.GetDamage(obstacle);
+        return _stability.GetDamage(obs);
     }
 
     public override Collection<Fuel> FuelSpend()
     {
         var allFuel = new Collection<Fuel>();
-        allFuel.Add(EngineE.Fuel);
-        allFuel.Add(GammaEngine.Fuel);
+        allFuel.Add(_engineE.Fuel);
+        allFuel.Add(_gammaEngine.Fuel);
         return allFuel;
     }
 
@@ -48,11 +49,11 @@ public class Vaklas : Ship
     {
         if (environment is IncreasedNebula)
         {
-            GammaEngine.Move(environment.JumpDistance);
+            _gammaEngine.Move(environment.JumpDistance);
         }
         else
         {
-            EngineE.Move(environment.JumpDistance);
+            _engineE.Move(environment.JumpDistance);
         }
     }
 }

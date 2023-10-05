@@ -4,25 +4,25 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Deflector;
 
 public abstract class Deflector
 {
+    private readonly int _asteroidDamage;
+    private readonly int _meteoriteDamage;
+    private readonly int _whaleDamage;
+    private int _photonDeflector;
+    private int _healthPoints;
+    private bool _works;
+
     protected Deflector(int asteroidDamage, int meteoriteDamage, int whaleDamage, int healthPoints)
     {
-        AsteroidDamage = asteroidDamage;
-        MeteoriteDamage = meteoriteDamage;
-        HealthPoints = healthPoints;
-        WhaleDamage = whaleDamage;
-        Works = true;
+        _asteroidDamage = asteroidDamage;
+        _meteoriteDamage = meteoriteDamage;
+        _healthPoints = healthPoints;
+        _whaleDamage = whaleDamage;
+        _works = true;
     }
-
-    private int PhotonDeflector { get; set; }
-    private int AsteroidDamage { get; }
-    private int MeteoriteDamage { get; }
-    private int WhaleDamage { get; }
-    private int HealthPoints { get; set; }
-    private bool Works { get; set; }
 
     public Obstacle? GetDamage(Obstacle? obstacle)
     {
-        if (Works == false || obstacle is null)
+        if (_works == false || obstacle is null)
         {
             return obstacle;
         }
@@ -30,36 +30,36 @@ public abstract class Deflector
         switch (obstacle)
         {
             case Asteroid:
-                obstacle.GetDamage(double.Min(AsteroidDamage, HealthPoints) / AsteroidDamage);
-                HealthPoints -= AsteroidDamage;
+                obstacle.GetDamage(double.Min(_asteroidDamage, _healthPoints) / _asteroidDamage);
+                _healthPoints -= _asteroidDamage;
                 break;
             case Meteorite:
-                obstacle.GetDamage(double.Min(MeteoriteDamage, HealthPoints) / MeteoriteDamage);
-                HealthPoints -= MeteoriteDamage;
+                obstacle.GetDamage(double.Min(_meteoriteDamage, _healthPoints) / _meteoriteDamage);
+                _healthPoints -= _meteoriteDamage;
                 break;
             case CosmoWhale:
-                obstacle.GetDamage(double.Min(WhaleDamage, HealthPoints) / WhaleDamage);
-                HealthPoints -= WhaleDamage;
-                if (WhaleDamage == 0)
+                obstacle.GetDamage(double.Min(_whaleDamage, _healthPoints) / _whaleDamage);
+                _healthPoints -= _whaleDamage;
+                if (_whaleDamage == 0)
                 {
-                    Works = false;
+                    _works = false;
                     return obstacle;
                 }
 
                 break;
             case Antimatter:
-                if (PhotonDeflector == 0)
+                if (_photonDeflector == 0)
                 {
                     return obstacle;
                 }
 
-                PhotonDeflector--;
+                _photonDeflector--;
                 return null;
         }
 
-        if (HealthPoints < 0)
+        if (_healthPoints < 0)
         {
-            Works = false;
+            _works = false;
             return obstacle;
         }
 
@@ -68,6 +68,6 @@ public abstract class Deflector
 
     public void AddPhotonDeflector()
     {
-        PhotonDeflector = 3;
+        _photonDeflector = 3;
     }
 }

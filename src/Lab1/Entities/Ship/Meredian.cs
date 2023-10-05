@@ -10,24 +10,26 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Meredian : Ship
 {
+    private readonly EngineE _engineE;
+
+    private readonly Deflector2 _deflector;
+    private readonly Stability2 _stability;
+
     public Meredian()
     {
-        EngineE = new EngineE();
-        Deflector = new Deflector2();
-        Stability = new Stability2();
+        _engineE = new EngineE();
+        _deflector = new Deflector2();
+        _stability = new Stability2();
         DoW = 30;
         Emitter = true;
     }
 
-    private EngineE EngineE { get; set; }
-    private Deflector2 Deflector { get; set; }
-    private Stability2 Stability { get; set; }
-    private int DoW { get; set; }
     private bool Emitter { get; set; }
+    private int DoW { get; set; }
 
     public void AddPhotonDeflector()
     {
-        Deflector.AddPhotonDeflector();
+        _deflector.AddPhotonDeflector();
     }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
@@ -37,19 +39,19 @@ public class Meredian : Ship
             return null;
         }
 
-        Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);
-        return Stability.GetDamage(obs);
+        Obstacle.Obstacle? obs = _deflector.GetDamage(obstacle);
+        return _stability.GetDamage(obs);
     }
 
     public override Collection<Fuel> FuelSpend()
     {
         var allFuel = new Collection<Fuel>();
-        allFuel.Add(EngineE.Fuel);
+        allFuel.Add(_engineE.Fuel);
         return allFuel;
     }
 
     public override void Move(Environment environment)
     {
-        EngineE.Move(environment.JumpDistance);
+        _engineE.Move(environment.JumpDistance);
     }
 }

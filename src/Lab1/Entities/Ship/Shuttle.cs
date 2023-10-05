@@ -8,26 +8,27 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Shuttle : Ship
 {
+    private readonly EngineC _engine;
+    private readonly Stability1 _stability;
+
     public Shuttle()
     {
-        Engine = new EngineC();
-        Stability = new Stability1();
+        _engine = new EngineC();
+        _stability = new Stability1();
         DoW = 20;
     }
 
-    private EngineC Engine { get; set; }
-    private Stability1 Stability { get; set; }
     private int DoW { get; set; }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
-        return Stability.GetDamage(obstacle);
+        return _stability.GetDamage(obstacle);
     }
 
     public override Collection<Fuel> FuelSpend()
     {
         var allFuel = new Collection<Fuel>();
-        allFuel.Add(Engine.Fuel);
+        allFuel.Add(_engine.Fuel);
         return allFuel;
     }
 
@@ -35,10 +36,10 @@ public class Shuttle : Ship
     {
         if (environment is NitrineNebula)
         {
-            Engine.Move(environment.JumpDistance * 100);
+            _engine.Move(environment.JumpDistance * 100);
             return;
         }
 
-        Engine.Move(environment.JumpDistance);
+        _engine.Move(environment.JumpDistance);
     }
 }

@@ -9,38 +9,39 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Avgur : Ship
 {
+    private readonly EngineE _engineE;
+    private readonly AlphaEngine _jumpEngine;
+    private readonly Deflector3 _deflector;
+    private readonly Stability3 _stability;
+
     public Avgur()
     {
-        EngineE = new EngineE();
-        JumpEngine = new AlphaEngine();
-        JumpDistance = JumpEngine.JumpDistance;
-        Deflector = new Deflector3();
-        Stability = new Stability3();
+        _engineE = new EngineE();
+        _jumpEngine = new AlphaEngine();
+        JumpDistance = _jumpEngine.JumpDistance;
+        _deflector = new Deflector3();
+        _stability = new Stability3();
         DoW = 40;
     }
 
-    private EngineE EngineE { get; set; }
-    private AlphaEngine JumpEngine { get; set; }
-    private Deflector3 Deflector { get; set; }
-    private Stability3 Stability { get; set; }
     private int DoW { get; set; }
 
     public void AddPhotonDeflector()
     {
-        Deflector.AddPhotonDeflector();
+        _deflector.AddPhotonDeflector();
     }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
-        Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);
-        return Stability.GetDamage(obs);
+        Obstacle.Obstacle? obs = _deflector.GetDamage(obstacle);
+        return _stability.GetDamage(obs);
     }
 
     public override Collection<Fuel> FuelSpend()
     {
         var allFuel = new Collection<Fuel>();
-        allFuel.Add(EngineE.Fuel);
-        allFuel.Add(JumpEngine.Fuel);
+        allFuel.Add(_engineE.Fuel);
+        allFuel.Add(_jumpEngine.Fuel);
         return allFuel;
     }
 
@@ -48,11 +49,11 @@ public class Avgur : Ship
     {
         if (environment is IncreasedNebula)
         {
-            JumpEngine.Move(environment.JumpDistance);
+            _jumpEngine.Move(environment.JumpDistance);
         }
         else
         {
-            EngineE.Move(environment.JumpDistance);
+            _engineE.Move(environment.JumpDistance);
         }
     }
 }

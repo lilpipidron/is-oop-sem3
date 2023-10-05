@@ -10,23 +10,23 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 
 public class TravelWay
 {
+    private readonly List<Environment> _environments;
+    private readonly FuelExchange.FuelExchange _fuelExchange;
+
     public TravelWay(FuelExchange.FuelExchange fuelExchange)
     {
-        Environments = new List<Environment>();
-        FuelExchange = fuelExchange;
+        _environments = new List<Environment>();
+        _fuelExchange = fuelExchange;
     }
-
-    private List<Environment> Environments { get; set; }
-    private FuelExchange.FuelExchange FuelExchange { get; set; }
 
     public void AddEnviroment(Environment environment)
     {
-        Environments.Add(environment);
+        _environments.Add(environment);
     }
 
     public Result Travel(Ship ship)
     {
-        foreach (Environment environment in Environments)
+        foreach (Environment environment in _environments)
         {
             if ((ship is Shuttle || ship is Meredian) && environment is IncreasedNebula)
             {
@@ -62,7 +62,7 @@ public class TravelWay
         double cost = 0;
         foreach (Fuel fuel in allFuel)
         {
-            cost += FuelExchange.TotalCost(fuel);
+            cost += _fuelExchange.TotalCost(fuel);
         }
 
         return new Success(cost);

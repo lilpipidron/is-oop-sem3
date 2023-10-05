@@ -9,33 +9,34 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Stella : Ship
 {
+    private readonly EngineC _engineC;
+    private readonly OmegaEngine _omegaEngine;
+    private readonly Deflector1 _deflector;
+    private readonly Stability1 _stability;
+
     public Stella()
     {
-        EngineC = new EngineC();
-        OmegaEngine = new OmegaEngine();
-        JumpDistance = OmegaEngine.JumpDistance;
-        Deflector = new Deflector1();
-        Stability = new Stability1();
+        _engineC = new EngineC();
+        _omegaEngine = new OmegaEngine();
+        JumpDistance = _omegaEngine.JumpDistance;
+        _deflector = new Deflector1();
+        _stability = new Stability1();
         DoW = 20;
     }
 
-    private EngineC EngineC { get; set; }
-    private OmegaEngine OmegaEngine { get; set; }
-    private Deflector1 Deflector { get; set; }
-    private Stability1 Stability { get; set; }
     private int DoW { get; set; }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
-        Obstacle.Obstacle? obs = Deflector.GetDamage(obstacle);
-        return Stability.GetDamage(obs);
+        Obstacle.Obstacle? obs = _deflector.GetDamage(obstacle);
+        return _stability.GetDamage(obs);
     }
 
     public override Collection<Fuel> FuelSpend()
     {
         var allFuel = new Collection<Fuel>();
-        allFuel.Add(EngineC.Fuel);
-        allFuel.Add(OmegaEngine.Fuel);
+        allFuel.Add(_engineC.Fuel);
+        allFuel.Add(_omegaEngine.Fuel);
         return allFuel;
     }
 
@@ -43,11 +44,11 @@ public class Stella : Ship
     {
         if (environment is IncreasedNebula)
         {
-            OmegaEngine.Move(environment.JumpDistance);
+            _omegaEngine.Move(environment.JumpDistance);
         }
         else
         {
-            EngineC.Move(environment.JumpDistance);
+            _engineC.Move(environment.JumpDistance);
         }
     }
 }
