@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
@@ -60,10 +61,7 @@ public class TravelWay
 
         Collection<Fuel> allFuel = ship.FuelSpend();
         double cost = 0;
-        foreach (Fuel fuel in allFuel)
-        {
-            cost += _fuelExchange.TotalCost(fuel);
-        }
+        cost = allFuel.Sum(fuel => _fuelExchange.TotalCost(fuel));
 
         return new Success(cost);
     }

@@ -26,13 +26,10 @@ public class ChooseShip
         foreach (Ship ship in _allShips)
         {
             Result result = _travelWay.Travel(ship);
-            if (result is Success success)
+            if (result is Success success && (success.FlyCost < minCost || minCost == -1))
             {
-                if (success.FlyCost < minCost || minCost == -1)
-                {
-                    minCost = success.FlyCost;
-                    topShip = ship;
-                }
+                minCost = success.FlyCost;
+                topShip = ship;
             }
         }
 
