@@ -9,7 +9,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class Test
 {
     [Fact]
-    public void Test1()
+    public void MiddleRouteInIncreasedNebulaShuttleAvgurShuttleLostShipAvgurLostShip()
     {
         var shuttle = new Shuttle();
         var avgur = new Avgur();
@@ -23,7 +23,7 @@ public class Test
     }
 
     [Fact]
-    public void Test2()
+    public void IncreasedNebulaWithAntimatterValkasAndValkasWithPhotonDeflectorFirstCrewDiedSecondSuccess()
     {
         var valkas1 = new Vaklas();
         var valkas2 = new Vaklas();
@@ -39,7 +39,7 @@ public class Test
     }
 
     [Fact]
-    public void Test3()
+    public void NitrineNebulaWithWhaleValkasAvgurMeredianValkasDestroyAvgurAndMeredianSuccess()
     {
         var valkas = new Vaklas();
         var avgur = new Avgur();
@@ -56,7 +56,7 @@ public class Test
     }
 
     [Fact]
-    public void Test4()
+    public void ShortRouteInSpaceShuttleAndVaklasChooseShuttle()
     {
         var shuttle = new Shuttle();
         var valkas = new Vaklas();
@@ -72,7 +72,7 @@ public class Test
     }
 
     [Fact]
-    public void Test5()
+    public void MiddleRouteInIncreasedNebulaAvgurAndStellaChooseStella()
     {
         var avgur = new Avgur();
         var stella = new Stella();
@@ -88,7 +88,7 @@ public class Test
     }
 
     [Fact]
-    public void Test6()
+    public void RouteInNitrineNebulaChooseVaklas()
     {
         var shuttle = new Shuttle();
         var valkas = new Vaklas();
@@ -104,7 +104,7 @@ public class Test
     }
 
     [Fact]
-    public void Test7()
+    public void RouteWithNitrineNebulaSpaceWithAsteroidMeteoriteIncreasedNebulaWithTwoAntimatterValkasWithPhotonDeflectorResultIsSuccess()
     {
         var valkas = new Vaklas();
         valkas.AddPhotonDeflector();
