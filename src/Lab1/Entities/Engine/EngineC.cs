@@ -10,6 +10,7 @@ public class EngineC : Engine
     public override void Move(int distance)
     {
         double time = distance / Speed;
+        Time += time;
         Fuel.Use(time + StartCost);
     }
 }

@@ -9,6 +9,7 @@ public class AlphaEngine : JumpEngine
 
     public override void Move(int distance)
     {
+        Time += JumpDistance / distance;
         Fuel.Use(distance);
     }
 }

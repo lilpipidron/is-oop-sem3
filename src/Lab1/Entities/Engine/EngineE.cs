@@ -11,6 +11,7 @@ public class EngineE : Engine
     {
         Speed = double.Exp(distance);
         double time = distance / Speed;
+        Time += time;
         Fuel.Use((time * 1.5) + StartCost);
     }
 }

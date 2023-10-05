@@ -12,5 +12,6 @@ public abstract class JumpEngine
 
     public double JumpDistance { get; private set; }
     public SpecialFuel Fuel { get; init; }
+    protected double Time { get; set; }
     public abstract void Move(int distance);
 }

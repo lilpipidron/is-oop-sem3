@@ -9,6 +9,7 @@ public class OmegaEngine : JumpEngine
 
     public override void Move(int distance)
     {
+        Time += JumpDistance / distance;
         Fuel.Use(distance * double.Log(distance));
     }
 }
