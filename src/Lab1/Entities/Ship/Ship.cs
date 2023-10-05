@@ -10,4 +10,5 @@ public abstract class Ship
     public abstract Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle);
     public abstract Collection<Fuel> FuelSpend();
     public abstract void Move(Environment environment);
+    public abstract double AllTime();
 }

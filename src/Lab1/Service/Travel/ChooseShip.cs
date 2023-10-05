@@ -23,12 +23,14 @@ public class ChooseShip
     {
         Ship? topShip = null;
         double minCost = -1;
+        double minTime = -1;
         foreach (Ship ship in _allShips)
         {
             Result result = _travelWay.Travel(ship);
-            if (result is Success success && (success.FlyCost < minCost || minCost == -1))
+            if (result is Success success && ((success.FlyCost < minCost || minCost == -1) || (success.FlyCost == minCost && (success.FlyTime < minTime || minTime == -1))))
             {
                 minCost = success.FlyCost;
+                minTime = success.FlyTime;
                 topShip = ship;
             }
         }

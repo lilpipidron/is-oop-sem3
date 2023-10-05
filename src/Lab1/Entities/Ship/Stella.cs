@@ -51,4 +51,9 @@ public class Stella : Ship
             _engineC.Move(environment.JumpDistance);
         }
     }
+
+    public override double AllTime()
+    {
+        return _engineC.Time + _omegaEngine.Time;
+    }
 }

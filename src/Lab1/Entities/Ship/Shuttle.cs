@@ -42,4 +42,9 @@ public class Shuttle : Ship
 
         _engine.Move(environment.JumpDistance);
     }
+
+    public override double AllTime()
+    {
+        return _engine.Time;
+    }
 }

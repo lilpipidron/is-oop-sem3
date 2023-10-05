@@ -56,4 +56,9 @@ public class Vaklas : Ship
             _engineE.Move(environment.JumpDistance);
         }
     }
+
+    public override double AllTime()
+    {
+        return _engineE.Time + _gammaEngine.Time;
+    }
 }

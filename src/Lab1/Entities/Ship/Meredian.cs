@@ -53,4 +53,9 @@ public class Meredian : Ship
     {
         _engineE.Move(environment.JumpDistance);
     }
+
+    public override double AllTime()
+    {
+        return _engineE.Time;
+    }
 }

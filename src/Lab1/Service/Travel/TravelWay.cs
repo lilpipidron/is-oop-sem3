@@ -61,8 +61,10 @@ public class TravelWay
 
         Collection<Fuel> allFuel = ship.FuelSpend();
         double cost = 0;
+        double time = 0;
         cost = allFuel.Sum(fuel => _fuelExchange.TotalCost(fuel));
+        time = ship.AllTime();
 
-        return new Success(cost);
+        return new Success(cost, time);
     }
 }
