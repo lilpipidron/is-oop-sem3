@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
