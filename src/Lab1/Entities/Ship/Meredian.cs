@@ -1,35 +1,23 @@
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public class Meredian : Ship
 {
-    private readonly Engine.Engine _engineE;
-    private readonly Stability _stability;
-    private Model.Deflector.Deflector _deflector;
-
     public Meredian()
     {
-        _engineE = new EngineE();
-        _deflector = new Deflector2();
-        _stability = new Stability2();
+        Engine = new EngineE();
+        Deflector = new Deflector2();
+        Stability = new Stability2();
         DoW = 30;
         Emitter = true;
     }
 
     private bool Emitter { get; set; }
     private int DoW { get; set; }
-
-    public void AddPhotonDeflector()
-    {
-        _deflector = new PhotonDeflector(_deflector);
-    }
 
     public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
     {
@@ -38,23 +26,7 @@ public class Meredian : Ship
             return null;
         }
 
-        Obstacle.Obstacle? obs = _deflector.GetDamage(obstacle);
-        return _stability.GetDamage(obs);
-    }
-
-    public override IEnumerable<Fuel> FuelSpend()
-    {
-        var allFuel = new Collection<Fuel> { _engineE.Fuel };
-        return allFuel;
-    }
-
-    public override void Move(Environment.Environment environment)
-    {
-        _engineE.Move(environment.JumpDistance);
-    }
-
-    public override double AllTime()
-    {
-        return _engineE.Time;
+        Obstacle.Obstacle? obs = Deflector?.GetDamage(obstacle);
+        return Stability?.GetDamage(obs);
     }
 }
