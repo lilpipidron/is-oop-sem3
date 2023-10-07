@@ -38,4 +38,15 @@ public class Space : Environment.Environment
 
         return obstacles;
     }
+
+    public override bool TryMove(Ship.Ship ship)
+    {
+        if (ship.Engine is null)
+        {
+            return false;
+        }
+
+        ship.Engine.Move(JumpDistance);
+        return true;
+    }
 }

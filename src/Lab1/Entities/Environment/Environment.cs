@@ -4,10 +4,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public abstract class Environment
 {
-    protected Environment()
-    {
-    }
-
     protected Environment(int jumpDistance)
     {
         JumpDistance = jumpDistance;
@@ -15,4 +11,5 @@ public abstract class Environment
 
     public int JumpDistance { get; private set; }
     public abstract Collection<Obstacle.Obstacle> GetAllObstacles();
+    public abstract bool TryMove(Ship.Ship ship);
 }

@@ -27,4 +27,20 @@ public class IncreasedNebula : Environment.Environment
 
         return obstacles;
     }
+
+    public override bool TryMove(Ship.Ship ship)
+    {
+        if (ship.JumpEngine is null)
+        {
+            return false;
+        }
+
+        if (ship.JumpDistance < JumpDistance)
+        {
+            return false;
+        }
+
+        ship.JumpEngine.Move(JumpDistance);
+        return true;
+    }
 }

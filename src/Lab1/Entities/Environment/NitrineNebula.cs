@@ -1,10 +1,12 @@
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 
 public class NitrineNebula : Environment.Environment
 {
+    private const int EngineDeceleration = 100;
     private int _whaleAmount;
 
     public NitrineNebula(int distance)
@@ -26,5 +28,20 @@ public class NitrineNebula : Environment.Environment
         }
 
         return obstacles;
+    }
+
+    public override bool TryMove(Ship.Ship ship)
+    {
+        switch (ship.Engine)
+        {
+            case null:
+                return false;
+            case EngineE:
+                ship.Engine.Move(JumpDistance);
+                return true;
+            default:
+                ship.Engine.Move(JumpDistance * EngineDeceleration);
+                return true;
+        }
     }
 }
