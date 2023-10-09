@@ -1,46 +1,24 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
+using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
 public abstract class Stability
 {
-    protected Stability(int healthPoints, int asteroidDamage, int meteoriteDamage)
+    private int _healthPoint;
+
+    protected Stability(int healthPoint)
     {
-        HealthPoints = healthPoints;
-        AsteroidDamage = asteroidDamage;
-        MeteoriteDamage = meteoriteDamage;
-        Alive = true;
+        _healthPoint = healthPoint;
     }
 
-    private int HealthPoints { get; set; }
-    private int AsteroidDamage { get; }
-    private int MeteoriteDamage { get; }
-    private bool Alive { get; set; }
-
-    public Obstacle? GetDamage(Obstacle? obstacle)
+    public Result GetDamage(int damage)
     {
-        if (!Alive || obstacle == null || obstacle is Antimatter || obstacle is CosmoWhale)
+        if (_healthPoint <= 0)
         {
-            return obstacle;
+            return new ObstacleNotReflected();
         }
 
-        switch (obstacle)
-        {
-            case Asteroid:
-                obstacle.GetDamage(double.Min(AsteroidDamage, HealthPoints) / AsteroidDamage);
-                HealthPoints -= AsteroidDamage;
-                break;
-            case Meteorite:
-                obstacle.GetDamage(double.Min(MeteoriteDamage, HealthPoints) / MeteoriteDamage);
-                HealthPoints -= MeteoriteDamage;
-                break;
-        }
-
-        if (HealthPoints <= 0)
-        {
-            Alive = false;
-        }
-
-        return Alive ? null : obstacle;
+        _healthPoint -= damage;
+        return new ObstacleReflected();
     }
 }
