@@ -1,19 +1,27 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 public abstract class Obstacle
 {
-    private double _healthPoint;
     private int _dow;
     protected Obstacle() { }
 
-    protected Obstacle(double health, int dw)
+    protected Obstacle(int dw, int damage)
     {
-        _healthPoint = health;
         _dow = dw;
+        Damage = damage;
     }
 
-    public void GetDamage(double damageCoefficient)
+    public int Damage { get; private set; }
+
+    public virtual Result DoDamage(Ship.Ship ship)
     {
-        _healthPoint -= _healthPoint * damageCoefficient;
+        if (ship.GetDamage(Damage) is not null)
+        {
+            return new DestroyShip();
+        }
+
+        return new ObstacleReflected();
     }
 }
