@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
@@ -30,34 +29,20 @@ public class TravelWay
     {
         foreach (Environment environment in _environments)
         {
-            if ((ship is Shuttle || ship is Meredian) && environment is IncreasedNebula)
+            if (environment.TryMove(ship) is false)
             {
                 return new LostShip();
-            }
-
-            if (environment is IncreasedNebula)
-            {
-                if (environment.JumpDistance > ship.JumpDistance)
-                {
-                    return new LostShip();
-                }
             }
 
             Collection<Obstacle> obstacle = environment.GetAllObstacles();
             foreach (Obstacle obs in obstacle)
             {
-                switch (ship.GetDamage(obs))
+                Result.Result res = obs.DoDamage(ship);
+                if (res is not ObstacleReflected)
                 {
-                    case Antimatter:
-                        return new CrewDied();
-                    case null:
-                        break;
-                    default:
-                        return new DestroyShip();
+                    return res;
                 }
             }
-
-            ship.Move(environment);
         }
 
         IEnumerable<Fuel> allFuel = ship.FuelSpend();
