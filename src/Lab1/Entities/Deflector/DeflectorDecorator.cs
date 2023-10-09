@@ -1,10 +1,10 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
-public abstract class DeflectorDecorator : Model.Deflector.Deflector
+public abstract class DeflectorDecorator : Deflector
 {
-    private readonly Model.Deflector.Deflector? _deflector;
+    private readonly Deflector? _deflector;
 
-    protected DeflectorDecorator(Model.Deflector.Deflector deflector)
+    protected DeflectorDecorator(Deflector deflector)
     {
         _deflector = deflector;
     }
