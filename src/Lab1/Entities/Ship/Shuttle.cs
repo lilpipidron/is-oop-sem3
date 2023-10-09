@@ -12,9 +12,4 @@ public class Shuttle : Ship
     }
 
     private int DoW { get; set; } = 20;
-
-    public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
-    {
-        return Stability?.GetDamage(obstacle);
-    }
 }

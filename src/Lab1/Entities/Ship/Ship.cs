@@ -4,6 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
+using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
@@ -12,9 +13,9 @@ public abstract class Ship
     public double JumpDistance { get; protected init; }
     public Engine.Engine? Engine { get; protected init; }
     public JumpEngine? JumpEngine { get; protected init; }
-    public Model.Deflector.Deflector? Deflector { get; protected set; }
-    public Stability? Stability { get; protected set; }
-    public abstract Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle);
+    public Deflector.Deflector? Deflector { get; protected set; }
+    public bool Emitter { get; protected set; }
+    protected Stability? Stability { get; init; }
 
     public void AddPhotonDeflector()
     {
@@ -54,5 +55,26 @@ public abstract class Ship
         }
 
         return fullTime;
+    }
+
+    public Result GetDamage(int damage)
+    {
+        Result result = new ObstacleNotReflected();
+        if (Deflector is not null)
+        {
+            result = Deflector.GetDamage(damage);
+        }
+
+        if (result is ObstacleReflected)
+        {
+            return new ObstacleReflected();
+        }
+
+        if (Stability is not null)
+        {
+            result = Stability.GetDamage(damage);
+        }
+
+        return result;
     }
 }

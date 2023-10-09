@@ -17,10 +17,4 @@ public class Avgur : Ship
     }
 
     private int DoW { get; set; }
-
-    public override Obstacle.Obstacle? GetDamage(Obstacle.Obstacle obstacle)
-    {
-        Obstacle.Obstacle? obs = Deflector?.GetDamage(obstacle);
-        return Stability?.GetDamage(obs);
-    }
 }
