@@ -1,3 +1,3 @@
-namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
-public record CrewDied() : Result.Result;
+public record CrewDied() : Result;
