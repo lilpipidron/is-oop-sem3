@@ -67,7 +67,7 @@ public abstract class Ship
 
         if (result is ObstacleReflected)
         {
-            return new ObstacleReflected();
+            return result;
         }
 
         if (Stability is not null)

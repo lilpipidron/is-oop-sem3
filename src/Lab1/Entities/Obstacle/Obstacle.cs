@@ -23,6 +23,6 @@ public abstract class Obstacle
             return new DestroyShip();
         }
 
-        return new ObstacleReflected();
+        return result;
     }
 }

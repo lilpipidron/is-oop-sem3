@@ -12,7 +12,7 @@ public class Deflector1 : Deflector
     public override Result GetDamage(int damage)
     {
         double damageReduce = 1;
-        if (HealthPoints <= 0 || damage > HealthPoints)
+        if (HealthPoints <= 0)
         {
             return new ObstacleNotReflected();
         }
@@ -20,6 +20,11 @@ public class Deflector1 : Deflector
         if (damage >= SmallDamage)
         {
             damageReduce = 0.5;
+        }
+
+        if (damage * damageReduce > HealthPoints)
+        {
+            return new ObstacleNotReflected();
         }
 
         HealthPoints -= damage * damageReduce;
