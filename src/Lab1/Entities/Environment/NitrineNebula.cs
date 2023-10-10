@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
-public class NitrineNebula : Environment.Environment
+public class NitrineNebula : Environment
 {
     private int _whaleAmount;
 

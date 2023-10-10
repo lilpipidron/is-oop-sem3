@@ -15,6 +15,4 @@ public class Stella : Ship
         Stability = new Stability1();
         DoW = 20;
     }
-
-    private int DoW { get; set; }
 }

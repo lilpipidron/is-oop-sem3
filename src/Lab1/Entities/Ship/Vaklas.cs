@@ -15,6 +15,4 @@ public class Vaklas : Ship
         Stability = new Stability2();
         DoW = 30;
     }
-
-    private int DoW { get; set; }
 }

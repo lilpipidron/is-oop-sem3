@@ -15,6 +15,4 @@ public class Avgur : Ship
         Stability = new Stability3();
         DoW = 40;
     }
-
-    private int DoW { get; set; }
 }

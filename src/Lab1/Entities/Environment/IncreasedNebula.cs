@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
-public class IncreasedNebula : Environment.Environment
+public class IncreasedNebula : Environment
 {
     private int _antimatterAmount;
 

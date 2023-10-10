@@ -9,7 +9,6 @@ public class Shuttle : Ship
     {
         Engine = new EngineC();
         Stability = new Stability1();
+        DoW = 20;
     }
-
-    private int DoW { get; set; } = 20;
 }

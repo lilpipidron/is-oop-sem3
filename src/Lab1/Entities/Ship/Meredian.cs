@@ -14,6 +14,4 @@ public class Meredian : Ship
         DoW = 30;
         Emitter = true;
     }
-
-    private int DoW { get; set; }
 }
