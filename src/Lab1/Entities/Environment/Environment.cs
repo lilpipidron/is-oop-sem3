@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
@@ -10,6 +10,6 @@ public abstract class Environment
     }
 
     public int JumpDistance { get; private set; }
-    public abstract Collection<Obstacle.Obstacle> GetAllObstacles();
+    public abstract IReadOnlyCollection<Obstacle.Obstacle> GetAllObstacles();
     public abstract bool TryMove(Ship.Ship ship);
 }

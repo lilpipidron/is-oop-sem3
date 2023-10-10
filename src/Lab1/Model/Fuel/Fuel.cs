@@ -2,7 +2,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 
 public abstract class Fuel
 {
-    public double Amount { get; protected set; }
+    public double Amount { get; private set; }
 
-    public abstract void Use(double time);
+    public void Use(double time)
+    {
+        Amount += time;
+    }
 }

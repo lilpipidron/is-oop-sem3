@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
@@ -34,7 +33,7 @@ public class TravelWay
                 return new LostShip();
             }
 
-            Collection<Obstacle> obstacle = environment.GetAllObstacles();
+            IReadOnlyCollection<Obstacle> obstacle = environment.GetAllObstacles();
             foreach (Obstacle obs in obstacle)
             {
                 Result.Result res = obs.DoDamage(ship);

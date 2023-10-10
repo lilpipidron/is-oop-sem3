@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
@@ -23,7 +24,7 @@ public class Space : Environment.Environment
         _meteoriteAmount++;
     }
 
-    public override Collection<Obstacle.Obstacle> GetAllObstacles()
+    public override IReadOnlyCollection<Obstacle.Obstacle> GetAllObstacles()
     {
         var obstacles = new Collection<Obstacle.Obstacle>();
         for (int i = 0; i < _asteroidAmount; i++)

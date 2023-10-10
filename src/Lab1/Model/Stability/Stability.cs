@@ -30,9 +30,3 @@ public abstract class Stability
         return new ObstacleReflected();
     }
 }
-
-/*
--
-0.4
-0.4
-*/
