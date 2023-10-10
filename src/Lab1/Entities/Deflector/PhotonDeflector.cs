@@ -11,11 +11,6 @@ public class PhotonDeflector : DeflectorDecorator
 
     public override bool PhotonDeflect()
     {
-        return Use();
-    }
-
-    private bool Use()
-    {
         _charge--;
         return _charge >= 0;
     }
