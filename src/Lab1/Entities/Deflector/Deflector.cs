@@ -4,30 +4,39 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
 public abstract class Deflector
 {
-    private int _healthPoints;
-
     protected Deflector()
     {
     }
 
-    protected Deflector(int healthPoints)
+    protected Deflector(int healthPoints, int smallDamage, int mediumDamage)
     {
-        _healthPoints = healthPoints;
+        HealthPoints = healthPoints;
+        SmallDamage = smallDamage;
+        MediumDamage = mediumDamage;
     }
+
+    protected Deflector(int healthPoints, int smallDamage)
+    {
+        HealthPoints = healthPoints;
+        SmallDamage = smallDamage;
+    }
+
+    protected int SmallDamage { get; }
+
+    protected int MediumDamage { get; }
+
+    protected double HealthPoints { get; set; }
 
     public virtual bool PhotonDeflect()
     {
         return false;
     }
 
-    public Result GetDamage(int damage)
-    {
-        if (_healthPoints <= 0)
-        {
-            return new ObstacleNotReflected();
-        }
-
-        _healthPoints -= damage;
-        return new ObstacleReflected();
-    }
+    public abstract Result GetDamage(int damage);
 }
+
+/*
+0.5
+0.3
+0.1 0.4
+*/
