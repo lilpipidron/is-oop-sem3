@@ -34,9 +34,3 @@ public abstract class Deflector
 
     public abstract Result GetDamage(int damage);
 }
-
-/*
-0.5
-0.3
-0.1 0.4
-*/

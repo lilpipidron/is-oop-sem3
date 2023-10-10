@@ -17,7 +17,7 @@ public class Deflector1 : Deflector
             return new ObstacleNotReflected();
         }
 
-        if (damage >= SmallDamage)
+        if (damage > SmallDamage)
         {
             damageReduce = 0.5;
         }
