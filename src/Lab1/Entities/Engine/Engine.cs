@@ -14,7 +14,12 @@ public abstract class Engine
     public SimpleFuel Fuel { get; private set; }
     public double Time { get; protected set; }
     protected double Speed { get; set; }
-    protected int StartCost { get; set; }
+    protected int StartCost { get; }
 
     public abstract void Move(int distance);
+
+    public virtual bool SpeedDown(int distance)
+    {
+        return true;
+    }
 }
