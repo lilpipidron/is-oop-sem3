@@ -6,7 +6,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Enivorment;
 
 public class NitrineNebula : Environment.Environment
 {
-    private const int EngineDeceleration = 100;
     private int _whaleAmount;
 
     public NitrineNebula(int distance)
@@ -40,8 +39,7 @@ public class NitrineNebula : Environment.Environment
                 ship.Engine.Move(JumpDistance);
                 return true;
             default:
-                ship.Engine.Move(JumpDistance * EngineDeceleration);
-                return true;
+                return ship.Engine.SpeedDown(JumpDistance);
         }
     }
 }

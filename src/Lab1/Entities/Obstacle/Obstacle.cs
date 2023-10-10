@@ -17,7 +17,8 @@ public abstract class Obstacle
 
     public virtual Result DoDamage(Ship.Ship ship)
     {
-        if (ship.GetDamage(Damage) is not null)
+        Result result = ship.GetDamage(Damage);
+        if (result is ObstacleNotReflected)
         {
             return new DestroyShip();
         }
