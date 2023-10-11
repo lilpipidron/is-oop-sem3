@@ -11,7 +11,6 @@ public class Meredian : Ship
         Engine = new EngineE();
         Deflector = new Deflector2();
         Stability = new Stability2();
-        DoW = 30;
         Emitter = true;
     }
 }

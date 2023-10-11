@@ -13,6 +13,5 @@ public class Stella : Ship
         JumpDistance = JumpEngine.JumpDistance;
         Deflector = new Deflector1();
         Stability = new Stability1();
-        DoW = 20;
     }
 }

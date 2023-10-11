@@ -13,6 +13,5 @@ public class Vaklas : Ship
         JumpDistance = JumpEngine.JumpDistance;
         Deflector = new Deflector1();
         Stability = new Stability2();
-        DoW = 30;
     }
 }

@@ -13,6 +13,5 @@ public class Avgur : Ship
         JumpDistance = JumpEngine.JumpDistance;
         Deflector = new Deflector3();
         Stability = new Stability3();
-        DoW = 40;
     }
 }

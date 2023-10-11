@@ -16,7 +16,6 @@ public abstract class Ship
     public Deflector.Deflector? Deflector { get; protected set; }
     public bool Emitter { get; protected init; }
     protected Stability? Stability { get; init; }
-    protected int DoW { get; init; }
 
     public void AddPhotonDeflector()
     {

@@ -9,6 +9,5 @@ public class Shuttle : Ship
     {
         Engine = new EngineC();
         Stability = new Stability1();
-        DoW = 20;
     }
 }
