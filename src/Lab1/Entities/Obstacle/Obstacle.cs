@@ -4,20 +4,18 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 public abstract class Obstacle
 {
-    private int _dow;
+    private readonly int _damage;
+
     protected Obstacle() { }
 
-    protected Obstacle(int dw, int damage)
+    protected Obstacle(int damage)
     {
-        _dow = dw;
-        Damage = damage;
+        _damage = damage;
     }
-
-    public int Damage { get; private set; }
 
     public virtual Result DoDamage(Ship.Ship ship)
     {
-        Result result = ship.GetDamage(Damage);
+        Result result = ship.GetDamage(_damage);
         if (result is ObstacleNotReflected)
         {
             return new DestroyShip();
