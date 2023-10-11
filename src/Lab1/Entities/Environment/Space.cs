@@ -4,15 +4,17 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
-public class Space : Environment
+public class Space : IEnvironment
 {
     private int _asteroidAmount;
     private int _meteoriteAmount;
 
     public Space(int distance)
-        : base(distance)
     {
+        JumpDistance = distance;
     }
+
+    public int JumpDistance { get; init; }
 
     public void AddAsteroid()
     {
@@ -24,7 +26,7 @@ public class Space : Environment
         _meteoriteAmount++;
     }
 
-    public override IEnumerable<Obstacle.Obstacle> GetAllObstacles()
+    public IEnumerable<Obstacle.Obstacle> GetAllObstacles()
     {
         var obstacles = new Collection<Obstacle.Obstacle>();
         for (int i = 0; i < _asteroidAmount; i++)
@@ -40,7 +42,7 @@ public class Space : Environment
         return obstacles;
     }
 
-    public override bool TryMove(Ship.Ship ship)
+    public bool TryMove(Ship.Ship ship)
     {
         if (ship.Engine is null)
         {

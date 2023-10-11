@@ -5,21 +5,23 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
-public class NitrineNebula : Environment
+public class NitrineNebula : IEnvironment
 {
     private int _whaleAmount;
 
     public NitrineNebula(int distance)
-        : base(distance)
     {
+        JumpDistance = distance;
     }
+
+    public int JumpDistance { get; init; }
 
     public void AddWhale()
     {
         _whaleAmount++;
     }
 
-    public override IEnumerable<Obstacle.Obstacle> GetAllObstacles()
+    public IEnumerable<Obstacle.Obstacle> GetAllObstacles()
     {
         var obstacles = new Collection<Obstacle.Obstacle>();
         for (int i = 0; i < _whaleAmount; i++)
@@ -30,7 +32,7 @@ public class NitrineNebula : Environment
         return obstacles;
     }
 
-    public override bool TryMove(Ship.Ship ship)
+    public bool TryMove(Ship.Ship ship)
     {
         switch (ship.Engine)
         {

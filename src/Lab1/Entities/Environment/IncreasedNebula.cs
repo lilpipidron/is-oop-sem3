@@ -4,21 +4,23 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
-public class IncreasedNebula : Environment
+public class IncreasedNebula : IEnvironment
 {
     private int _antimatterAmount;
 
     public IncreasedNebula(int jumpDistance)
-        : base(jumpDistance)
     {
+        JumpDistance = jumpDistance;
     }
+
+    public int JumpDistance { get; init; }
 
     public void AddAntimatter()
     {
         _antimatterAmount++;
     }
 
-    public override IEnumerable<Obstacle.Obstacle> GetAllObstacles()
+    public IEnumerable<Obstacle.Obstacle> GetAllObstacles()
     {
         var obstacles = new Collection<Obstacle.Obstacle>();
         for (int i = 0; i < _antimatterAmount; i++)
@@ -29,7 +31,7 @@ public class IncreasedNebula : Environment
         return obstacles;
     }
 
-    public override bool TryMove(Ship.Ship ship)
+    public bool TryMove(Ship.Ship ship)
     {
         if (ship.JumpEngine is null)
         {
