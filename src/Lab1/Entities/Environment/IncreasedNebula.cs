@@ -18,7 +18,7 @@ public class IncreasedNebula : Environment
         _antimatterAmount++;
     }
 
-    public override IReadOnlyCollection<Obstacle.Obstacle> GetAllObstacles()
+    public override IEnumerable<Obstacle.Obstacle> GetAllObstacles()
     {
         var obstacles = new Collection<Obstacle.Obstacle>();
         for (int i = 0; i < _antimatterAmount; i++)

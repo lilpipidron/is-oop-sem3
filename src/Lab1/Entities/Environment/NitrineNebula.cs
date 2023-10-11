@@ -19,7 +19,7 @@ public class NitrineNebula : Environment
         _whaleAmount++;
     }
 
-    public override IReadOnlyCollection<Obstacle.Obstacle> GetAllObstacles()
+    public override IEnumerable<Obstacle.Obstacle> GetAllObstacles()
     {
         var obstacles = new Collection<Obstacle.Obstacle>();
         for (int i = 0; i < _whaleAmount; i++)

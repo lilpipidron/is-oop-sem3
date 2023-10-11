@@ -9,7 +9,7 @@ public abstract class Environment
         JumpDistance = jumpDistance;
     }
 
-    public int JumpDistance { get; private set; }
-    public abstract IReadOnlyCollection<Obstacle.Obstacle> GetAllObstacles();
+    protected int JumpDistance { get; private set; }
+    public abstract IEnumerable<Obstacle.Obstacle> GetAllObstacles();
     public abstract bool TryMove(Ship.Ship ship);
 }
