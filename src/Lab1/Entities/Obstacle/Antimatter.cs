@@ -11,6 +11,11 @@ public class Antimatter : Obstacle
             return new CrewDied();
         }
 
-        return ship.Deflector.PhotonDeflect() ? new ObstacleReflected() : new CrewDied();
+        if (ship.Deflector.PhotonDeflect() is ObstacleReflected)
+        {
+            return new ObstacleReflected();
+        }
+
+        return new CrewDied();
     }
 }

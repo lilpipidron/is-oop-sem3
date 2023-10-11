@@ -1,3 +1,5 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
 public class PhotonDeflector : DeflectorDecorator
@@ -9,9 +11,9 @@ public class PhotonDeflector : DeflectorDecorator
     {
     }
 
-    public override bool PhotonDeflect()
+    public override Result PhotonDeflect()
     {
         _charge--;
-        return _charge >= 0;
+        return _charge >= 0 ? new ObstacleReflected() : new ObstacleNotReflected();
     }
 }

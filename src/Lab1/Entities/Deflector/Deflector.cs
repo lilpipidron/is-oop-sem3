@@ -27,9 +27,9 @@ public abstract class Deflector
 
     protected double HealthPoints { get; set; }
 
-    public virtual bool PhotonDeflect()
+    public virtual Result PhotonDeflect()
     {
-        return false;
+        return new ObstacleNotReflected();
     }
 
     public abstract Result GetDamage(int damage);
