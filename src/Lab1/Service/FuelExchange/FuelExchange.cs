@@ -14,7 +14,7 @@ public class FuelExchange
         _specialFuelCost = specialFuelCost;
     }
 
-    public double TotalCost(Fuel fuel) => fuel switch
+    public double TotalCost(IFuel fuel) => fuel switch
     {
         null => throw new ArgumentNullException(nameof(fuel)),
         SimpleFuel simpleFuel => _simpleFuelCost * simpleFuel.Amount,

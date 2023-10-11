@@ -44,7 +44,7 @@ public class TravelWay
             }
         }
 
-        IEnumerable<Fuel> allFuel = ship.FuelSpend();
+        IEnumerable<IFuel> allFuel = ship.FuelSpend();
         double cost = allFuel.Sum(fuel => _fuelExchange.TotalCost(fuel));
         double time = ship.AllTime();
 
