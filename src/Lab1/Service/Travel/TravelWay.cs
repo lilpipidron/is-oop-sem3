@@ -33,7 +33,7 @@ public class TravelWay
                 return new LostShip();
             }
 
-            IReadOnlyCollection<Obstacle> obstacle = environment.GetAllObstacles();
+            IEnumerable<Obstacle> obstacle = environment.GetAllObstacles();
             foreach (Obstacle obs in obstacle)
             {
                 Result.Result res = obs.DoDamage(ship);
@@ -45,10 +45,8 @@ public class TravelWay
         }
 
         IEnumerable<Fuel> allFuel = ship.FuelSpend();
-        double cost = 0;
-        double time = 0;
-        cost = allFuel.Sum(fuel => _fuelExchange.TotalCost(fuel));
-        time = ship.AllTime();
+        double cost = allFuel.Sum(fuel => _fuelExchange.TotalCost(fuel));
+        double time = ship.AllTime();
 
         return new Success(cost, time);
     }
