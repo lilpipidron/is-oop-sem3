@@ -15,7 +15,7 @@ public abstract class Ship
     public JumpEngine? JumpEngine { get; protected init; }
     public Deflector.IDeflector? Deflector { get; protected set; }
     public bool Emitter { get; protected init; }
-    protected Stability? Stability { get; init; }
+    protected IStability? Stability { get; init; }
 
     public void AddPhotonDeflector()
     {
