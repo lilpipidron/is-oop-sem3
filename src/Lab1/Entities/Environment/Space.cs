@@ -6,15 +6,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public class Space : IEnvironment
 {
+    private readonly int _distance;
     private int _asteroidAmount;
     private int _meteoriteAmount;
 
     public Space(int distance)
     {
-        JumpDistance = distance;
+        _distance = distance;
     }
-
-    public int JumpDistance { get; init; }
 
     public void AddAsteroid()
     {
@@ -26,9 +25,9 @@ public class Space : IEnvironment
         _meteoriteAmount++;
     }
 
-    public IEnumerable<Obstacle.Obstacle> GetAllObstacles()
+    public IEnumerable<Obstacle.IObstacle> GetAllObstacles()
     {
-        var obstacles = new Collection<Obstacle.Obstacle>();
+        var obstacles = new Collection<Obstacle.IObstacle>();
         for (int i = 0; i < _asteroidAmount; i++)
         {
             obstacles.Add(new Asteroid());
@@ -49,7 +48,7 @@ public class Space : IEnvironment
             return false;
         }
 
-        ship.Engine.Move(JumpDistance);
+        ship.Engine.Move(_distance);
         return true;
     }
 }

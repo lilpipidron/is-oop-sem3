@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
@@ -7,29 +6,23 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public class NitrineNebula : IEnvironment
 {
-    private int _whaleAmount;
+    private readonly List<CosmoWhale> _whales;
+    private readonly int _distance;
 
     public NitrineNebula(int distance)
     {
-        JumpDistance = distance;
+        _distance = distance;
+        _whales = new List<CosmoWhale>();
     }
 
-    public int JumpDistance { get; init; }
-
-    public void AddWhale()
+    public void AddWhale(int amount)
     {
-        _whaleAmount++;
+        _whales.Add(new CosmoWhale(amount));
     }
 
-    public IEnumerable<Obstacle.Obstacle> GetAllObstacles()
+    public IEnumerable<Obstacle.IObstacle> GetAllObstacles()
     {
-        var obstacles = new Collection<Obstacle.Obstacle>();
-        for (int i = 0; i < _whaleAmount; i++)
-        {
-            obstacles.Add(new CosmoWhale());
-        }
-
-        return obstacles;
+        return _whales;
     }
 
     public bool TryMove(Ship.Ship ship)
@@ -39,10 +32,10 @@ public class NitrineNebula : IEnvironment
             case null:
                 return false;
             case EngineE:
-                ship.Engine.Move(JumpDistance);
+                ship.Engine.Move(_distance);
                 return true;
             default:
-                return ship.Engine.SpeedDown(JumpDistance);
+                return ship.Engine.SpeedDown(_distance);
         }
     }
 }

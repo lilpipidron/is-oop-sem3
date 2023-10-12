@@ -6,26 +6,25 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public class IncreasedNebula : IEnvironment
 {
+    private readonly int _jumpDistance;
     private int _antimatterAmount;
 
     public IncreasedNebula(int jumpDistance)
     {
-        JumpDistance = jumpDistance;
+        _jumpDistance = jumpDistance;
     }
-
-    public int JumpDistance { get; init; }
 
     public void AddAntimatter()
     {
         _antimatterAmount++;
     }
 
-    public IEnumerable<Obstacle.Obstacle> GetAllObstacles()
+    public IEnumerable<Obstacle.IObstacle> GetAllObstacles()
     {
-        var obstacles = new Collection<Obstacle.Obstacle>();
+        var obstacles = new Collection<Obstacle.IObstacle>();
         for (int i = 0; i < _antimatterAmount; i++)
         {
-            obstacles.Add(new Antimatter());
+            obstacles.Add(new AntimatterFlash());
         }
 
         return obstacles;
@@ -38,12 +37,12 @@ public class IncreasedNebula : IEnvironment
             return false;
         }
 
-        if (ship.JumpDistance < JumpDistance)
+        if (ship.JumpDistance < _jumpDistance)
         {
             return false;
         }
 
-        ship.JumpEngine.Move(JumpDistance);
+        ship.JumpEngine.Move(_jumpDistance);
         return true;
     }
 }

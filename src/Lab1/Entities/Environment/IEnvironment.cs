@@ -4,7 +4,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public interface IEnvironment
 {
-    public int JumpDistance { get; init; }
-    public IEnumerable<Obstacle.Obstacle> GetAllObstacles();
+    public IEnumerable<Obstacle.IObstacle> GetAllObstacles();
     public bool TryMove(Ship.Ship ship);
 }
