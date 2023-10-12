@@ -1,3 +1,3 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
-public record ObstacleReflected : Result;
+public sealed record ObstacleReflected(double HealthPoint) : Result;
