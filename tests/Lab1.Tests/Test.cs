@@ -50,7 +50,8 @@ public class Test
         travel.AddEnvironment(increasedNebula);
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
-        Assert.True(result1 is LostShip && result2 is LostShip);
+        Assert.Equal(typeof(LostShip), result1.GetType());
+        Assert.Equal(typeof(LostShip), result2.GetType());
     }
 
     [Theory]
@@ -64,7 +65,8 @@ public class Test
         travel.AddEnvironment(increasedNebula);
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
-        Assert.True(result1 is CrewDied && result2 is Success);
+        Assert.Same(typeof(CrewDied), result1.GetType());
+        Assert.Same(typeof(Success), result2.GetType());
     }
 
     [Theory]
@@ -80,6 +82,9 @@ public class Test
         Result result2 = travel.Travel(ship2);
         Result result3 = travel.Travel(ship3);
         Assert.True(result1 is DestroyShip && result2 is Success && result3 is Success);
+        Assert.Equal(typeof(DestroyShip), result1.GetType());
+        Assert.Equal(typeof(Success), result2.GetType());
+        Assert.Equal(typeof(Success), result3.GetType());
     }
 
     [Fact]
@@ -95,7 +100,7 @@ public class Test
         chooseShip.AddShip(shuttle);
         chooseShip.AddShip(valkas);
         Ship? ship = chooseShip.ChooseBest();
-        Assert.True(ship is Shuttle);
+        Assert.Same(typeof(Shuttle), ship?.GetType());
     }
 
     [Fact]
@@ -111,7 +116,7 @@ public class Test
         chooseShip.AddShip(avgur);
         chooseShip.AddShip(stella);
         Ship? ship = chooseShip.ChooseBest();
-        Assert.True(ship is Stella);
+        Assert.Equal(typeof(Stella), ship?.GetType());
     }
 
     [Fact]
@@ -127,7 +132,7 @@ public class Test
         chooseShip.AddShip(shuttle);
         chooseShip.AddShip(valkas);
         Ship? ship = chooseShip.ChooseBest();
-        Assert.True(ship is Vaklas);
+        Assert.Same(typeof(Vaklas), ship?.GetType());
     }
 
     [Fact]
@@ -149,6 +154,6 @@ public class Test
         travel.AddEnvironment(nitrineNebula);
         travel.AddEnvironment(space);
         Result result = travel.Travel(valkas);
-        Assert.True(result is Success);
+        Assert.Equal(typeof(Success), result.GetType());
     }
 }
