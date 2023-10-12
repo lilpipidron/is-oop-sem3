@@ -2,17 +2,15 @@ using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
-public class Deflector1 : Deflector
+public class Deflector1 : IDeflector
 {
-    public Deflector1()
-        : base(20, 10)
-    {
-    }
+    private const int SmallDamage = 10;
+    private double _healthPoints = 20;
 
-    public override Result GetDamage(int damage)
+    public Result GetDamage(int damage)
     {
         double damageReduce = 1;
-        if (HealthPoints <= 0)
+        if (_healthPoints <= 0)
         {
             return new ObstacleNotReflected();
         }
@@ -22,12 +20,12 @@ public class Deflector1 : Deflector
             damageReduce = 0.5;
         }
 
-        if (damage * damageReduce > HealthPoints)
+        if (damage * damageReduce > _healthPoints)
         {
             return new ObstacleNotReflected();
         }
 
-        HealthPoints -= damage * damageReduce;
+        _healthPoints -= damage * damageReduce;
         return new ObstacleReflected();
     }
 }

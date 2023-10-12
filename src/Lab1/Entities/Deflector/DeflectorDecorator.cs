@@ -2,16 +2,16 @@ using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
-public abstract class DeflectorDecorator : Deflector
+public abstract class DeflectorDecorator : IDeflector
 {
-    private readonly Deflector _deflector;
+    private readonly IDeflector _deflector;
 
-    protected DeflectorDecorator(Deflector deflector)
+    protected DeflectorDecorator(IDeflector deflector)
     {
         _deflector = deflector;
     }
 
-    public override Result GetDamage(int damage)
+    public Result GetDamage(int damage)
     {
         return _deflector.GetDamage(damage);
     }
