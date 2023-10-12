@@ -33,8 +33,8 @@ public class TravelWay
                 return new LostShip();
             }
 
-            IEnumerable<Obstacle> obstacle = environment.GetAllObstacles();
-            foreach (Obstacle obs in obstacle)
+            IEnumerable<IObstacle> obstacle = environment.GetAllObstacles();
+            foreach (IObstacle obs in obstacle)
             {
                 Result.Result res = obs.DoDamage(ship);
                 if (res is not ObstacleReflected)
