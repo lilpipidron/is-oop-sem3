@@ -1,3 +1,4 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
 using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
@@ -11,7 +12,7 @@ public abstract class DeflectorDecorator : IDeflector
         _deflector = deflector;
     }
 
-    public Result GetDamage(int damage)
+    public virtual Result GetDamage(Damage damage)
     {
         return _deflector.GetDamage(damage);
     }

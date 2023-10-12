@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 
 public interface IStability
 {
-    public Result GetDamage(int damage);
+    public Result GetDamage(Damage.Damage damage);
 }
