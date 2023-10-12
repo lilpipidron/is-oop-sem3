@@ -2,9 +2,9 @@ using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
-public class Antimatter : Obstacle
+public class AntimatterFlash : IObstacle
 {
-    public override Result DoDamage(Ship.Ship ship)
+    public Result DoDamage(Ship.Ship ship)
     {
         if (ship.Deflector is null)
         {
