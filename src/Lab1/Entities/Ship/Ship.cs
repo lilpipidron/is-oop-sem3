@@ -13,7 +13,7 @@ public abstract class Ship
     public double JumpDistance { get; protected init; }
     public Engine.Engine? Engine { get; protected init; }
     public JumpEngine? JumpEngine { get; protected init; }
-    public Deflector.Deflector? Deflector { get; protected set; }
+    public Deflector.IDeflector? Deflector { get; protected set; }
     public bool Emitter { get; protected init; }
     protected Stability? Stability { get; init; }
 
@@ -25,9 +25,9 @@ public abstract class Ship
         }
     }
 
-    public IEnumerable<Fuel> FuelSpend()
+    public IEnumerable<IFuel> FuelSpend()
     {
-        var allFuel = new Collection<Fuel>();
+        var allFuel = new Collection<IFuel>();
         if (Engine is not null)
         {
             allFuel.Add(Engine.Fuel);
