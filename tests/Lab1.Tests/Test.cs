@@ -72,7 +72,7 @@ public class Test
     public void NitrineNebulaWithWhale_ValkasAvgurMeredian_ValkasDestroyAvgurAndMeredianSuccess(Ship ship1, Ship ship2, Ship ship3)
     {
         var nitrineNebula = new NitrineNebula(10);
-        nitrineNebula.AddWhale();
+        nitrineNebula.AddWhale(1);
         var fuelExchange = new FuelExchange(10, 20);
         var travel = new TravelWay(fuelExchange);
         travel.AddEnvironment(nitrineNebula);
