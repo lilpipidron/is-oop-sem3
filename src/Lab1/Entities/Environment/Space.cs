@@ -25,9 +25,9 @@ public class Space : IEnvironment
         _meteoriteAmount++;
     }
 
-    public IEnumerable<Obstacle.IObstacle> GetAllObstacles()
+    public IEnumerable<IObstacle> GetAllObstacles()
     {
-        var obstacles = new Collection<Obstacle.IObstacle>();
+        var obstacles = new Collection<IObstacle>();
         for (int i = 0; i < _asteroidAmount; i++)
         {
             obstacles.Add(new Asteroid());

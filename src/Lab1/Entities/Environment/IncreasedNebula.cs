@@ -19,9 +19,9 @@ public class IncreasedNebula : IEnvironment
         _antimatterAmount++;
     }
 
-    public IEnumerable<Obstacle.IObstacle> GetAllObstacles()
+    public IEnumerable<IObstacle> GetAllObstacles()
     {
-        var obstacles = new Collection<Obstacle.IObstacle>();
+        var obstacles = new Collection<IObstacle>();
         for (int i = 0; i < _antimatterAmount; i++)
         {
             obstacles.Add(new AntimatterFlash());

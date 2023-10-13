@@ -12,7 +12,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 public abstract class Ship
 {
     public double JumpDistance { get; protected init; }
-    public Engine.Engine? Engine { get; protected init; }
+    public IEngine? Engine { get; protected init; }
     public JumpEngine? JumpEngine { get; protected init; }
     public IDeflector? Deflector { get; protected set; }
     public bool Emitter { get; protected init; }

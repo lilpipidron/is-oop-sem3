@@ -20,7 +20,7 @@ public class NitrineNebula : IEnvironment
         _whales.Add(new CosmoWhale(amount));
     }
 
-    public IEnumerable<Obstacle.IObstacle> GetAllObstacles()
+    public IEnumerable<IObstacle> GetAllObstacles()
     {
         return _whales;
     }
@@ -29,13 +29,13 @@ public class NitrineNebula : IEnvironment
     {
         switch (ship.Engine)
         {
-            case null:
-                return false;
             case EngineE:
                 ship.Engine.Move(_distance);
                 return true;
+            case EngineC c:
+                return c.SpeedDown(_distance);
             default:
-                return ship.Engine.SpeedDown(_distance);
+                return false;
         }
     }
 }

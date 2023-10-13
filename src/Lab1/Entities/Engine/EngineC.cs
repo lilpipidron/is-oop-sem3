@@ -1,27 +1,31 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
+
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
-public class EngineC : Engine
+public class EngineC : IEngine
 {
-    public EngineC()
-        : base(20, 20)
-    {
-    }
+    private const double Speed = 20;
+    private const int StartCost = 20;
 
-    public override void Move(int distance)
+    public double Time { get; private set; }
+    public SimpleFuel Fuel { get; } = new();
+
+    public void Move(int distance)
     {
         double time = distance / Speed;
         Time += time;
         Fuel.Use(time + StartCost);
     }
 
-    public override bool SpeedDown(int distance)
+    public bool SpeedDown(int distance)
     {
+        double speed = Speed;
         for (int i = 0; i < distance; i++)
         {
-            Speed *= 0.9;
+            speed *= 0.9;
             Move(1);
         }
 
-        return Speed > 0.1;
+        return speed > 0.1;
     }
 }
