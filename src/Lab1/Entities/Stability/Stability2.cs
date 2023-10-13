@@ -1,15 +1,15 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Strategy;
 using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Stability;
 
-public class Stability1 : IStability
+public class Stability2 : IStability
 {
     private const int SmallDamage = 10;
     private readonly PhysDamageStrategy _strategy = new();
-    private double _healthPoint = 10;
+    private double _healthPoint = 50;
 
-    public Result GetDamage(Damage.Damage damage)
+    public Result GetDamage(Model.Damage.Damage damage)
     {
         if (_healthPoint <= 0 || damage.DamageAmount > _healthPoint)
         {
@@ -22,7 +22,7 @@ public class Stability1 : IStability
             damageReduce = 0.4;
         }
 
-        Damage.Damage newDamage = damage with { DamageAmount = damage.DamageAmount * damageReduce };
+        Model.Damage.Damage newDamage = damage with { DamageAmount = damage.DamageAmount * damageReduce };
 
         Result res = _strategy.TakeDamage(newDamage, _healthPoint);
         if (res is ObstacleNotReflected)
