@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Stability;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 

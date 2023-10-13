@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Stability;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Stability;
 using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
