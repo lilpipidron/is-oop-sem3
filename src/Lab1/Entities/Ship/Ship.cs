@@ -13,7 +13,7 @@ public abstract class Ship
 {
     public double JumpDistance { get; protected init; }
     public IEngine? Engine { get; protected init; }
-    public JumpEngine? JumpEngine { get; protected init; }
+    public IJumpEngine? JumpEngine { get; protected init; }
     public IDeflector? Deflector { get; protected set; }
     public bool Emitter { get; protected init; }
     protected IStability? Stability { get; init; }
