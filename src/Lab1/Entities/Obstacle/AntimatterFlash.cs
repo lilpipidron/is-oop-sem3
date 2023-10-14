@@ -1,9 +1,10 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
-public class AntimatterFlash : IObstacle
+public class AntimatterFlash : IIncreasedNebulaObstacle
 {
     public Result DoDamage(Ship.Ship ship)
     {
@@ -12,6 +13,6 @@ public class AntimatterFlash : IObstacle
             return photonicDecorator.HandlePhotonicDamage();
         }
 
-        return new Result.ObstacleNotReflected(0);
+        return new Result.CrewDied();
     }
 }
