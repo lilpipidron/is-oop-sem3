@@ -1,10 +1,8 @@
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
 public interface IEngine
 {
-    public SimpleFuel Fuel { get; }
-    public double Time { get; }
-    public void Move(int distance);
+    public EngineTravelResult Travel(int distance);
 }

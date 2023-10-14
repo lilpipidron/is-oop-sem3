@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
@@ -10,11 +11,11 @@ public class EngineC : IEngine, IEngineWithSpeedDown
     public double Time { get; private set; }
     public SimpleFuel Fuel { get; } = new();
 
-    public void Move(int distance)
+    public EngineTravelResult Travel(int distance)
     {
-        double time = distance / Speed;
-        Time += time;
-        Fuel.Use(time + StartCost);
+        Time = distance / Speed;
+        Fuel.Use(distance + StartCost);
+        return new EngineTravelResult.TravelSuccess(Time, Fuel);
     }
 
     public bool SpeedDown(int distance)
@@ -23,7 +24,7 @@ public class EngineC : IEngine, IEngineWithSpeedDown
         for (int i = 0; i < distance; i++)
         {
             speed *= 0.9;
-            Move(1);
+            Travel(1);
         }
 
         return speed > 0.1;

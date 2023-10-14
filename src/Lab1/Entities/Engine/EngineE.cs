@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
@@ -8,10 +9,11 @@ public class EngineE : IEngine
     public SimpleFuel Fuel { get; } = new();
     public double Time { get; private set; }
 
-    public void Move(int distance)
+    public EngineTravelResult Travel(int distance)
     {
         double time = double.Log(distance + 1);
-        Time += time;
+        Time = time;
         Fuel.Use(time + StartCost);
+        return new EngineTravelResult.TravelSuccess(Time, Fuel);
     }
 }

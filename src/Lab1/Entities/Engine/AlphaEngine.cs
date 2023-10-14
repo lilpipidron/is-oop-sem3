@@ -1,4 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
@@ -8,9 +9,15 @@ public class AlphaEngine : IJumpEngine
     public SpecialFuel Fuel { get; init; } = new();
     public double Time { get; private set; }
 
-    public void Move(int distance)
+    public JumpEngineTravelResult Travel(int distance)
     {
-        Time += JumpDistance / distance;
-        Fuel.Use(distance);
+        if (distance > JumpDistance)
+        {
+            return new JumpEngineTravelResult.TravelFailed();
+        }
+
+        Time = distance / JumpDistance;
+        Fuel.Use(Time);
+        return new JumpEngineTravelResult.TravelSuccess(Time, Fuel);
     }
 }
