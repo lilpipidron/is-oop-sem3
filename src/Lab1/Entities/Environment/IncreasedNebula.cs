@@ -1,48 +1,41 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public class IncreasedNebula : IEnvironment
 {
-    private readonly int _jumpDistance;
-    private int _antimatterAmount;
+    private readonly int _distance;
+    private readonly Collection<IIncreasedNebulaObstacle> _obstacles;
 
-    public IncreasedNebula(int jumpDistance)
+    public IncreasedNebula(int distance, Collection<IIncreasedNebulaObstacle> obstacles)
     {
-        _jumpDistance = jumpDistance;
+        _distance = distance;
+        _obstacles = obstacles;
     }
 
-    public void AddAntimatter()
-    {
-        _antimatterAmount++;
-    }
-
-    public IEnumerable<IObstacle> GetAllObstacles()
-    {
-        var obstacles = new Collection<IObstacle>();
-        for (int i = 0; i < _antimatterAmount; i++)
-        {
-            obstacles.Add(new AntimatterFlash());
-        }
-
-        return obstacles;
-    }
-
-    public bool TryMove(Ship.Ship ship)
+    public Result TryOvercome(Ship.Ship ship)
     {
         if (ship.JumpEngine is null)
         {
-            return false;
+            return new Result.LostShip();
         }
 
-        if (ship.JumpDistance < _jumpDistance)
+        JumpEngineTravelResult travelResult = ship.JumpEngine.Travel(_distance);
+        foreach (IIncreasedNebulaObstacle obs in _obstacles)
         {
-            return false;
+            Result obstacleResult = obs.DoDamage(ship);
+            if (obstacleResult is not Result.ObstacleReflected)
+            {
+                return obstacleResult;
+            }
         }
 
-        ship.JumpEngine.Move(_jumpDistance);
-        return true;
+        if (travelResult is JumpEngineTravelResult.TravelSuccess travelSuccess)
+        {
+            return new Result.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
+        }
+
+        return new Result.LostShip();
     }
 }

@@ -1,41 +1,50 @@
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public class NitrineNebula : IEnvironment
 {
-    private readonly List<CosmoWhale> _whales;
+    private readonly Collection<INitrineNebulaObstacle> _obstacles;
     private readonly int _distance;
 
-    public NitrineNebula(int distance)
+    public NitrineNebula(int distance, Collection<INitrineNebulaObstacle> obstacles)
     {
         _distance = distance;
-        _whales = new List<CosmoWhale>();
+        _obstacles = obstacles;
     }
 
-    public void AddWhale(int amount)
+    public Result TryOvercome(Ship.Ship ship)
     {
-        _whales.Add(new CosmoWhale(amount));
-    }
-
-    public IEnumerable<IObstacle> GetAllObstacles()
-    {
-        return _whales;
-    }
-
-    public bool TryMove(Ship.Ship ship)
-    {
-        switch (ship.Engine)
+        if (ship.Engine is IEngineWithSpeedDown engineWithSpeedDown)
         {
-            case null:
-                return false;
-            case IEngineWithSpeedDown engineWithSpeedDown:
-                return engineWithSpeedDown.SpeedDown(_distance);
-            default:
-                ship.Engine.Move(_distance);
-                return true;
+            if (engineWithSpeedDown.SpeedDown(_distance) is false)
+            {
+                return new Result.LostShip();
+            }
         }
+
+        EngineTravelResult travelResult = ship.Engine.Travel(_distance);
+        if (travelResult is EngineTravelResult.TravelFailed)
+        {
+            return new Result.LostShip();
+        }
+
+        foreach (INitrineNebulaObstacle obstacle in _obstacles)
+        {
+            Result res = obstacle.DoDamage(ship);
+            if (res is not Result.ObstacleReflected)
+            {
+                return res;
+            }
+        }
+
+        if (travelResult is EngineTravelResult.TravelSuccess travelSuccess)
+        {
+            return new Result.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
+        }
+
+        return new Result.LostShip();
     }
 }
