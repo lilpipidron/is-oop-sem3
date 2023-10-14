@@ -1,5 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
@@ -10,6 +10,6 @@ public class Asteroid : IObstacle
     public Result DoDamage(Ship.Ship ship)
     {
         Result result = ship.GetDamage(_damage);
-        return result is ObstacleNotReflected ? new DestroyShip() : result;
+        return result is Result.ObstacleNotReflected ? new Result.DestroyShip() : result;
     }
 }

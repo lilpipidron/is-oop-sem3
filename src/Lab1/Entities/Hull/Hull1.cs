@@ -1,19 +1,19 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Strategy;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Stability;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Hull;
 
-public class Stability2 : IStability
+public class Hull1 : IHull
 {
     private const int SmallDamage = 10;
     private readonly PhysDamageStrategy _strategy = new();
-    private double _healthPoint = 50;
+    private double _healthPoint = 10;
 
     public Result GetDamage(Model.Damage.Damage damage)
     {
         if (_healthPoint <= 0 || damage.DamageAmount > _healthPoint)
         {
-            return new ObstacleNotReflected(damage);
+            return new Result.ObstacleNotReflected(damage);
         }
 
         double damageReduce = 1;
@@ -25,7 +25,7 @@ public class Stability2 : IStability
         Model.Damage.Damage newDamage = damage with { DamageAmount = damage.DamageAmount * damageReduce };
 
         Result res = _strategy.TakeDamage(newDamage, _healthPoint);
-        if (res is ObstacleNotReflected)
+        if (res is Result.ObstacleNotReflected)
         {
             _healthPoint = 0;
         }
