@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Service.FuelExchange;
@@ -15,17 +18,17 @@ public class Test
         yield return new object[]
         {
             new Shuttle(),
-            new Avgur(),
+            new Avgur(new Deflector3()),
         };
     }
 
     public static IEnumerable<object[]> SecondTestShips()
     {
-        var valkas2 = new Vaklas();
-        valkas2.AddPhotonDeflector();
+        var deflector1 = new PhotonDeflector(new Deflector1());
+        var valkas2 = new Vaklas(deflector1);
         yield return new object[]
         {
-            new Vaklas(),
+            new Vaklas(new Deflector1()),
             valkas2,
         };
     }
@@ -34,9 +37,9 @@ public class Test
     {
         yield return new object[]
         {
-            new Vaklas(),
-            new Avgur(),
-            new Meredian(),
+            new Vaklas(new Deflector1()),
+            new Avgur(new Deflector3()),
+            new Meredian(new Deflector2()),
         };
     }
 
@@ -44,10 +47,14 @@ public class Test
     [MemberData(nameof(FirstTestShips))]
     public void MiddleRouteInIncreasedNebula_ShuttleAvgur_ShuttleLostShipAvgurLostShip(Ship ship1, Ship ship2)
     {
-        var increasedNebula = new IncreasedNebula(20);
+        var increasedNebula = new IncreasedNebula(
+            20,
+            new Collection<IIncreasedNebulaObstacle>());
         var fuelExchange = new FuelExchange(10, 20);
-        var travel = new TravelWay(fuelExchange);
-        travel.AddEnvironment(increasedNebula);
+        var travel = new TravelWay(
+            fuelExchange,
+            new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { increasedNebula }));
+
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
         Assert.Equal(typeof(Result.LostShip), result1.GetType());
@@ -56,13 +63,17 @@ public class Test
 
     [Theory]
     [MemberData(nameof(SecondTestShips))]
-    public void IncreasedNebulaWithAntimatter_ValkasAndValkasWithPhotonDeflector_FirstCrewDiedSecondSuccess(Ship ship1, Ship ship2)
+    public void IncreasedNebulaWithAntimatter_ValkasAndValkasWithPhotonDeflector_FirstCrewDiedSecondSuccess(
+        Ship ship1,
+        Ship ship2)
     {
-        var increasedNebula = new IncreasedNebula(10);
+        var increasedNebula = new IncreasedNebula(
+            10,
+            new Collection<IIncreasedNebulaObstacle>(new IIncreasedNebulaObstacle[] { new AntimatterFlash() }));
         var fuelExchange = new FuelExchange(10, 20);
-        var travel = new TravelWay(fuelExchange);
-        increasedNebula.AddAntimatter();
-        travel.AddEnvironment(increasedNebula);
+        var travel = new TravelWay(
+            fuelExchange,
+            new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { increasedNebula }));
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
         Assert.Same(typeof(Result.CrewDied), result1.GetType());
@@ -71,13 +82,18 @@ public class Test
 
     [Theory]
     [MemberData(nameof(ThirdTestShips))]
-    public void NitrineNebulaWithWhale_ValkasAvgurMeredian_ValkasDestroyAvgurAndMeredianSuccess(Ship ship1, Ship ship2, Ship ship3)
+    public void NitrineNebulaWithWhale_ValkasAvgurMeredian_ValkasDestroyAvgurAndMeredianSuccess(
+        Ship ship1,
+        Ship ship2,
+        Ship ship3)
     {
-        var nitrineNebula = new NitrineNebula(10);
-        nitrineNebula.AddWhale(1);
+        var nitrineNebula = new NitrineNebula(
+            10,
+            new Collection<INitrineNebulaObstacle>(new INitrineNebulaObstacle[] { new CosmoWhale(1) }));
         var fuelExchange = new FuelExchange(10, 20);
-        var travel = new TravelWay(fuelExchange);
-        travel.AddEnvironment(nitrineNebula);
+        var travel = new TravelWay(
+            fuelExchange,
+            new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { nitrineNebula }));
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
         Result result3 = travel.Travel(ship3);
@@ -91,69 +107,84 @@ public class Test
     public void ShortRouteInSpace_ShuttleAndVaklas_ChooseShuttle()
     {
         var shuttle = new Shuttle();
-        var valkas = new Vaklas();
+        var valkas = new Vaklas(new Deflector1());
         var fuelExchange = new FuelExchange(10, 20);
-        var space = new Space(30);
-        var travel = new TravelWay(fuelExchange);
-        travel.AddEnvironment(space);
-        var chooseShip = new ChooseShip(travel);
-        chooseShip.AddShip(shuttle);
-        chooseShip.AddShip(valkas);
-        Ship? ship = chooseShip.ChooseBest();
+        var space = new Space(
+            30,
+            new Collection<ISpaceObstacle>());
+        var travel = new TravelWay(
+            fuelExchange,
+            new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { space }));
+        var chooseShip = new ChooserBestShip(
+            travel,
+            new Collection<Ship>(new List<Ship> { shuttle, valkas }),
+            fuelExchange);
+        Ship? ship = chooseShip.FindBestShip();
         Assert.Same(typeof(Shuttle), ship?.GetType());
     }
 
     [Fact]
     public void MiddleRouteInIncreasedNebula_AvgurAndStella_ChooseStella()
     {
-        var avgur = new Avgur();
-        var stella = new Stella();
-        var increasedNebula = new IncreasedNebula(20);
+        var avgur = new Avgur(new Deflector3());
+        var stella = new Stella(new Deflector1());
+        var increasedNebula = new IncreasedNebula(
+            20,
+            new Collection<IIncreasedNebulaObstacle>());
         var fuelExchange = new FuelExchange(10, 20);
-        var travel = new TravelWay(fuelExchange);
-        travel.AddEnvironment(increasedNebula);
-        var chooseShip = new ChooseShip(travel);
-        chooseShip.AddShip(avgur);
-        chooseShip.AddShip(stella);
-        Ship? ship = chooseShip.ChooseBest();
+        var travel = new TravelWay(
+            fuelExchange,
+            new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { increasedNebula }));
+        var chooseShip = new ChooserBestShip(
+            travel,
+            new Collection<Ship>(new List<Ship> { avgur, stella }),
+            fuelExchange);
+        Ship? ship = chooseShip.FindBestShip();
         Assert.Equal(typeof(Stella), ship?.GetType());
-    }
-
-    [Fact]
-    public void RouteInNitrineNebula_ShuttleAndValkas_ChooseVaklas()
-    {
-        var shuttle = new Shuttle();
-        var valkas = new Vaklas();
-        var nitrineNebula = new NitrineNebula(50000);
-        var fuelExchange = new FuelExchange(10, 20);
-        var travel = new TravelWay(fuelExchange);
-        travel.AddEnvironment(nitrineNebula);
-        var chooseShip = new ChooseShip(travel);
-        chooseShip.AddShip(shuttle);
-        chooseShip.AddShip(valkas);
-        Ship? ship = chooseShip.ChooseBest();
-        Assert.Same(typeof(Vaklas), ship?.GetType());
     }
 
     [Fact]
     public void
         RouteWithNitrineNebula_SpaceWithAsteroidMeteorite_IncreasedNebulaWithTwoAntimatter_ValkasWithPhotonDeflector_ResultIsSuccess()
     {
-        var valkas = new Vaklas();
-        valkas.AddPhotonDeflector();
-        var nitrineNebula = new NitrineNebula(20);
-        var space = new Space(20);
-        space.AddAsteroid();
-        space.AddMeteorite();
-        var increasedNebula = new IncreasedNebula(20);
-        increasedNebula.AddAntimatter();
-        increasedNebula.AddAntimatter();
+        var valkas = new Vaklas(new PhotonDeflector(new Deflector1()));
+        var nitrineNebula = new NitrineNebula(
+            20,
+            new Collection<INitrineNebulaObstacle>());
+        var space = new Space(
+            20,
+            new Collection<ISpaceObstacle>(new ISpaceObstacle[] { new Asteroid(), new Meteorite() }));
+
+        var increasedNebula = new IncreasedNebula(
+            20,
+            new Collection<IIncreasedNebulaObstacle>() { new AntimatterFlash() });
+
         var fuelExchange = new FuelExchange(10, 20);
-        var travel = new TravelWay(fuelExchange);
-        travel.AddEnvironment(increasedNebula);
-        travel.AddEnvironment(nitrineNebula);
-        travel.AddEnvironment(space);
+
+        var travel = new TravelWay(
+            fuelExchange,
+            new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { nitrineNebula, space, increasedNebula }));
         Result result = travel.Travel(valkas);
         Assert.Equal(typeof(Result.Success), result.GetType());
+    }
+
+    [Fact]
+    public void RouteInNitrineNebula_ShuttleAndValkas_ChooseVaklas()
+    {
+        var shuttle = new Shuttle();
+        var valkas = new Vaklas(new Deflector1());
+        var nitrineNebula = new NitrineNebula(
+            300,
+            new Collection<INitrineNebulaObstacle>());
+        var fuelExchange = new FuelExchange(10, 20);
+        var travel = new TravelWay(
+            fuelExchange,
+            new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { nitrineNebula }));
+        var chooseShip = new ChooserBestShip(
+            travel,
+            new Collection<Ship>(new List<Ship> { shuttle, valkas }),
+            fuelExchange);
+        Ship? ship = chooseShip.FindBestShip();
+        Assert.Same(typeof(Vaklas), ship?.GetType());
     }
 }
