@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 
-public class EngineC : IEngine
+public class EngineC : IEngine, IEngineWithSpeedDown
 {
     private const double Speed = 20;
     private const int StartCost = 20;
