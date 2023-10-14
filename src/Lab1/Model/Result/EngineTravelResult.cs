@@ -2,7 +2,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
-public record EngineTravelResult
+public abstract record EngineTravelResult
 {
     private EngineTravelResult()
     {
