@@ -12,7 +12,7 @@ public abstract record Result
 
     public sealed record LostShip : Result;
 
-    public sealed record ObstacleNotReflected(Damage.Damage Damage) : Result;
+    public sealed record ObstacleNotReflected(double Damage) : Result;
 
     public sealed record ObstacleReflected(double HealthPoint) : Result;
 
