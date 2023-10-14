@@ -1,36 +1,25 @@
-using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Hull;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
 public abstract class Ship
 {
-    public double JumpDistance { get; protected init; }
-    public IEngine? Engine { get; protected init; }
-    public IJumpEngine? JumpEngine { get; protected init; }
-    public IDeflector? Deflector { get; protected set; }
-    protected IHull? Stability { get; init; }
-
-    public abstract IEnumerable<IFuel> FuelSpend();
-
-    public abstract double GetAllTime();
-
-    public void AddPhotonDeflector()
+    protected Ship(IEngine engine)
     {
-        if (Deflector is not null)
-        {
-            Deflector = new PhotonDeflector(Deflector);
-        }
+        Engine = engine;
     }
 
-    public Result GetDamage(Damage damage)
+    public IEngine Engine { get; }
+    public IJumpEngine? JumpEngine { get; protected init; }
+    public IDeflector? Deflector { get; protected init; }
+    protected IHull? Stability { get; init; }
+
+    public Result HandleDamage(int damage)
     {
-        Result result = new Result.ObstacleNotReflected(new Damage(DamageType.Physical, 0));
+        Result result = new Result.ObstacleNotReflected(0);
         if (Deflector is not null)
         {
             result = Deflector.GetDamage(damage);
@@ -43,7 +32,7 @@ public abstract class Ship
 
         if (Stability is not null)
         {
-            result = Stability.GetDamage(damage);
+            result = Stability.HandleDamage(damage);
         }
 
         return result;

@@ -1,54 +1,38 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
+using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public class Space : IEnvironment
 {
     private readonly int _distance;
-    private int _asteroidAmount;
-    private int _meteoriteAmount;
+    private Collection<ISpaceObstacle> _obstacles;
 
-    public Space(int distance)
+    public Space(int distance, Collection<ISpaceObstacle> obstacles)
     {
         _distance = distance;
+        _obstacles = obstacles;
     }
 
-    public void AddAsteroid()
+    public Result TryOvercome(Ship.Ship ship)
     {
-        _asteroidAmount++;
-    }
-
-    public void AddMeteorite()
-    {
-        _meteoriteAmount++;
-    }
-
-    public IEnumerable<IObstacle> GetAllObstacles()
-    {
-        var obstacles = new Collection<IObstacle>();
-        for (int i = 0; i < _asteroidAmount; i++)
+        EngineTravelResult travelResult = ship.Engine.Travel(_distance);
+        if (travelResult is EngineTravelResult.TravelFailed)
         {
-            obstacles.Add(new Asteroid());
+            return new Result.DestroyShip();
         }
 
-        for (int i = 0; i < _meteoriteAmount; i++)
+        if (_obstacles.Select(obstacle => obstacle.DoDamage(ship)).OfType<Result.ObstacleNotReflected>().Any())
         {
-            obstacles.Add(new Meteorite());
+            return new Result.DestroyShip();
         }
 
-        return obstacles;
-    }
-
-    public bool TryMove(Ship.Ship ship)
-    {
-        if (ship.Engine is null)
+        if (travelResult is EngineTravelResult.TravelSuccess travelSuccess)
         {
-            return false;
+            return new Result.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
         }
 
-        ship.Engine.Move(_distance);
-        return true;
+        return new Result.LostShip();
     }
 }
