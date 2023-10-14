@@ -1,9 +1,11 @@
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Service.FuelExchange;
 
-public class FuelExchange
+public class FuelExchange : IFuelExchange
 {
     private readonly double _simpleFuelCost;
     private readonly double _specialFuelCost;
@@ -14,11 +16,13 @@ public class FuelExchange
         _specialFuelCost = specialFuelCost;
     }
 
-    public double TotalCost(IFuel fuel) => fuel switch
+    public double TotalCost(Collection<IFuel> allFuel)
     {
-        null => throw new ArgumentNullException(nameof(fuel)),
-        SimpleFuel simpleFuel => _simpleFuelCost * simpleFuel.Amount,
-        SpecialFuel specialFuel => _specialFuelCost * specialFuel.Amount,
-        _ => throw new ArgumentException("We have no information about this type of fuel"),
-    };
+        return allFuel.Sum(fuel => fuel switch
+        {
+            SimpleFuel => fuel.Amount * _simpleFuelCost,
+            SpecialFuel => fuel.Amount * _specialFuelCost,
+            _ => throw new ArgumentException("We have no information about this type of fuel"),
+        });
+    }
 }
