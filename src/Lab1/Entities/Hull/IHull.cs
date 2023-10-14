@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Hull;
 
 public interface IHull
 {
-    public Result GetDamage(Model.Damage.Damage damage);
+    public Result HandleDamage(double damage);
 }
