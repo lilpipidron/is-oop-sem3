@@ -6,7 +6,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 public class GammaEngine : IJumpEngine
 {
     public double JumpDistance { get; init; } = 30;
-    public SpecialFuel Fuel { get; init; } = new();
     public double Time { get; private set; }
 
     public JumpEngineTravelResult Travel(int distance)
@@ -17,7 +16,7 @@ public class GammaEngine : IJumpEngine
         }
 
         Time = distance / JumpDistance;
-        Fuel.Use(Time);
-        return new JumpEngineTravelResult.TravelSuccess(Time, Fuel);
+        var fuel = new SpecialFuel(Time);
+        return new JumpEngineTravelResult.TravelSuccess(Time, fuel);
     }
 }
