@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 
@@ -24,20 +24,20 @@ public class TravelWay
         _environments.Add(environment);
     }
 
-    public Result.Result Travel(Ship ship)
+    public Result Travel(Ship ship)
     {
         foreach (IEnvironment environment in _environments)
         {
             if (environment.TryMove(ship) is false)
             {
-                return new LostShip();
+                return new Result.LostShip();
             }
 
             IEnumerable<IObstacle> obstacle = environment.GetAllObstacles();
             foreach (IObstacle obs in obstacle)
             {
-                Result.Result res = obs.DoDamage(ship);
-                if (res is not ObstacleReflected)
+                Result res = obs.DoDamage(ship);
+                if (res is not Result.ObstacleReflected)
                 {
                     return res;
                 }
@@ -46,8 +46,8 @@ public class TravelWay
 
         IEnumerable<IFuel> allFuel = ship.FuelSpend();
         double cost = allFuel.Sum(fuel => _fuelExchange.TotalCost(fuel));
-        double time = ship.AllTime();
+        double time = ship.GetAllTime();
 
-        return new Success(cost, time);
+        return new Result.Success(cost, time);
     }
 }

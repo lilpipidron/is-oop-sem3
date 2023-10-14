@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Strategy;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
@@ -17,6 +17,6 @@ public class PhotonDeflector : DeflectorDecorator
     public override Result GetDamage(Damage damage)
     {
         Result res = _strategy.TakeDamage(damage, 0);
-        return res is ObstacleNotReflected ? base.GetDamage(damage) : res;
+        return res is Result.ObstacleNotReflected ? base.GetDamage(damage) : res;
     }
 }

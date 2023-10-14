@@ -1,5 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
@@ -9,6 +9,6 @@ public class AntimatterFlash : IObstacle
 
     public Result DoDamage(Ship.Ship ship)
     {
-        return ship.Deflector is null ? new CrewDied() : ship.Deflector.GetDamage(_damage);
+        return ship.Deflector is null ? new Result.CrewDied() : ship.Deflector.GetDamage(_damage);
     }
 }

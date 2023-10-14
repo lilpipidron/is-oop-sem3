@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 
@@ -28,8 +28,8 @@ public class ChooseShip
         double minTime = -1;
         foreach (Ship ship in _allShips)
         {
-            Result.Result result = _travelWay.Travel(ship);
-            if (result is not Success success ||
+            Model.Result.Result result = _travelWay.Travel(ship);
+            if (result is not Result.Success success ||
                 (!(success.FlyCost < minCost) && Math.Abs(minCost + 1) != 0 &&
                  (Math.Abs(success.FlyCost - minCost) != 0 ||
                   (!(success.FlyTime < minTime) && Math.Abs(minTime + 1) != 0))))

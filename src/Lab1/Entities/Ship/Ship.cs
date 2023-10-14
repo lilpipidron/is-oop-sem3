@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
-using Itmo.ObjectOrientedProgramming.Lab1.Entities.Stability;
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Hull;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 
@@ -15,8 +14,11 @@ public abstract class Ship
     public IEngine? Engine { get; protected init; }
     public IJumpEngine? JumpEngine { get; protected init; }
     public IDeflector? Deflector { get; protected set; }
-    public bool Emitter { get; protected init; }
-    protected IStability? Stability { get; init; }
+    protected IHull? Stability { get; init; }
+
+    public abstract IEnumerable<IFuel> FuelSpend();
+
+    public abstract double GetAllTime();
 
     public void AddPhotonDeflector()
     {
@@ -26,47 +28,15 @@ public abstract class Ship
         }
     }
 
-    public IEnumerable<IFuel> FuelSpend()
-    {
-        var allFuel = new Collection<IFuel>();
-        if (Engine is not null)
-        {
-            allFuel.Add(Engine.Fuel);
-        }
-
-        if (JumpEngine is not null)
-        {
-            allFuel.Add(JumpEngine.Fuel);
-        }
-
-        return allFuel;
-    }
-
-    public double AllTime()
-    {
-        double fullTime = 0;
-        if (Engine is not null)
-        {
-            fullTime += Engine.Time;
-        }
-
-        if (JumpEngine is not null)
-        {
-            fullTime += JumpEngine.Time;
-        }
-
-        return fullTime;
-    }
-
     public Result GetDamage(Damage damage)
     {
-        Result result = new ObstacleNotReflected(new Damage(DamageType.Physical, 0));
+        Result result = new Result.ObstacleNotReflected(new Damage(DamageType.Physical, 0));
         if (Deflector is not null)
         {
             result = Deflector.GetDamage(damage);
         }
 
-        if (result is ObstacleReflected)
+        if (result is Result.ObstacleReflected)
         {
             return result;
         }

@@ -1,5 +1,6 @@
+using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
@@ -14,12 +15,12 @@ public class CosmoWhale : IObstacle
 
     public Result DoDamage(Ship.Ship ship)
     {
-        if (ship.Emitter)
+        if (ship is IShipWithEmitter)
         {
-            return new ObstacleReflected(0);
+            return new Result.ObstacleReflected(0);
         }
 
         Result result = ship.GetDamage(_damage);
-        return result is ObstacleNotReflected ? new DestroyShip() : result;
+        return result is Result.ObstacleNotReflected ? new Result.DestroyShip() : result;
     }
 }

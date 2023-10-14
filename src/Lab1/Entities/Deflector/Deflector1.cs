@@ -1,6 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Strategy;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
@@ -15,7 +15,7 @@ public class Deflector1 : IDeflector
         double damageReduce = 1;
         if (_healthPoints <= 0)
         {
-            return new ObstacleNotReflected(damage);
+            return new Result.ObstacleNotReflected(damage);
         }
 
         if (damage.DamageAmount > SmallDamage)
@@ -27,14 +27,14 @@ public class Deflector1 : IDeflector
 
         if (newDamage.DamageAmount > _healthPoints)
         {
-            return new ObstacleNotReflected(newDamage with { DamageAmount = newDamage.DamageAmount - _healthPoints });
+            return new Result.ObstacleNotReflected(newDamage with { DamageAmount = newDamage.DamageAmount - _healthPoints });
         }
 
         Result res = _strategy.TakeDamage(newDamage, _healthPoints);
         _healthPoints = res switch
         {
-            ObstacleReflected obstacleReflected => obstacleReflected.HealthPoint,
-            ObstacleNotReflected => 0,
+            Result.ObstacleReflected obstacleReflected => obstacleReflected.HealthPoint,
+            Result.ObstacleNotReflected => 0,
             _ => _healthPoints,
         };
 

@@ -1,5 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Service.FuelExchange;
-using Itmo.ObjectOrientedProgramming.Lab1.Service.Result;
 using Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 using Xunit;
 
@@ -50,8 +50,8 @@ public class Test
         travel.AddEnvironment(increasedNebula);
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
-        Assert.Equal(typeof(LostShip), result1.GetType());
-        Assert.Equal(typeof(LostShip), result2.GetType());
+        Assert.Equal(typeof(Result.LostShip), result1.GetType());
+        Assert.Equal(typeof(Result.LostShip), result2.GetType());
     }
 
     [Theory]
@@ -65,8 +65,8 @@ public class Test
         travel.AddEnvironment(increasedNebula);
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
-        Assert.Same(typeof(CrewDied), result1.GetType());
-        Assert.Same(typeof(Success), result2.GetType());
+        Assert.Same(typeof(Result.CrewDied), result1.GetType());
+        Assert.Same(typeof(Result.Success), result2.GetType());
     }
 
     [Theory]
@@ -81,10 +81,10 @@ public class Test
         Result result1 = travel.Travel(ship1);
         Result result2 = travel.Travel(ship2);
         Result result3 = travel.Travel(ship3);
-        Assert.True(result1 is DestroyShip && result2 is Success && result3 is Success);
-        Assert.Equal(typeof(DestroyShip), result1.GetType());
-        Assert.Equal(typeof(Success), result2.GetType());
-        Assert.Equal(typeof(Success), result3.GetType());
+        Assert.True(result1 is Result.DestroyShip && result2 is Result.Success && result3 is Result.Success);
+        Assert.Equal(typeof(Result.DestroyShip), result1.GetType());
+        Assert.Equal(typeof(Result.Success), result2.GetType());
+        Assert.Equal(typeof(Result.Success), result3.GetType());
     }
 
     [Fact]
@@ -154,6 +154,6 @@ public class Test
         travel.AddEnvironment(nitrineNebula);
         travel.AddEnvironment(space);
         Result result = travel.Travel(valkas);
-        Assert.Equal(typeof(Success), result.GetType());
+        Assert.Equal(typeof(Result.Success), result.GetType());
     }
 }
