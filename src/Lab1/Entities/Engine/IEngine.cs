@@ -6,6 +6,5 @@ public interface IEngine
 {
     public SimpleFuel Fuel { get; }
     public double Time { get; }
-
     public void Move(int distance);
 }

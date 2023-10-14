@@ -29,13 +29,13 @@ public class NitrineNebula : IEnvironment
     {
         switch (ship.Engine)
         {
-            case EngineE:
+            case null:
+                return false;
+            case IEngineWithSpeedDown engineWithSpeedDown:
+                return engineWithSpeedDown.SpeedDown(_distance);
+            default:
                 ship.Engine.Move(_distance);
                 return true;
-            case EngineC c:
-                return c.SpeedDown(_distance);
-            default:
-                return false;
         }
     }
 }
