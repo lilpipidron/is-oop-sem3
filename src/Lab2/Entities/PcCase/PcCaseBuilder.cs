@@ -8,11 +8,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCase;
 
 public class PcCaseBuilder : IPcCaseBuilder
 {
-    private IVideoCardDimension? _maxVideoCardDimension;
+    private Dimension.VideoCardDimension? _maxVideoCardDimension;
     private IReadOnlyCollection<MotherBoardFormFactor>? _motherBoardForms;
-    private ICaseDimension? _dimension;
+    private Dimension.CaseDimension? _dimension;
 
-    public IPcCaseBuilder WithMaxVideoCardDimension(IVideoCardDimension maxDimension)
+    public IPcCaseBuilder WithMaxVideoCardDimension(Dimension.VideoCardDimension maxDimension)
     {
         _maxVideoCardDimension = maxDimension;
         return this;
@@ -24,7 +24,7 @@ public class PcCaseBuilder : IPcCaseBuilder
         return this;
     }
 
-    public IPcCaseBuilder WithDimension(ICaseDimension dimension)
+    public IPcCaseBuilder WithDimension(Dimension.CaseDimension dimension)
     {
         _dimension = dimension;
         return this;

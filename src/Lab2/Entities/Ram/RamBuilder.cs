@@ -12,7 +12,7 @@ public class RamBuilder : IRamBuilder
     private RamFormFactor? _ramFormFactor;
     private int? _versionDdr;
     private int? _powerConsumption;
-    private IReadOnlyCollection<ISupportedFrequencyVoltagePairs>? _supportedFrequencyVoltagePairsList;
+    private IReadOnlyCollection<SupportedFrequencyVoltagePairs>? _supportedFrequencyVoltagePairsList;
     private IReadOnlyCollection<int>? _availableXmpProfiles;
 
     public IRamBuilder WithAmount(int amount)
@@ -40,7 +40,7 @@ public class RamBuilder : IRamBuilder
     }
 
     public IRamBuilder WithSupportedFrequencyVoltagePairs(
-        IEnumerable<ISupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList)
+        IEnumerable<SupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList)
     {
         _supportedFrequencyVoltagePairsList = supportedFrequencyVoltagePairsList.ToArray();
         return this;

@@ -7,14 +7,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCase;
 
 public class PcCase : IPcCase
 {
-    private readonly IVideoCardDimension _maxDimension;
+    private readonly Dimension.VideoCardDimension _maxDimension;
     private readonly IReadOnlyCollection<MotherBoardFormFactor> _motherBoardForms;
-    private readonly ICaseDimension _dimension;
+    private readonly Dimension.CaseDimension _dimension;
 
     public PcCase(
-        IVideoCardDimension maxDimension,
+        Dimension.VideoCardDimension maxDimension,
         IEnumerable<MotherBoardFormFactor> motherBoardForms,
-        ICaseDimension dimension)
+        Dimension.CaseDimension dimension)
     {
         _maxDimension = maxDimension;
         _motherBoardForms = motherBoardForms.ToArray();

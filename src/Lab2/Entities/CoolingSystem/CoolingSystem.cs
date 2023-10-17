@@ -6,11 +6,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystem;
 
 public class CoolingSystem : ICoolingSystem
 {
-    private readonly ICoolingDimension _dimension;
+    private readonly Dimension.CoolingDimension _dimension;
     private readonly IReadOnlyCollection<string> _socket;
     private readonly int _maxTdp;
 
-    public CoolingSystem(ICoolingDimension dimension, IEnumerable<string> socket, int maxTdp)
+    public CoolingSystem(Dimension.CoolingDimension dimension, IEnumerable<string> socket, int maxTdp)
     {
         _dimension = dimension;
         _socket = socket.ToArray();

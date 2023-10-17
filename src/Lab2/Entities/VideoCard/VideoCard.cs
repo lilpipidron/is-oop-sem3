@@ -4,14 +4,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCard;
 
 public class VideoCard : IVideoCard
 {
-    private readonly IVideoCardDimension _dimension;
+    private readonly Dimension.VideoCardDimension _dimension;
     private readonly int _memoryAmount;
     private readonly string _versionPciE;
     private readonly double _chipFrequency;
     private readonly int _powerConsumption;
 
     public VideoCard(
-        IVideoCardDimension dimension,
+        Dimension.VideoCardDimension dimension,
         int memoryAmount,
         string versionPciE,
         double chipFrequency,

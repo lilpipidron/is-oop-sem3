@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCard;
 
 public interface IVideoCardBuilder
 {
-    IVideoCardBuilder WithDimension(IVideoCardDimension dimension);
+    IVideoCardBuilder WithDimension(Dimension.VideoCardDimension dimension);
 
     IVideoCardBuilder WithMemoryAmount(int memoryAmount);
 

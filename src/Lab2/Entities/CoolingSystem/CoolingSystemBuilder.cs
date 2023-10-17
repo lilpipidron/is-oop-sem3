@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystem;
 
 public class CoolingSystemBuilder : ICoolingSystemBuilder
 {
-    private ICoolingDimension? _dimension;
+    private Dimension.CoolingDimension? _dimension;
     private IReadOnlyCollection<string>? _socket;
     private int? _maxTdp;
 
@@ -23,7 +23,7 @@ public class CoolingSystemBuilder : ICoolingSystemBuilder
         return this;
     }
 
-    public ICoolingSystemBuilder WithDimension(ICoolingDimension dimension)
+    public ICoolingSystemBuilder WithDimension(Dimension.CoolingDimension dimension)
     {
         _dimension = dimension;
         return this;

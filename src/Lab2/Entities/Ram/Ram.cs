@@ -11,7 +11,7 @@ public class Ram : IRam
     private readonly RamFormFactor _ramFormFactor;
     private readonly int _versionDdr;
     private readonly int _powerConsumption;
-    private readonly IReadOnlyCollection<ISupportedFrequencyVoltagePairs> _supportedFrequencyVoltagePairsList;
+    private readonly IReadOnlyCollection<SupportedFrequencyVoltagePairs> _supportedFrequencyVoltagePairsList;
     private readonly IReadOnlyCollection<int> _availableXmpProfiles;
 
     public Ram(
@@ -19,7 +19,7 @@ public class Ram : IRam
         RamFormFactor ramFormFactor,
         int versionDdr,
         int powerConsumption,
-        IEnumerable<ISupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList,
+        IEnumerable<SupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList,
         IEnumerable<int> availableXmpProfiles)
     {
         _amount = amount;
