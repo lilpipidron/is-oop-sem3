@@ -7,4 +7,6 @@ public interface IHddBuilder
     IHddBuilder WithSpindleSpeed(int spindleSpeed);
 
     IHddBuilder WithPowerConsumption(int powerConsumption);
+
+    IHdd Build();
 }

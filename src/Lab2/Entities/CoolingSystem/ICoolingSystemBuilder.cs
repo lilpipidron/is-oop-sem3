@@ -10,4 +10,6 @@ public interface ICoolingSystemBuilder
     ICoolingSystemBuilder WithSocket(IEnumerable<string> socket);
 
     ICoolingSystemBuilder WithMaxTdp(int maxTdp);
+
+    ICoolingSystem Build();
 }

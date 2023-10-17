@@ -17,4 +17,6 @@ public interface ICpuBuilder
     ICpuBuilder WithTdp(int tdp);
 
     ICpuBuilder WithPowerConsumption(int powerConsumption);
+
+    ICpu Build();
 }

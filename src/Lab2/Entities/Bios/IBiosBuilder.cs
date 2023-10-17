@@ -10,4 +10,6 @@ public interface IBiosBuilder
     IBiosBuilder WithVersion(string version);
 
     IBiosBuilder WithSupportedCpu(IEnumerable<ICpu> supportedCpu);
+
+    IBios Build();
 }

@@ -7,6 +7,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCase;
 public interface IPcCaseBuilder
 {
     IPcCaseBuilder WithMaxVideoCardDimension(IVideoCardDimension maxDimension);
+
     IPcCaseBuilder WithMotherBoardForms(IReadOnlyCollection<MotherBoardFormFactor> motherBoardForms);
+
     IPcCaseBuilder WithDimension(ICaseDimension dimension);
+
+    IPcCase Build();
 }

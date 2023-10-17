@@ -7,9 +7,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ram;
 public interface IRamBuilder
 {
     IRamBuilder WithAmount(int amount);
+
     IRamBuilder WithRamFormFactor(RamFormFactor ramFormFactor);
+
     IRamBuilder WithVersionDdr(int versionDdr);
+
     IRamBuilder WithPowerConsumption(int powerConsumption);
-    IRamBuilder WithSupportedFrequencyVoltagePairs(IReadOnlyCollection<ISupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList);
+
+    IRamBuilder WithSupportedFrequencyVoltagePairs(
+        IReadOnlyCollection<ISupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList);
+
     IRamBuilder WithAvailableXmpProfiles(IReadOnlyCollection<int> availableXmpProfiles);
+
+    IRam Build();
 }
