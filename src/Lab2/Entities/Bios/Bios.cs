@@ -1,18 +1,19 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Bios;
 
 public class Bios : IBios
 {
-    private readonly string _bios;
+    private readonly string _biosType;
     private readonly string _version;
-    private readonly Collection<ICpu> _supportedCpu;
+    private readonly IReadOnlyCollection<ICpu> _supportedCpu;
 
-    public Bios(string bios, string version, Collection<ICpu> supportedCpu)
+    public Bios(string biosType, string version, IEnumerable<ICpu> supportedCpu)
     {
-        _bios = bios;
+        _biosType = biosType;
         _version = version;
-        _supportedCpu = supportedCpu;
+        _supportedCpu = supportedCpu.ToArray();
     }
 }

@@ -1,4 +1,5 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.RamFormFactors;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.SupportedFrequencyVoltagePairs;
 
@@ -10,22 +11,22 @@ public class Ram : IRam
     private readonly RamFormFactor _ramFormFactor;
     private readonly int _versionDdr;
     private readonly int _powerConsumption;
-    private readonly Collection<ISupportedFrequencyVoltagePairs> _supportedFrequencyVoltagePairsList;
-    private readonly Collection<int> _availableXmpProfiles;
+    private readonly IReadOnlyCollection<ISupportedFrequencyVoltagePairs> _supportedFrequencyVoltagePairsList;
+    private readonly IReadOnlyCollection<int> _availableXmpProfiles;
 
     public Ram(
         int amount,
         RamFormFactor ramFormFactor,
         int versionDdr,
         int powerConsumption,
-        Collection<ISupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList,
-        Collection<int> availableXmpProfiles)
+        IEnumerable<ISupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList,
+        IEnumerable<int> availableXmpProfiles)
     {
         _amount = amount;
         _ramFormFactor = ramFormFactor;
         _versionDdr = versionDdr;
         _powerConsumption = powerConsumption;
-        _supportedFrequencyVoltagePairsList = supportedFrequencyVoltagePairsList;
-        _availableXmpProfiles = availableXmpProfiles;
+        _supportedFrequencyVoltagePairsList = supportedFrequencyVoltagePairsList.ToArray();
+        _availableXmpProfiles = availableXmpProfiles.ToArray();
     }
 }

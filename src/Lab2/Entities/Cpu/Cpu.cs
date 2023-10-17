@@ -1,4 +1,5 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
@@ -8,7 +9,7 @@ public class Cpu : ICpu
     private readonly double _coreAmount;
     private readonly string _socket;
     private readonly bool _videoCore;
-    private readonly ReadOnlyCollection<int> _ramFrequency;
+    private readonly IReadOnlyCollection<int> _ramFrequency;
     private readonly int _tdp;
     private readonly int _powerConsumption;
 
@@ -17,7 +18,7 @@ public class Cpu : ICpu
         double coreAmount,
         string socket,
         bool videoCore,
-        ReadOnlyCollection<int> ramFrequency,
+        IEnumerable<int> ramFrequency,
         int tdp,
         int powerConsumption)
     {
@@ -25,7 +26,7 @@ public class Cpu : ICpu
         _coreAmount = coreAmount;
         _socket = socket;
         _videoCore = videoCore;
-        _ramFrequency = ramFrequency;
+        _ramFrequency = ramFrequency.ToArray();
         _tdp = tdp;
         _powerConsumption = powerConsumption;
     }
