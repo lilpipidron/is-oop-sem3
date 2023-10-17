@@ -29,4 +29,17 @@ public class Ram : IRam
         _supportedFrequencyVoltagePairsList = supportedFrequencyVoltagePairsList.ToArray();
         _availableXmpProfiles = availableXmpProfiles.ToArray();
     }
+
+    public IRamBuilder Director(IRamBuilder builder)
+    {
+        builder
+            .WithAmount(_amount)
+            .WithRamFormFactor(_ramFormFactor)
+            .WithVersionDdr(_versionDdr)
+            .WithPowerConsumption(_powerConsumption)
+            .WithSupportedFrequencyVoltagePairs(_supportedFrequencyVoltagePairsList)
+            .WithAvailableXmpProfiles(_availableXmpProfiles);
+
+        return builder;
+    }
 }

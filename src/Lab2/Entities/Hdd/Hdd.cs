@@ -12,4 +12,14 @@ public class Hdd : IHdd
         _spindleSpeed = spindleSpeed;
         _powerConsumption = powerConsumption;
     }
+
+    public IHddBuilder Director(IHddBuilder builder)
+    {
+        builder
+            .WithMemoryAmount(_memoryAmount)
+            .WithSpindleSpeed(_spindleSpeed)
+            .WithPowerConsumption(_powerConsumption);
+
+        return builder;
+    }
 }

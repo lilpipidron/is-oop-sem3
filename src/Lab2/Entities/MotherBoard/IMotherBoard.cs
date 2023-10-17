@@ -1,5 +1,5 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.MotherBoard;
 
-public interface IMotherBoard
+public interface IMotherBoard : IMotherBoardBuilderDirector
 {
 }

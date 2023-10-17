@@ -30,4 +30,18 @@ public class Cpu : ICpu
         _tdp = tdp;
         _powerConsumption = powerConsumption;
     }
+
+    public ICpuBuilder Director(ICpuBuilder builder)
+    {
+        builder
+            .WithCoreFrequency(_coreFrequency)
+            .WithCoreAmount(_coreAmount)
+            .WithSocket(_socket)
+            .WithVideoCore(_videoCore)
+            .WithRamFrequency(_ramFrequency)
+            .WithTdp(_tdp)
+            .WithPowerConsumption(_powerConsumption);
+
+        return builder;
+    }
 }

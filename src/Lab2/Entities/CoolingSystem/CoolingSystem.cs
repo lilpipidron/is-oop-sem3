@@ -16,4 +16,14 @@ public class CoolingSystem : ICoolingSystem
         _socket = socket.ToArray();
         _maxTdp = maxTdp;
     }
+
+    public ICoolingSystemBuilder Director(ICoolingSystemBuilder builder)
+    {
+        builder
+            .WithDimension(_dimension)
+            .WithSocket(_socket)
+            .WithMaxTdp(_maxTdp);
+
+        return builder;
+    }
 }

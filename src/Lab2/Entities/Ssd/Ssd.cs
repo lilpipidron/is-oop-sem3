@@ -14,4 +14,15 @@ public class Ssd : ISsd
         _powerConsumption = powerConsumption;
         _connectionOption = connectionOption;
     }
+
+    public ISsdBuilder Director(ISsdBuilder builder)
+    {
+        builder
+            .WithMemoryAmount(_memoryAmount)
+            .WithMaximumSpeed(_maximumSpeed)
+            .WithPowerConsumption(_powerConsumption)
+            .WithConnectionOption(_connectionOption);
+
+        return builder;
+    }
 }

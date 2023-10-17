@@ -1,5 +1,5 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.XMP;
 
-public interface IXmp
+public interface IXmp : IXmpBuilderDirector
 {
 }

@@ -8,4 +8,12 @@ public class Psu : IPsu
     {
         _peakLoad = peakLoad;
     }
+
+    public IPsuBuilder Director(IPsuBuilder builder)
+    {
+        builder
+            .WithPeakLoad(_peakLoad);
+
+        return builder;
+    }
 }

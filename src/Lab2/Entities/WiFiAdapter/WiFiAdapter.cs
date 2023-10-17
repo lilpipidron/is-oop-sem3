@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.WiFiAdapter;
 
-public class WiFiAdapter
+public class WiFiAdapter : IWiFiAdapter
 {
     private readonly int _wifiVersion;
     private readonly bool _bluetooth;
@@ -13,5 +13,16 @@ public class WiFiAdapter
         _bluetooth = bluetooth;
         _versionPciE = versionPciE;
         _powerConsumption = powerConsumption;
+    }
+
+    public IWiFiBuilder Director(IWiFiBuilder builder)
+    {
+        builder
+            .WithWiFiVersion(_wifiVersion)
+            .WithBluetooth(_bluetooth)
+            .WithVersionPciE(_versionPciE)
+            .WithPowerConsumption(_powerConsumption);
+
+        return builder;
     }
 }

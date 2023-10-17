@@ -34,4 +34,19 @@ public class MotherBoard : IMotherBoard
         _motherBoardFormFactor = motherBoardFormFactor;
         _bios = bios;
     }
+
+    public IMotherBoardBuilder Director(IMotherBoardBuilder builder)
+    {
+        builder
+            .WithSocket(_socket)
+            .WithPciE(_pciE)
+            .WithSata(_sata)
+            .WithChipset(_chipset)
+            .WithDdrStandard(_ddrStandard)
+            .WithRamCapacity(_ramCapacity)
+            .WithMotherBoardFormFactor(_motherBoardFormFactor)
+            .WithBios(_bios);
+
+        return builder;
+    }
 }

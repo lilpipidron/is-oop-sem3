@@ -23,4 +23,16 @@ public class VideoCard : IVideoCard
         _chipFrequency = chipFrequency;
         _powerConsumption = powerConsumption;
     }
+
+    public IVideoCardBuilder Director(IVideoCardBuilder builder)
+    {
+        builder
+            .WithDimension(_dimension)
+            .WithMemoryAmount(_memoryAmount)
+            .WithVersionPciE(_versionPciE)
+            .WithChipFrequency(_chipFrequency)
+            .WithPowerConsumption(_powerConsumption);
+
+        return builder;
+    }
 }

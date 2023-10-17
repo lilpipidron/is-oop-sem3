@@ -16,4 +16,14 @@ public class Bios : IBios
         _version = version;
         _supportedCpu = supportedCpu.ToArray();
     }
+
+    public IBiosBuilder Director(IBiosBuilder builder)
+    {
+        builder
+            .WithBiosType(_biosType)
+            .WithVersion(_version)
+            .WithSupportedCpu(_supportedCpu);
+
+        return builder;
+    }
 }
