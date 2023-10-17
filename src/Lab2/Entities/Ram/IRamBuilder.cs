@@ -15,9 +15,9 @@ public interface IRamBuilder
     IRamBuilder WithPowerConsumption(int powerConsumption);
 
     IRamBuilder WithSupportedFrequencyVoltagePairs(
-        IReadOnlyCollection<ISupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList);
+        IEnumerable<ISupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList);
 
-    IRamBuilder WithAvailableXmpProfiles(IReadOnlyCollection<int> availableXmpProfiles);
+    IRamBuilder WithAvailableXmpProfiles(IEnumerable<int> availableXmpProfiles);
 
     IRam Build();
 }

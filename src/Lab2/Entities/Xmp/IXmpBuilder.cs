@@ -2,7 +2,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.XMP;
 
 public interface IXmpBuilder
 {
-    IXmpBuilder WithTimings(int[] timings);
+    IXmpBuilder WithTimings(string timings);
 
     IXmpBuilder WithVoltage(int voltage);
 

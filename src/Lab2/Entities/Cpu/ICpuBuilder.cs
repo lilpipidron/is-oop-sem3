@@ -8,7 +8,7 @@ public interface ICpuBuilder
 
     ICpuBuilder WithCoreAmount(double coreAmount);
 
-    ICpuBuilder WithSocket(double socket);
+    ICpuBuilder WithSocket(string socket);
 
     ICpuBuilder WithVideoCore(bool videoCore);
 

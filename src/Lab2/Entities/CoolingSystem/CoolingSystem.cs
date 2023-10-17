@@ -10,10 +10,10 @@ public class CoolingSystem : ICoolingSystem
     private readonly IReadOnlyCollection<string> _socket;
     private readonly int _maxTdp;
 
-    public CoolingSystem(int maxTdp, IEnumerable<string> socket, ICoolingDimension dimension)
+    public CoolingSystem(ICoolingDimension dimension, IEnumerable<string> socket, int maxTdp)
     {
-        _maxTdp = maxTdp;
-        _socket = socket.ToArray();
         _dimension = dimension;
+        _socket = socket.ToArray();
+        _maxTdp = maxTdp;
     }
 }

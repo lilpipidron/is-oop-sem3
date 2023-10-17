@@ -11,16 +11,16 @@ public class VideoCard : IVideoCard
     private readonly int _powerConsumption;
 
     public VideoCard(
+        IVideoCardDimension dimension,
         int memoryAmount,
         string versionPciE,
         double chipFrequency,
-        int powerConsumption,
-        IVideoCardDimension dimension)
+        int powerConsumption)
     {
+        _dimension = dimension;
         _memoryAmount = memoryAmount;
         _versionPciE = versionPciE;
         _chipFrequency = chipFrequency;
         _powerConsumption = powerConsumption;
-        _dimension = dimension;
     }
 }

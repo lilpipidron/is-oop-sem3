@@ -10,5 +10,5 @@ public interface IWiFiBuilder
 
     IWiFiBuilder WithPowerConsumption(int powerConsumption);
 
-    IWiFiAdapter Build();
+    WiFiAdapter Build();
 }

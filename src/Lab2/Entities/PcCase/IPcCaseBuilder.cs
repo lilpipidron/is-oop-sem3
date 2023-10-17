@@ -8,7 +8,7 @@ public interface IPcCaseBuilder
 {
     IPcCaseBuilder WithMaxVideoCardDimension(IVideoCardDimension maxDimension);
 
-    IPcCaseBuilder WithMotherBoardForms(IReadOnlyCollection<MotherBoardFormFactor> motherBoardForms);
+    IPcCaseBuilder WithMotherBoardForms(IEnumerable<MotherBoardFormFactor> motherBoardForms);
 
     IPcCaseBuilder WithDimension(ICaseDimension dimension);
 
