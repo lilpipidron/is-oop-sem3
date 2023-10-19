@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.SupportedFrequencyVoltagePairs;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Rams;
 
-public interface IRam : IRamBuilderDirector, IHasName
+public interface IRam : IBuilderDirector<IRamBuilder>, IHasName
 {
     public int Amount { get; }
     public RamFormFactor RamFormFactor { get; }

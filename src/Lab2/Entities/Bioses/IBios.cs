@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Bioses;
 
-public interface IBios : IBiosBuilderDirector, IHasName
+public interface IBios : IBuilderDirector<IBiosBuilder>, IHasName
 {
     public string BiosType { get; }
     public string Version { get; }

@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
 
-public interface IPcCase : IPcCaseBuilderDirector, IHasName
+public interface IPcCase : IBuilderDirector<IPcCaseBuilder>, IHasName
 {
     public Dimension.VideoCardDimension MaxDimension { get; }
     public IReadOnlyCollection<MotherBoardFormFactor> MotherBoardForms { get; }

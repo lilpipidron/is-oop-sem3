@@ -1,5 +1,5 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 
-public interface IPc : IPcBuilderDirector
+public interface IPc : IBuilderDirector<IPcBuilder>
 {
 }

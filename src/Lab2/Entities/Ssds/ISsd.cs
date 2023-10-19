@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ssds;
 
-public interface ISsd : ISsdBuilderDirector, IHasName
+public interface ISsd : IBuilderDirector<ISsdBuilder>, IHasName
 {
     public int MemoryAmount { get; }
     public int MaximumSpeed { get; }

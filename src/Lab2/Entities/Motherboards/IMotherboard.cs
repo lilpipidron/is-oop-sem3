@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
 
-public interface IMotherboard : IMotherboardBuilderDirector, IHasName
+public interface IMotherboard : IBuilderDirector<IMotherboardBuilder>, IHasName
 {
     public string Socket { get; }
     public int PciE { get; }

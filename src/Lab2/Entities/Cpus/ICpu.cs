@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 
-public interface ICpu : ICpuBuilderDirector, IHasName
+public interface ICpu : IBuilderDirector<ICpuBuilder>, IHasName
 {
     public double CoreFrequency { get; }
     public double CoreAmount { get; }
