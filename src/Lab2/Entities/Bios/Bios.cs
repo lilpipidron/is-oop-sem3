@@ -4,25 +4,28 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Bios;
 
-public class Bios : IBios
+internal class Bios : IBios
 {
-    private readonly string _biosType;
-    private readonly string _version;
-    private readonly IReadOnlyCollection<ICpu> _supportedCpu;
-
-    public Bios(string biosType, string version, IEnumerable<ICpu> supportedCpu)
+    public Bios(string name, string biosType, string version, IEnumerable<ICpu> supportedCpu)
     {
-        _biosType = biosType;
-        _version = version;
-        _supportedCpu = supportedCpu.ToArray();
+        Name = name;
+        BiosType = biosType;
+        Version = version;
+        SupportedCpu = supportedCpu.ToArray();
     }
+
+    public string Name { get; }
+    public string BiosType { get; }
+    public string Version { get; }
+    public IReadOnlyCollection<ICpu> SupportedCpu { get; }
 
     public IBiosBuilder Director(IBiosBuilder builder)
     {
         builder
-            .WithBiosType(_biosType)
-            .WithVersion(_version)
-            .WithSupportedCpu(_supportedCpu);
+            .WithName(Name)
+            .WithBiosType(BiosType)
+            .WithVersion(Version)
+            .WithSupportedCpu(SupportedCpu);
 
         return builder;
     }

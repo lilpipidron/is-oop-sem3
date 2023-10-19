@@ -2,26 +2,29 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ssd;
 
 public class Ssd : ISsd
 {
-    private readonly int _memoryAmount;
-    private readonly int _maximumSpeed;
-    private readonly int _powerConsumption;
-    private readonly string _connectionOption;
-
-    public Ssd(int memoryAmount, int maximumSpeed, int powerConsumption, string connectionOption)
+    internal Ssd(string name, int memoryAmount, int maximumSpeed, int powerConsumption, string connectionOption)
     {
-        _memoryAmount = memoryAmount;
-        _maximumSpeed = maximumSpeed;
-        _powerConsumption = powerConsumption;
-        _connectionOption = connectionOption;
+        Name = name;
+        MemoryAmount = memoryAmount;
+        MaximumSpeed = maximumSpeed;
+        PowerConsumption = powerConsumption;
+        ConnectionOption = connectionOption;
     }
+
+    public string Name { get; }
+    public int MemoryAmount { get; }
+    public int MaximumSpeed { get; }
+    public int PowerConsumption { get; }
+    public string ConnectionOption { get; }
 
     public ISsdBuilder Director(ISsdBuilder builder)
     {
         builder
-            .WithMemoryAmount(_memoryAmount)
-            .WithMaximumSpeed(_maximumSpeed)
-            .WithPowerConsumption(_powerConsumption)
-            .WithConnectionOption(_connectionOption);
+            .WithName(Name)
+            .WithMemoryAmount(MemoryAmount)
+            .WithMaximumSpeed(MaximumSpeed)
+            .WithPowerConsumption(PowerConsumption)
+            .WithConnectionOption(ConnectionOption);
 
         return builder;
     }

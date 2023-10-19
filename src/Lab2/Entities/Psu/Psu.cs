@@ -2,17 +2,20 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Psu;
 
 public class Psu : IPsu
 {
-    private readonly int _peakLoad;
-
-    public Psu(int peakLoad)
+    internal Psu(string name, int peakLoad)
     {
-        _peakLoad = peakLoad;
+        Name = name;
+        PeakLoad = peakLoad;
     }
+
+    public string Name { get; }
+    public int PeakLoad { get; }
 
     public IPsuBuilder Director(IPsuBuilder builder)
     {
         builder
-            .WithPeakLoad(_peakLoad);
+            .WithName(Name)
+            .WithPeakLoad(PeakLoad);
 
         return builder;
     }

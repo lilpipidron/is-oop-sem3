@@ -8,12 +8,19 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ram;
 
 public class RamBuilder : IRamBuilder
 {
+    private string? _name;
     private int? _amount;
     private RamFormFactor? _ramFormFactor;
     private int? _versionDdr;
     private int? _powerConsumption;
     private IReadOnlyCollection<SupportedFrequencyVoltagePairs>? _supportedFrequencyVoltagePairsList;
     private IReadOnlyCollection<int>? _availableXmpProfiles;
+
+    public IRamBuilder WithName(string name)
+    {
+        _name = name;
+        return this;
+    }
 
     public IRamBuilder WithAmount(int amount)
     {
@@ -55,6 +62,7 @@ public class RamBuilder : IRamBuilder
     public IRam Build()
     {
         return new Ram(
+            _name ?? throw new ArgumentNullException(nameof(_name)),
             _amount ?? throw new ArgumentNullException(nameof(_amount)),
             _ramFormFactor ?? throw new ArgumentNullException(nameof(_ramFormFactor)),
             _versionDdr ?? throw new ArgumentNullException(nameof(_versionDdr)),

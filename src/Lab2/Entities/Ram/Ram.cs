@@ -7,14 +7,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ram;
 
 public class Ram : IRam
 {
-    private readonly int _amount;
-    private readonly RamFormFactor _ramFormFactor;
-    private readonly int _versionDdr;
-    private readonly int _powerConsumption;
-    private readonly IReadOnlyCollection<SupportedFrequencyVoltagePairs> _supportedFrequencyVoltagePairsList;
-    private readonly IReadOnlyCollection<int> _availableXmpProfiles;
-
-    public Ram(
+    internal Ram(
+        string name,
         int amount,
         RamFormFactor ramFormFactor,
         int versionDdr,
@@ -22,23 +16,33 @@ public class Ram : IRam
         IEnumerable<SupportedFrequencyVoltagePairs> supportedFrequencyVoltagePairsList,
         IEnumerable<int> availableXmpProfiles)
     {
-        _amount = amount;
-        _ramFormFactor = ramFormFactor;
-        _versionDdr = versionDdr;
-        _powerConsumption = powerConsumption;
-        _supportedFrequencyVoltagePairsList = supportedFrequencyVoltagePairsList.ToArray();
-        _availableXmpProfiles = availableXmpProfiles.ToArray();
+        Name = name;
+        Amount = amount;
+        RamFormFactor = ramFormFactor;
+        VersionDdr = versionDdr;
+        PowerConsumption = powerConsumption;
+        SupportedFrequencyVoltagePairsList = supportedFrequencyVoltagePairsList.ToArray();
+        AvailableXmpProfiles = availableXmpProfiles.ToArray();
     }
+
+    public string Name { get; }
+    public int Amount { get; }
+    public RamFormFactor RamFormFactor { get; }
+    public int VersionDdr { get; }
+    public int PowerConsumption { get; }
+    public IReadOnlyCollection<SupportedFrequencyVoltagePairs> SupportedFrequencyVoltagePairsList { get; }
+    public IReadOnlyCollection<int> AvailableXmpProfiles { get; }
 
     public IRamBuilder Director(IRamBuilder builder)
     {
         builder
-            .WithAmount(_amount)
-            .WithRamFormFactor(_ramFormFactor)
-            .WithVersionDdr(_versionDdr)
-            .WithPowerConsumption(_powerConsumption)
-            .WithSupportedFrequencyVoltagePairs(_supportedFrequencyVoltagePairsList)
-            .WithAvailableXmpProfiles(_availableXmpProfiles);
+            .WithName(Name)
+            .WithAmount(Amount)
+            .WithRamFormFactor(RamFormFactor)
+            .WithVersionDdr(VersionDdr)
+            .WithPowerConsumption(PowerConsumption)
+            .WithSupportedFrequencyVoltagePairs(SupportedFrequencyVoltagePairsList)
+            .WithAvailableXmpProfiles(AvailableXmpProfiles);
 
         return builder;
     }

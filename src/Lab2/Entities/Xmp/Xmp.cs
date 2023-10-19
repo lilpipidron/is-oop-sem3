@@ -2,23 +2,26 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.XMP;
 
 public class Xmp : IXmp
 {
-    private readonly string _timings;
-    private readonly int _voltage;
-    private readonly int _frequency;
-
-    public Xmp(string timings, int voltage, int frequency)
+    public Xmp(string name, string timings, int voltage, int frequency)
     {
-        _timings = timings;
-        _voltage = voltage;
-        _frequency = frequency;
+        Name = name;
+        Timings = timings;
+        Voltage = voltage;
+        Frequency = frequency;
     }
+
+    public string Name { get; }
+    public string Timings { get; }
+    public int Voltage { get; }
+    public int Frequency { get; }
 
     public IXmpBuilder Director(IXmpBuilder builder)
     {
         builder
-            .WithTimings(_timings)
-            .WithVoltage(_voltage)
-            .WithFrequency(_frequency);
+            .WithName(Name)
+            .WithTimings(Timings)
+            .WithVoltage(Voltage)
+            .WithFrequency(Frequency);
 
         return builder;
     }

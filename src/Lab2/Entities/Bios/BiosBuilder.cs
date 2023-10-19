@@ -7,9 +7,16 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Bios;
 
 public class BiosBuilder : IBiosBuilder
 {
+    private string? _name;
     private string? _biosType;
     private string? _version;
     private IReadOnlyCollection<ICpu>? _supportedCpu;
+
+    public IBiosBuilder WithName(string name)
+    {
+        _name = name;
+        return this;
+    }
 
     public IBiosBuilder WithBiosType(string biosType)
     {
@@ -32,6 +39,7 @@ public class BiosBuilder : IBiosBuilder
     public IBios Build()
     {
         return new Bios(
+            _name ?? throw new ArgumentNullException(nameof(_name)),
             _biosType ?? throw new ArgumentNullException(nameof(_biosType)),
             _version ?? throw new ArgumentNullException(nameof(_version)),
             _supportedCpu ?? throw new ArgumentNullException(nameof(_supportedCpu)));

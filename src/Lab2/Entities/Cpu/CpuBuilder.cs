@@ -6,6 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
 public class CpuBuilder : ICpuBuilder
 {
+    private string? _name;
     private double? _coreFrequency;
     private double? _coreAmount;
     private string? _socket;
@@ -13,6 +14,12 @@ public class CpuBuilder : ICpuBuilder
     private IReadOnlyCollection<int>? _ramFrequency;
     private int? _tdp;
     private int? _powerConsumption;
+
+    public ICpuBuilder WithName(string name)
+    {
+        _name = name;
+        return this;
+    }
 
     public ICpuBuilder WithCoreFrequency(double coreFrequency)
     {
@@ -59,6 +66,7 @@ public class CpuBuilder : ICpuBuilder
     public ICpu Build()
     {
         return new Cpu(
+            _name ?? throw new ArgumentNullException(nameof(_name)),
             _coreFrequency ?? throw new ArgumentNullException(nameof(_coreFrequency)),
             _coreAmount ?? throw new ArgumentNullException(nameof(_coreAmount)),
             _socket ?? throw new ArgumentNullException(nameof(_socket)),

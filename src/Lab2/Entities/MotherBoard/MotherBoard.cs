@@ -6,16 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.MotherBoard;
 
 public class MotherBoard : IMotherBoard
 {
-    private readonly string _socket;
-    private readonly int _pciE;
-    private readonly int _sata;
-    private readonly IChipset _chipset;
-    private readonly int _ddrStandard;
-    private readonly int _ramCapacity;
-    private readonly MotherBoardFormFactor _motherBoardFormFactor;
-    private readonly IBios _bios;
-
-    public MotherBoard(
+    internal MotherBoard(
+        string name,
         string socket,
         int pciE,
         int sata,
@@ -25,27 +17,39 @@ public class MotherBoard : IMotherBoard
         MotherBoardFormFactor motherBoardFormFactor,
         IBios bios)
     {
-        _socket = socket;
-        _pciE = pciE;
-        _sata = sata;
-        _chipset = chipset;
-        _ddrStandard = ddrStandard;
-        _ramCapacity = ramCapacity;
-        _motherBoardFormFactor = motherBoardFormFactor;
-        _bios = bios;
+        Name = name;
+        Socket = socket;
+        PciE = pciE;
+        Sata = sata;
+        Chipset = chipset;
+        DdrStandard = ddrStandard;
+        RamCapacity = ramCapacity;
+        MotherBoardFormFactor = motherBoardFormFactor;
+        Bios = bios;
     }
+
+    public string Name { get; }
+    public string Socket { get; }
+    public int PciE { get; }
+    public int Sata { get; }
+    public IChipset Chipset { get; }
+    public int DdrStandard { get; }
+    public int RamCapacity { get; }
+    public MotherBoardFormFactor MotherBoardFormFactor { get; }
+    public IBios Bios { get; }
 
     public IMotherBoardBuilder Director(IMotherBoardBuilder builder)
     {
         builder
-            .WithSocket(_socket)
-            .WithPciE(_pciE)
-            .WithSata(_sata)
-            .WithChipset(_chipset)
-            .WithDdrStandard(_ddrStandard)
-            .WithRamCapacity(_ramCapacity)
-            .WithMotherBoardFormFactor(_motherBoardFormFactor)
-            .WithBios(_bios);
+            .WithName(Name)
+            .WithSocket(Socket)
+            .WithPciE(PciE)
+            .WithSata(Sata)
+            .WithChipset(Chipset)
+            .WithDdrStandard(DdrStandard)
+            .WithRamCapacity(RamCapacity)
+            .WithMotherBoardFormFactor(MotherBoardFormFactor)
+            .WithBios(Bios);
 
         return builder;
     }

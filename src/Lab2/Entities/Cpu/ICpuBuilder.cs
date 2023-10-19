@@ -4,6 +4,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
 public interface ICpuBuilder
 {
+    ICpuBuilder WithName(string name);
+
     ICpuBuilder WithCoreFrequency(double coreFrequency);
 
     ICpuBuilder WithCoreAmount(double coreAmount);

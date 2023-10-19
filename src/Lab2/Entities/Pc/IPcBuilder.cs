@@ -7,6 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.Psu;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Ram;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Ssd;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCard;
+using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pc;
 
@@ -21,5 +22,5 @@ public interface IPcBuilder
     IPcBuilder WithHdd(IHdd? hdd);
     IPcBuilder WithPcCase(IPcCase pcCase);
     IPcBuilder WithPsu(IPsu psu);
-    IPc Build();
+    Result Build();
 }

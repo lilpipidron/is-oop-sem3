@@ -2,23 +2,26 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdd;
 
 public class Hdd : IHdd
 {
-    private readonly int _memoryAmount;
-    private readonly int _spindleSpeed;
-    private readonly int _powerConsumption;
-
-    public Hdd(int memoryAmount, int spindleSpeed, int powerConsumption)
+    internal Hdd(string name, int memoryAmount, int spindleSpeed, int powerConsumption)
     {
-        _memoryAmount = memoryAmount;
-        _spindleSpeed = spindleSpeed;
-        _powerConsumption = powerConsumption;
+        Name = name;
+        MemoryAmount = memoryAmount;
+        SpindleSpeed = spindleSpeed;
+        PowerConsumption = powerConsumption;
     }
+
+    public string Name { get; }
+    public int MemoryAmount { get; }
+    public int SpindleSpeed { get; }
+    public int PowerConsumption { get; }
 
     public IHddBuilder Director(IHddBuilder builder)
     {
         builder
-            .WithMemoryAmount(_memoryAmount)
-            .WithSpindleSpeed(_spindleSpeed)
-            .WithPowerConsumption(_powerConsumption);
+            .WithName(Name)
+            .WithMemoryAmount(MemoryAmount)
+            .WithSpindleSpeed(SpindleSpeed)
+            .WithPowerConsumption(PowerConsumption);
 
         return builder;
     }

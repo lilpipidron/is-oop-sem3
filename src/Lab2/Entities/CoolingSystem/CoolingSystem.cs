@@ -4,25 +4,28 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Dimensions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystem;
 
-public class CoolingSystem : ICoolingSystem
+internal class CoolingSystem : ICoolingSystem
 {
-    private readonly Dimension.CoolingDimension _dimension;
-    private readonly IReadOnlyCollection<string> _socket;
-    private readonly int _maxTdp;
-
-    public CoolingSystem(Dimension.CoolingDimension dimension, IEnumerable<string> socket, int maxTdp)
+    public CoolingSystem(string name, Dimension.CoolingDimension dimension, IEnumerable<string> socket, int maxTdp)
     {
-        _dimension = dimension;
-        _socket = socket.ToArray();
-        _maxTdp = maxTdp;
+        Name = name;
+        Dimension = dimension;
+        Socket = socket.ToArray();
+        MaxTdp = maxTdp;
     }
+
+    public string Name { get; }
+    public Dimension.CoolingDimension Dimension { get; }
+    public IReadOnlyCollection<string> Socket { get; }
+    public int MaxTdp { get; }
 
     public ICoolingSystemBuilder Director(ICoolingSystemBuilder builder)
     {
         builder
-            .WithDimension(_dimension)
-            .WithSocket(_socket)
-            .WithMaxTdp(_maxTdp);
+            .WithName(Name)
+            .WithDimension(Dimension)
+            .WithSocket(Socket)
+            .WithMaxTdp(MaxTdp);
 
         return builder;
     }

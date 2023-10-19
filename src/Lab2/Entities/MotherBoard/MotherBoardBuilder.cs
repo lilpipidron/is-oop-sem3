@@ -1,3 +1,4 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Bios;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Chipset;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
@@ -6,6 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.MotherBoard;
 
 public class MotherBoardBuilder : IMotherBoardBuilder
 {
+    private string? _name;
     private string? _socket;
     private int? _pciE;
     private int? _sata;
@@ -14,6 +16,12 @@ public class MotherBoardBuilder : IMotherBoardBuilder
     private int? _ramCapacity;
     private MotherBoardFormFactor? _motherBoardFormFactor;
     private IBios? _bios;
+
+    public IMotherBoardBuilder WithName(string name)
+    {
+        _name = name;
+        return this;
+    }
 
     public IMotherBoardBuilder WithSocket(string socket)
     {
@@ -66,6 +74,7 @@ public class MotherBoardBuilder : IMotherBoardBuilder
     public IMotherBoard Build()
     {
         return new MotherBoard(
+            _name ?? throw new ArgumentNullException(nameof(_name)),
             _socket ?? throw new System.ArgumentNullException(nameof(_socket)),
             _pciE ?? throw new System.ArgumentNullException(nameof(_pciE)),
             _sata ?? throw new System.ArgumentNullException(nameof(_sata)),

@@ -6,6 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.MotherBoard;
 
 public interface IMotherBoardBuilder
 {
+    IMotherBoardBuilder WithName(string name);
+
     IMotherBoardBuilder WithSocket(string socket);
 
     IMotherBoardBuilder WithPciE(int pciE);

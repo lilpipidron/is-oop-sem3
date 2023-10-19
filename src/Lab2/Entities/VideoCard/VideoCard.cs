@@ -4,34 +4,38 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCard;
 
 public class VideoCard : IVideoCard
 {
-    private readonly Dimension.VideoCardDimension _dimension;
-    private readonly int _memoryAmount;
-    private readonly string _versionPciE;
-    private readonly double _chipFrequency;
-    private readonly int _powerConsumption;
-
-    public VideoCard(
+    internal VideoCard(
+        string name,
         Dimension.VideoCardDimension dimension,
         int memoryAmount,
         string versionPciE,
         double chipFrequency,
         int powerConsumption)
     {
-        _dimension = dimension;
-        _memoryAmount = memoryAmount;
-        _versionPciE = versionPciE;
-        _chipFrequency = chipFrequency;
-        _powerConsumption = powerConsumption;
+        Name = name;
+        Dimension = dimension;
+        MemoryAmount = memoryAmount;
+        VersionPciE = versionPciE;
+        ChipFrequency = chipFrequency;
+        PowerConsumption = powerConsumption;
     }
+
+    public string Name { get; }
+    public Dimension.VideoCardDimension Dimension { get; }
+    public int MemoryAmount { get; }
+    public string VersionPciE { get; }
+    public double ChipFrequency { get; }
+    public int PowerConsumption { get; }
 
     public IVideoCardBuilder Director(IVideoCardBuilder builder)
     {
         builder
-            .WithDimension(_dimension)
-            .WithMemoryAmount(_memoryAmount)
-            .WithVersionPciE(_versionPciE)
-            .WithChipFrequency(_chipFrequency)
-            .WithPowerConsumption(_powerConsumption);
+            .WithName(Name)
+            .WithDimension(Dimension)
+            .WithMemoryAmount(MemoryAmount)
+            .WithVersionPciE(VersionPciE)
+            .WithChipFrequency(ChipFrequency)
+            .WithPowerConsumption(PowerConsumption);
 
         return builder;
     }

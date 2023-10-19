@@ -2,6 +2,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ssd;
 
 public interface ISsdBuilder
 {
+    ISsdBuilder WithName(string name);
+
     ISsdBuilder WithMemoryAmount(int memoryAmount);
 
     ISsdBuilder WithMaximumSpeed(int maximumSpeed);

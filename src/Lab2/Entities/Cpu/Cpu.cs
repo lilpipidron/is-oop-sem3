@@ -5,15 +5,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
 public class Cpu : ICpu
 {
-    private readonly double _coreFrequency;
-    private readonly double _coreAmount;
-    private readonly string _socket;
-    private readonly bool _videoCore;
-    private readonly IReadOnlyCollection<int> _ramFrequency;
-    private readonly int _tdp;
-    private readonly int _powerConsumption;
-
-    public Cpu(
+    internal Cpu(
+        string name,
         double coreFrequency,
         double coreAmount,
         string socket,
@@ -22,25 +15,36 @@ public class Cpu : ICpu
         int tdp,
         int powerConsumption)
     {
-        _coreFrequency = coreFrequency;
-        _coreAmount = coreAmount;
-        _socket = socket;
-        _videoCore = videoCore;
-        _ramFrequency = ramFrequency.ToArray();
-        _tdp = tdp;
-        _powerConsumption = powerConsumption;
+        Name = name;
+        CoreFrequency = coreFrequency;
+        CoreAmount = coreAmount;
+        Socket = socket;
+        VideoCore = videoCore;
+        RamFrequency = ramFrequency.ToArray();
+        Tdp = tdp;
+        PowerConsumption = powerConsumption;
     }
+
+    public string Name { get; }
+    public double CoreFrequency { get; }
+    public double CoreAmount { get; }
+    public string Socket { get; }
+    public bool VideoCore { get; }
+    public IReadOnlyCollection<int> RamFrequency { get; }
+    public int Tdp { get; }
+    public int PowerConsumption { get; }
 
     public ICpuBuilder Director(ICpuBuilder builder)
     {
         builder
-            .WithCoreFrequency(_coreFrequency)
-            .WithCoreAmount(_coreAmount)
-            .WithSocket(_socket)
-            .WithVideoCore(_videoCore)
-            .WithRamFrequency(_ramFrequency)
-            .WithTdp(_tdp)
-            .WithPowerConsumption(_powerConsumption);
+            .WithName(Name)
+            .WithCoreFrequency(CoreFrequency)
+            .WithCoreAmount(CoreAmount)
+            .WithSocket(Socket)
+            .WithVideoCore(VideoCore)
+            .WithRamFrequency(RamFrequency)
+            .WithTdp(Tdp)
+            .WithPowerConsumption(PowerConsumption);
 
         return builder;
     }

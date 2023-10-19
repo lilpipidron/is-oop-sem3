@@ -1,5 +1,5 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ram;
 
-public interface IRam : IRamBuilderDirector
+public interface IRam : IRamBuilderDirector, IHasName
 {
 }

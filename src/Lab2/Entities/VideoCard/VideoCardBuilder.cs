@@ -5,11 +5,18 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCard;
 
 public class VideoCardBuilder : IVideoCardBuilder
 {
+    private string? _name;
     private Dimension.VideoCardDimension? _dimension;
     private int? _memoryAmount;
     private string? _versionPciE;
     private double? _chipFrequency;
     private int? _powerConsumption;
+
+    public IVideoCardBuilder WithName(string name)
+    {
+        _name = name;
+        return this;
+    }
 
     public IVideoCardBuilder WithDimension(Dimension.VideoCardDimension dimension)
     {
@@ -44,6 +51,7 @@ public class VideoCardBuilder : IVideoCardBuilder
     public IVideoCard Build()
     {
         return new VideoCard(
+            _name ?? throw new ArgumentNullException(nameof(_name)),
             _dimension ?? throw new ArgumentNullException(nameof(_dimension)),
             _memoryAmount ?? throw new ArgumentNullException(nameof(_memoryAmount)),
             _versionPciE ?? throw new ArgumentNullException(nameof(_versionPciE)),

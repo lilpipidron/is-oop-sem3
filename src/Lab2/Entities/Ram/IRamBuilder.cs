@@ -6,6 +6,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ram;
 
 public interface IRamBuilder
 {
+    IRamBuilder WithName(string name);
+
     IRamBuilder WithAmount(int amount);
 
     IRamBuilder WithRamFormFactor(RamFormFactor ramFormFactor);
