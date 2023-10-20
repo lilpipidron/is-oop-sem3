@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 
 public interface ICoolingSystem : IBuilderDirector<ICoolingSystemBuilder>, IPcComponent
 {
-    public Dimension.CoolingDimension Dimension { get; }
+    public Dimension.HWDDimension Dimension { get; }
     public IReadOnlyCollection<PcSocket> Socket { get; }
     public int MaxTdp { get; }
 }

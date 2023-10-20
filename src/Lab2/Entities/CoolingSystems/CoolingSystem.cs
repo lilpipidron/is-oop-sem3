@@ -7,14 +7,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 
 public class CoolingSystem : ICoolingSystem
 {
-    internal CoolingSystem(Dimension.CoolingDimension dimension, IEnumerable<PcSocket> socket, int maxTdp)
+    internal CoolingSystem(Dimension.HWDDimension dimension, IEnumerable<PcSocket> socket, int maxTdp)
     {
         Dimension = dimension;
         Socket = socket.ToArray();
         MaxTdp = maxTdp;
     }
 
-    public Dimension.CoolingDimension Dimension { get; }
+    public Dimension.HWDDimension Dimension { get; }
     public IReadOnlyCollection<PcSocket> Socket { get; }
     public int MaxTdp { get; }
 

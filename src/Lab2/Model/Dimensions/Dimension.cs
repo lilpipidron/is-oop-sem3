@@ -6,15 +6,22 @@ public record Dimension
     {
     }
 
-    public record CoolingDimension(int Height, int Width, int Depth) : Dimension;
-
-    public record CaseDimension(int Height, int Width, int Depth) : Dimension;
-
-    public record VideoCardDimension(int Height, int Width) : Dimension
+    public record HWDDimension(int Height, int Width, int Depth) : Dimension
     {
-        public bool IsCompatible(VideoCardDimension dimension)
+        public bool IsCompatible(HWDDimension dimension)
         {
-            return Height >= dimension.Height && Width >= dimension.Width;
+            return Height >= dimension.Height &&
+                   Width >= dimension.Width &&
+                   Depth >= dimension.Height;
+        }
+    }
+
+    public record HWDimension(int Height, int Width) : Dimension
+    {
+        public bool IsCompatible(HWDimension dimension)
+        {
+            return Height >= dimension.Height &&
+                   Width >= dimension.Width;
         }
     }
 }

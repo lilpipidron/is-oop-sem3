@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 public class VideoCard : IVideoCard
 {
     internal VideoCard(
-        Dimension.VideoCardDimension dimension,
+        Dimension.HWDimension dimension,
         int memoryAmount,
         string versionPciE,
         double chipFrequency,
@@ -18,7 +18,7 @@ public class VideoCard : IVideoCard
         PowerConsumption = powerConsumption;
     }
 
-    public Dimension.VideoCardDimension Dimension { get; }
+    public Dimension.HWDimension Dimension { get; }
     public int MemoryAmount { get; }
     public string VersionPciE { get; }
     public double ChipFrequency { get; }

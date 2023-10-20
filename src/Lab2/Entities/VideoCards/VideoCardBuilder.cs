@@ -5,13 +5,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 
 public class VideoCardBuilder : IVideoCardBuilder
 {
-    private Dimension.VideoCardDimension? _dimension;
+    private Dimension.HWDimension? _dimension;
     private int? _memoryAmount;
     private string? _versionPciE;
     private double? _chipFrequency;
     private int? _powerConsumption;
 
-    public IVideoCardBuilder WithDimension(Dimension.VideoCardDimension dimension)
+    public IVideoCardBuilder WithDimension(Dimension.HWDimension dimension)
     {
         _dimension = dimension;
         return this;

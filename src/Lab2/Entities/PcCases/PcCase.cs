@@ -8,18 +8,18 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
 public class PcCase : IPcCase
 {
     internal PcCase(
-        Dimension.VideoCardDimension maxDimension,
+        Dimension.HWDimension maxDimension,
         IEnumerable<MotherBoardFormFactor> motherBoardForms,
-        Dimension.CaseDimension dimension)
+        Dimension.HWDDimension dimension)
     {
         MaxDimension = maxDimension;
         MotherBoardForms = motherBoardForms.ToArray();
         Dimension = dimension;
     }
 
-    public Dimension.VideoCardDimension MaxDimension { get; }
+    public Dimension.HWDimension MaxDimension { get; }
     public IReadOnlyCollection<MotherBoardFormFactor> MotherBoardForms { get; }
-    public Dimension.CaseDimension Dimension { get; }
+    public Dimension.HWDDimension Dimension { get; }
 
     public IPcCaseBuilder Director(IPcCaseBuilder builder)
     {
