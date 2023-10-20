@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
+using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 
@@ -9,7 +10,7 @@ public class Cpu : ICpu
     internal Cpu(
         double coreFrequency,
         double coreAmount,
-        string socket,
+        PcSocket pcSocket,
         bool videoCore,
         IEnumerable<int> ramFrequency,
         int tdp,
@@ -17,7 +18,7 @@ public class Cpu : ICpu
     {
         CoreFrequency = coreFrequency;
         CoreAmount = coreAmount;
-        Socket = socket;
+        Socket = pcSocket;
         VideoCore = videoCore;
         RamFrequency = ramFrequency.ToArray();
         Tdp = tdp;
@@ -26,7 +27,7 @@ public class Cpu : ICpu
 
     public double CoreFrequency { get; }
     public double CoreAmount { get; }
-    public string Socket { get; }
+    public PcSocket Socket { get; }
     public bool VideoCore { get; }
     public IReadOnlyCollection<int> RamFrequency { get; }
     public int Tdp { get; }

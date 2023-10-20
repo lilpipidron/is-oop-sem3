@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
+using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 
@@ -9,7 +10,7 @@ public class CpuBuilder : ICpuBuilder
 {
     private double? _coreFrequency;
     private double? _coreAmount;
-    private string? _socket;
+    private PcSocket? _socket;
     private bool _videoCore;
     private IReadOnlyCollection<int>? _ramFrequency;
     private int? _tdp;
@@ -27,7 +28,7 @@ public class CpuBuilder : ICpuBuilder
         return this;
     }
 
-    public ICpuBuilder WithSocket(string socket)
+    public ICpuBuilder WithSocket(PcSocket socket)
     {
         _socket = socket;
         return this;

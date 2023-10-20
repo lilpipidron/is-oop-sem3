@@ -9,6 +9,10 @@ public class Repository<T> : IRepository<T>
 {
     private Collection<T> _entity = new();
 
+    public Repository()
+    {
+    }
+
     public IEnumerable<T> GetAllComponents()
     {
         return _entity;

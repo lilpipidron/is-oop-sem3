@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Dimensions;
+using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 
 public class CoolingSystemBuilder : ICoolingSystemBuilder
 {
     private Dimension.CoolingDimension? _dimension;
-    private IReadOnlyCollection<string>? _socket;
+    private IReadOnlyCollection<PcSocket>? _socket;
     private int? _maxTdp;
 
     public ICoolingSystemBuilder WithMaxTdp(int maxTdp)
@@ -17,7 +18,7 @@ public class CoolingSystemBuilder : ICoolingSystemBuilder
         return this;
     }
 
-    public ICoolingSystemBuilder WithSocket(IEnumerable<string> socket)
+    public ICoolingSystemBuilder WithSocket(IEnumerable<PcSocket> socket)
     {
         _socket = socket.ToArray();
         return this;

@@ -1,12 +1,13 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Bioses;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Chipsets;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
+using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
 
 public interface IMotherboardBuilder
 {
-    IMotherboardBuilder WithSocket(string socket);
+    IMotherboardBuilder WithSocket(PcSocket socket);
 
     IMotherboardBuilder WithPciE(int pciE);
 

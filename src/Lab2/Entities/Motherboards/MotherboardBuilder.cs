@@ -2,12 +2,13 @@ using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Bioses;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Chipsets;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
+using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
 
 public class MotherboardBuilder : IMotherboardBuilder
 {
-    private string? _socket;
+    private PcSocket? _socket;
     private int? _pciE;
     private int? _sata;
     private IChipset? _chipset;
@@ -16,7 +17,7 @@ public class MotherboardBuilder : IMotherboardBuilder
     private MotherBoardFormFactor? _motherBoardFormFactor;
     private IBios? _bios;
 
-    public IMotherboardBuilder WithSocket(string socket)
+    public IMotherboardBuilder WithSocket(PcSocket socket)
     {
         _socket = socket;
         return this;

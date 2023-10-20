@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
+using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
@@ -9,7 +10,7 @@ public interface ICpuBuilder
 
     ICpuBuilder WithCoreAmount(double coreAmount);
 
-    ICpuBuilder WithSocket(string socket);
+    ICpuBuilder WithSocket(PcSocket socket);
 
     ICpuBuilder WithVideoCore(bool videoCore);
 
