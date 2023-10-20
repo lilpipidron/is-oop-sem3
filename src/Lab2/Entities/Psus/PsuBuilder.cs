@@ -4,14 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Psus;
 
 public class PsuBuilder : IPsuBuilder
 {
-    private string? _name;
     private int? _peakLoad;
-
-    public IPsuBuilder WithName(string name)
-    {
-        _name = name;
-        return this;
-    }
 
     public IPsuBuilder WithPeakLoad(int peakLoad)
     {
@@ -22,7 +15,6 @@ public class PsuBuilder : IPsuBuilder
     public IPsu Build()
     {
         return new Psu(
-            _name ?? throw new ArgumentNullException(nameof(_name)),
             _peakLoad ?? throw new ArgumentNullException(nameof(_peakLoad)));
     }
 }

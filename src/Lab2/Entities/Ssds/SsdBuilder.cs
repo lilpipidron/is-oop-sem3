@@ -4,17 +4,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Ssds;
 
 public class SsdBuilder : ISsdBuilder
 {
-    private string? _name;
     private int? _memoryAmount;
     private int? _maximumSpeed;
     private int? _powerConsumption;
     private string? _connectionOption;
-
-    public ISsdBuilder WithName(string name)
-    {
-        _name = name;
-        return this;
-    }
 
     public ISsdBuilder WithMemoryAmount(int memoryAmount)
     {
@@ -43,7 +36,6 @@ public class SsdBuilder : ISsdBuilder
     public ISsd Build()
     {
         return new Ssd(
-            _name ?? throw new ArgumentNullException(nameof(_name)),
             _memoryAmount ?? throw new ArgumentNullException(nameof(_memoryAmount)),
             _maximumSpeed ?? throw new ArgumentNullException(nameof(_maximumSpeed)),
             _powerConsumption ?? throw new ArgumentNullException(nameof(_powerConsumption)),

@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Xmps;
 
-public interface IXmp : IBuilderDirector<IXmpBuilder>, IHasName
+public interface IXmp : IBuilderDirector<IXmpBuilder>, IPcComponent
 {
     public string Timings { get; }
     public int Voltage { get; }

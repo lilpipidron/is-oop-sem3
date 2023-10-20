@@ -1,31 +1,26 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.Repository;
 
 public class Repository<T> : IRepository<T>
-    where T : class, IHasName
+    where T : IPcComponent
 {
-    public Repository(Collection<T> entity)
-    {
-        Entity = entity;
-    }
+    private Collection<T> _entity = new();
 
-    public Collection<T> Entity { get; }
-
-    public T? Find(string name)
+    public IEnumerable<T> GetAllComponents()
     {
-        return Entity.FirstOrDefault(e => e.Name == name);
+        return _entity;
     }
 
     public void Add(T entity)
     {
-        Entity.Add(entity);
+        _entity.Add(entity);
     }
 
     public void Delete(T entity)
     {
-        Entity.Remove(entity);
+        _entity.Remove(entity);
     }
 }

@@ -1,18 +1,20 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystem;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdd;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.MotherBoard;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCase;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Psu;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Ram;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Ssd;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCard;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdds;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Psus;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Rams;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Ssds;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
+using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pc;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs
+;
 
 public class PcBuilder : IPcBuilder
 {
-    private IMotherBoard? _motherBoard;
+    private IMotherboard? _motherBoard;
     private ICpu? _cpu;
     private ICoolingSystem? _coolingSystem;
     private IRam? _ram;
@@ -22,9 +24,9 @@ public class PcBuilder : IPcBuilder
     private IPcCase? _pcCase;
     private IPsu? _psu;
 
-    public IPcBuilder WithMotherBoard(IMotherBoard motherBoard)
+    public IPcBuilder WithMotherBoard(IMotherboard motherboard)
     {
-        _motherBoard = motherBoard;
+        _motherBoard = motherboard;
         return this;
     }
 
@@ -76,7 +78,7 @@ public class PcBuilder : IPcBuilder
         return this;
     }
 
-    public IPc Build()
+    public Result Build()
     {
         throw new System.NotImplementedException();
     }

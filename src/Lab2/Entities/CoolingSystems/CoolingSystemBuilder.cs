@@ -7,16 +7,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 
 public class CoolingSystemBuilder : ICoolingSystemBuilder
 {
-    private string? _name;
     private Dimension.CoolingDimension? _dimension;
     private IReadOnlyCollection<string>? _socket;
     private int? _maxTdp;
-
-    public ICoolingSystemBuilder WithName(string name)
-    {
-        _name = name;
-        return this;
-    }
 
     public ICoolingSystemBuilder WithMaxTdp(int maxTdp)
     {
@@ -39,7 +32,6 @@ public class CoolingSystemBuilder : ICoolingSystemBuilder
     public ICoolingSystem Build()
     {
         return new CoolingSystem(
-            _name ?? throw new ArgumentNullException(nameof(_name)),
             _dimension ?? throw new ArgumentNullException(nameof(_dimension)),
             _socket ?? throw new ArgumentNullException(nameof(_socket)),
             _maxTdp ?? throw new ArgumentNullException(nameof(_maxTdp)));

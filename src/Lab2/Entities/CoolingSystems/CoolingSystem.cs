@@ -6,15 +6,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 
 public class CoolingSystem : ICoolingSystem
 {
-    internal CoolingSystem(string name, Dimension.CoolingDimension dimension, IEnumerable<string> socket, int maxTdp)
+    internal CoolingSystem(Dimension.CoolingDimension dimension, IEnumerable<string> socket, int maxTdp)
     {
-        Name = name;
         Dimension = dimension;
         Socket = socket.ToArray();
         MaxTdp = maxTdp;
     }
 
-    public string Name { get; }
     public Dimension.CoolingDimension Dimension { get; }
     public IReadOnlyCollection<string> Socket { get; }
     public int MaxTdp { get; }
@@ -22,7 +20,6 @@ public class CoolingSystem : ICoolingSystem
     public ICoolingSystemBuilder Director(ICoolingSystemBuilder builder)
     {
         builder
-            .WithName(Name)
             .WithDimension(Dimension)
             .WithSocket(Socket)
             .WithMaxTdp(MaxTdp);

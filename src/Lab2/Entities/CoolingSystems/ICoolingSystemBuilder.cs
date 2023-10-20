@@ -5,8 +5,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 
 public interface ICoolingSystemBuilder
 {
-    ICoolingSystemBuilder WithName(string name);
-
     ICoolingSystemBuilder WithDimension(Dimension.CoolingDimension dimension);
 
     ICoolingSystemBuilder WithSocket(IEnumerable<string> socket);

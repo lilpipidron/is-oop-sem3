@@ -5,14 +5,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 public class VideoCard : IVideoCard
 {
     internal VideoCard(
-        string name,
         Dimension.VideoCardDimension dimension,
         int memoryAmount,
         string versionPciE,
         double chipFrequency,
         int powerConsumption)
     {
-        Name = name;
         Dimension = dimension;
         MemoryAmount = memoryAmount;
         VersionPciE = versionPciE;
@@ -20,7 +18,6 @@ public class VideoCard : IVideoCard
         PowerConsumption = powerConsumption;
     }
 
-    public string Name { get; }
     public Dimension.VideoCardDimension Dimension { get; }
     public int MemoryAmount { get; }
     public string VersionPciE { get; }
@@ -30,7 +27,6 @@ public class VideoCard : IVideoCard
     public IVideoCardBuilder Director(IVideoCardBuilder builder)
     {
         builder
-            .WithName(Name)
             .WithDimension(Dimension)
             .WithMemoryAmount(MemoryAmount)
             .WithVersionPciE(VersionPciE)

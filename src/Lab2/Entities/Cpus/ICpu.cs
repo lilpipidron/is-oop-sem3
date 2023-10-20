@@ -3,7 +3,8 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 
-public interface ICpu : IBuilderDirector<ICpuBuilder>, IHasName
+public interface ICpu : IBuilderDirector<ICpuBuilder>, IPcComponent,
+    IPcComponentWithPowerConsumption
 {
     public double CoreFrequency { get; }
     public double CoreAmount { get; }
@@ -11,5 +12,4 @@ public interface ICpu : IBuilderDirector<ICpuBuilder>, IHasName
     public bool VideoCore { get; }
     public IReadOnlyCollection<int> RamFrequency { get; }
     public int Tdp { get; }
-    public int PowerConsumption { get; }
 }

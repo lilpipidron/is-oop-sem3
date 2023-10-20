@@ -1,6 +1,6 @@
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities;
 
-public interface IBuilderDirector<T1>
+public interface IBuilderDirector<T>
 {
-    T1 Director(T1 builder);
+    T Director(T builder);
 }

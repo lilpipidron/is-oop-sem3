@@ -8,7 +8,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Rams;
 public class Ram : IRam
 {
     internal Ram(
-        string name,
         int amount,
         RamFormFactor ramFormFactor,
         int versionDdr,
@@ -16,7 +15,6 @@ public class Ram : IRam
         IEnumerable<SupportedFrequencyVoltagePair> supportedFrequencyVoltagePairsList,
         IEnumerable<int> availableXmpProfiles)
     {
-        Name = name;
         Amount = amount;
         RamFormFactor = ramFormFactor;
         VersionDdr = versionDdr;
@@ -25,7 +23,6 @@ public class Ram : IRam
         AvailableXmpProfiles = availableXmpProfiles.ToArray();
     }
 
-    public string Name { get; }
     public int Amount { get; }
     public RamFormFactor RamFormFactor { get; }
     public int VersionDdr { get; }
@@ -36,7 +33,6 @@ public class Ram : IRam
     public IRamBuilder Director(IRamBuilder builder)
     {
         builder
-            .WithName(Name)
             .WithAmount(Amount)
             .WithRamFormFactor(RamFormFactor)
             .WithVersionDdr(VersionDdr)

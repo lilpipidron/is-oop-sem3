@@ -7,7 +7,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 public class Cpu : ICpu
 {
     internal Cpu(
-        string name,
         double coreFrequency,
         double coreAmount,
         string socket,
@@ -16,7 +15,6 @@ public class Cpu : ICpu
         int tdp,
         int powerConsumption)
     {
-        Name = name;
         CoreFrequency = coreFrequency;
         CoreAmount = coreAmount;
         Socket = socket;
@@ -26,7 +24,6 @@ public class Cpu : ICpu
         PowerConsumption = powerConsumption;
     }
 
-    public string Name { get; }
     public double CoreFrequency { get; }
     public double CoreAmount { get; }
     public string Socket { get; }
@@ -38,7 +35,6 @@ public class Cpu : ICpu
     public ICpuBuilder Director(ICpuBuilder builder)
     {
         builder
-            .WithName(Name)
             .WithCoreFrequency(CoreFrequency)
             .WithCoreAmount(CoreAmount)
             .WithSocket(Socket)

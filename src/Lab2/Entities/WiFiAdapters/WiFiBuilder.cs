@@ -4,17 +4,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.WiFiAdapters;
 
 public class WiFiBuilder : IWiFiBuilder
 {
-    private string? _name;
     private int? _wifiVersion;
     private bool _bluetooth;
     private string? _versionPciE;
     private int? _powerConsumption;
-
-    public IWiFiBuilder WithName(string name)
-    {
-        _name = name;
-        return this;
-    }
 
     public IWiFiBuilder WithWiFiVersion(int wifiVersion)
     {
@@ -43,7 +36,6 @@ public class WiFiBuilder : IWiFiBuilder
     public WiFiAdapters.WiFiAdapter Build()
     {
         return new WiFiAdapter(
-            _name ?? throw new ArgumentNullException(nameof(_name)),
             _wifiVersion ?? throw new ArgumentNullException(nameof(_wifiVersion)),
             _bluetooth,
             _versionPciE ?? throw new ArgumentNullException(nameof(_versionPciE)),

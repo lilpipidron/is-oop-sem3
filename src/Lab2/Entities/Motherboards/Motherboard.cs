@@ -7,7 +7,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
 public class Motherboard : IMotherboard
 {
     internal Motherboard(
-        string name,
         string socket,
         int pciE,
         int sata,
@@ -17,7 +16,6 @@ public class Motherboard : IMotherboard
         MotherBoardFormFactor motherBoardFormFactor,
         IBios bios)
     {
-        Name = name;
         Socket = socket;
         PciE = pciE;
         Sata = sata;
@@ -28,7 +26,6 @@ public class Motherboard : IMotherboard
         Bios = bios;
     }
 
-    public string Name { get; }
     public string Socket { get; }
     public int PciE { get; }
     public int Sata { get; }
@@ -41,7 +38,6 @@ public class Motherboard : IMotherboard
     public IMotherboardBuilder Director(IMotherboardBuilder builder)
     {
         builder
-            .WithName(Name)
             .WithSocket(Socket)
             .WithPciE(PciE)
             .WithSata(Sata)

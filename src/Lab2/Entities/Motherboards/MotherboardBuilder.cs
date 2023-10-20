@@ -7,7 +7,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
 
 public class MotherboardBuilder : IMotherboardBuilder
 {
-    private string? _name;
     private string? _socket;
     private int? _pciE;
     private int? _sata;
@@ -16,12 +15,6 @@ public class MotherboardBuilder : IMotherboardBuilder
     private int? _ramCapacity;
     private MotherBoardFormFactor? _motherBoardFormFactor;
     private IBios? _bios;
-
-    public IMotherboardBuilder WithName(string name)
-    {
-        _name = name;
-        return this;
-    }
 
     public IMotherboardBuilder WithSocket(string socket)
     {
@@ -74,14 +67,13 @@ public class MotherboardBuilder : IMotherboardBuilder
     public IMotherboard Build()
     {
         return new Motherboard(
-            _name ?? throw new ArgumentNullException(nameof(_name)),
-            _socket ?? throw new System.ArgumentNullException(nameof(_socket)),
-            _pciE ?? throw new System.ArgumentNullException(nameof(_pciE)),
-            _sata ?? throw new System.ArgumentNullException(nameof(_sata)),
-            _chipset ?? throw new System.ArgumentNullException(nameof(_chipset)),
-            _ddrStandard ?? throw new System.ArgumentNullException(nameof(_ddrStandard)),
-            _ramCapacity ?? throw new System.ArgumentNullException(nameof(_ramCapacity)),
-            _motherBoardFormFactor ?? throw new System.ArgumentNullException(nameof(_motherBoardFormFactor)),
-            _bios ?? throw new System.ArgumentNullException(nameof(_bios)));
+            _socket ?? throw new ArgumentNullException(nameof(_socket)),
+            _pciE ?? throw new ArgumentNullException(nameof(_pciE)),
+            _sata ?? throw new ArgumentNullException(nameof(_sata)),
+            _chipset ?? throw new ArgumentNullException(nameof(_chipset)),
+            _ddrStandard ?? throw new ArgumentNullException(nameof(_ddrStandard)),
+            _ramCapacity ?? throw new ArgumentNullException(nameof(_ramCapacity)),
+            _motherBoardFormFactor ?? throw new ArgumentNullException(nameof(_motherBoardFormFactor)),
+            _bios ?? throw new ArgumentNullException(nameof(_bios)));
     }
 }

@@ -2,8 +2,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.WiFiAdapters;
 
 public interface IWiFiBuilder
 {
-    IWiFiBuilder WithName(string name);
-
     IWiFiBuilder WithWiFiVersion(int wifiVersion);
 
     IWiFiBuilder WithBluetooth(bool bluetooth);

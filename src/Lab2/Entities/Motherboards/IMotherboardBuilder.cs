@@ -6,8 +6,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
 
 public interface IMotherboardBuilder
 {
-    IMotherboardBuilder WithName(string name);
-
     IMotherboardBuilder WithSocket(string socket);
 
     IMotherboardBuilder WithPciE(int pciE);
