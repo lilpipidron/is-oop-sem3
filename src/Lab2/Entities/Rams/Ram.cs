@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Jedecs;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Xmps;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.RamFormFactors;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.SupportedFrequencyVoltagePairs;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Rams;
 
@@ -12,23 +11,23 @@ public class Ram : IRam
         RamFormFactor ramFormFactor,
         int versionDdr,
         int powerConsumption,
-        IEnumerable<SupportedFrequencyVoltagePair> supportedFrequencyVoltagePairsList,
-        IEnumerable<int> availableXmpProfiles)
+        Jedec jedecProfile,
+        Xmp? xmpProfile)
     {
         Amount = amount;
         RamFormFactor = ramFormFactor;
         VersionDdr = versionDdr;
         PowerConsumption = powerConsumption;
-        SupportedFrequencyVoltagePairsList = supportedFrequencyVoltagePairsList.ToArray();
-        AvailableXmpProfiles = availableXmpProfiles.ToArray();
+        JedecProfile = jedecProfile;
+        XmpProfile = xmpProfile;
     }
 
     public int Amount { get; }
     public RamFormFactor RamFormFactor { get; }
     public int VersionDdr { get; }
     public int PowerConsumption { get; }
-    public IReadOnlyCollection<SupportedFrequencyVoltagePair> SupportedFrequencyVoltagePairsList { get; }
-    public IReadOnlyCollection<int> AvailableXmpProfiles { get; }
+    public Jedec JedecProfile { get; }
+    public Xmp? XmpProfile { get; }
 
     public IRamBuilder Director(IRamBuilder builder)
     {
@@ -37,8 +36,8 @@ public class Ram : IRam
             .WithRamFormFactor(RamFormFactor)
             .WithVersionDdr(VersionDdr)
             .WithPowerConsumption(PowerConsumption)
-            .WithSupportedFrequencyVoltagePairs(SupportedFrequencyVoltagePairsList)
-            .WithAvailableXmpProfiles(AvailableXmpProfiles);
+            .WithJedec(JedecProfile)
+            .WithXmpProfiles(XmpProfile);
 
         return builder;
     }

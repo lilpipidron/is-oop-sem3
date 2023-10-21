@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Jedecs;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Xmps;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.RamFormFactors;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.SupportedFrequencyVoltagePairs;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Rams;
 
@@ -12,8 +11,8 @@ public class RamBuilder : IRamBuilder
     private RamFormFactor? _ramFormFactor;
     private int? _versionDdr;
     private int? _powerConsumption;
-    private IReadOnlyCollection<SupportedFrequencyVoltagePair>? _supportedFrequencyVoltagePairsList;
-    private IReadOnlyCollection<int>? _availableXmpProfiles;
+    private Jedec? _jedecProfile;
+    private Xmp? _xmpProfile;
 
     public IRamBuilder WithAmount(int amount)
     {
@@ -39,16 +38,15 @@ public class RamBuilder : IRamBuilder
         return this;
     }
 
-    public IRamBuilder WithSupportedFrequencyVoltagePairs(
-        IEnumerable<SupportedFrequencyVoltagePair> supportedFrequencyVoltagePairsList)
+    public IRamBuilder WithJedec(Jedec jedecProfile)
     {
-        _supportedFrequencyVoltagePairsList = supportedFrequencyVoltagePairsList.ToArray();
+        _jedecProfile = jedecProfile;
         return this;
     }
 
-    public IRamBuilder WithAvailableXmpProfiles(IEnumerable<int> availableXmpProfiles)
+    public IRamBuilder WithXmpProfiles(Xmp? xmpProfile)
     {
-        _availableXmpProfiles = availableXmpProfiles.ToArray();
+        _xmpProfile = xmpProfile;
         return this;
     }
 
@@ -59,7 +57,7 @@ public class RamBuilder : IRamBuilder
             _ramFormFactor ?? throw new ArgumentNullException(nameof(_ramFormFactor)),
             _versionDdr ?? throw new ArgumentNullException(nameof(_versionDdr)),
             _powerConsumption ?? throw new ArgumentNullException(nameof(_powerConsumption)),
-            _supportedFrequencyVoltagePairsList ?? throw new ArgumentNullException(nameof(_supportedFrequencyVoltagePairsList)),
-            _availableXmpProfiles ?? throw new ArgumentNullException(nameof(_availableXmpProfiles)));
+            _jedecProfile ?? throw new ArgumentNullException(nameof(_jedecProfile)),
+            _xmpProfile);
     }
 }
