@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdds;
@@ -10,23 +11,23 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 
-public class Pc
+public class Pc : IPc
 {
     private readonly IMotherboard _motherboard;
     private readonly ICpu _cpu;
     private readonly ICoolingSystem _coolingSystem;
-    private readonly IRam _ram;
+    private readonly Collection<IRam> _ram;
     private readonly IVideoCard? _videoCard;
     private readonly ISsd? _ssd;
     private readonly IHdd? _hdd;
     private readonly IPcCase _pcCase;
     private readonly IPsu _psu;
 
-    public Pc(
+    internal Pc(
         IMotherboard motherboard,
         ICpu cpu,
         ICoolingSystem coolingSystem,
-        IRam ram,
+        Collection<IRam> ram,
         IVideoCard? videoCard,
         ISsd? ssd,
         IHdd? hdd,
@@ -44,7 +45,7 @@ public class Pc
         _psu = psu;
     }
 
-    public PcBuilder Director(PcBuilder builder)
+    public IPcBuilder Director(IPcBuilder builder)
     {
         builder
             .WithMotherBoard(_motherboard)

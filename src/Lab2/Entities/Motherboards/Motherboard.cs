@@ -1,5 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Bioses;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.Chipsets;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Chipsets;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.WiFiAdapters;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
@@ -15,7 +16,8 @@ public class Motherboard : IMotherboard
         int ddrStandard,
         int ramCapacity,
         MotherBoardFormFactor motherBoardFormFactor,
-        IBios bios)
+        IBios bios,
+        IWiFiAdapter? wiFiAdapter)
     {
         Socket = socket;
         PciE = pciE;
@@ -25,6 +27,7 @@ public class Motherboard : IMotherboard
         RamCapacity = ramCapacity;
         MotherBoardFormFactor = motherBoardFormFactor;
         Bios = bios;
+        WiFiAdapter = wiFiAdapter;
     }
 
     public PcSocket Socket { get; }
@@ -35,6 +38,7 @@ public class Motherboard : IMotherboard
     public int RamCapacity { get; }
     public MotherBoardFormFactor MotherBoardFormFactor { get; }
     public IBios Bios { get; }
+    public IWiFiAdapter? WiFiAdapter { get; }
 
     public IMotherboardBuilder Director(IMotherboardBuilder builder)
     {

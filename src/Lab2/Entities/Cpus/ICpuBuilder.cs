@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 
 public interface ICpuBuilder
 {
-    ICpuBuilder WithCoreFrequency(double coreFrequency);
+    ICpuBuilder WithCoreFrequency(int coreFrequency);
 
-    ICpuBuilder WithCoreAmount(double coreAmount);
+    ICpuBuilder WithCoreAmount(int coreAmount);
 
     ICpuBuilder WithSocket(PcSocket socket);
 

@@ -1,28 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpu;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 
 public class CpuBuilder : ICpuBuilder
 {
-    private double? _coreFrequency;
-    private double? _coreAmount;
+    private int? _coreFrequency;
+    private int? _coreAmount;
     private PcSocket? _socket;
     private bool _videoCore;
     private IReadOnlyCollection<int>? _ramFrequency;
     private int? _tdp;
     private int? _powerConsumption;
 
-    public ICpuBuilder WithCoreFrequency(double coreFrequency)
+    public ICpuBuilder WithCoreFrequency(int coreFrequency)
     {
         _coreFrequency = coreFrequency;
         return this;
     }
 
-    public ICpuBuilder WithCoreAmount(double coreAmount)
+    public ICpuBuilder WithCoreAmount(int coreAmount)
     {
         _coreAmount = coreAmount;
         return this;

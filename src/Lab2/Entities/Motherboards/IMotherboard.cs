@@ -1,5 +1,6 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Bioses;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.Chipsets;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Chipsets;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.WiFiAdapters;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
@@ -15,4 +16,5 @@ public interface IMotherboard : IBuilderDirector<IMotherboardBuilder>, IPcCompon
     public int RamCapacity { get; }
     public MotherBoardFormFactor MotherBoardFormFactor { get; }
     public IBios Bios { get; }
+    public IWiFiAdapter? WiFiAdapter { get; }
 }

@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdds;
@@ -16,7 +17,7 @@ public interface IPcBuilder
     IPcBuilder WithMotherBoard(IMotherboard motherboard);
     IPcBuilder WithCpu(ICpu cpu);
     IPcBuilder WithCoolingSystem(ICoolingSystem coolingSystem);
-    IPcBuilder WithRam(IRam ram);
+    IPcBuilder WithRam(Collection<IRam> ram);
     IPcBuilder WithVideoCard(IVideoCard? videoCard);
     IPcBuilder WithSsd(ISsd? ssd);
     IPcBuilder WithHdd(IHdd? hdd);

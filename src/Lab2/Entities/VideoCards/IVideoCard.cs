@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Dimensions;
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 
 public interface IVideoCard : IBuilderDirector<IVideoCardBuilder>, IPcComponent,
-    IPcComponentWithPowerConsumption
+    IPcComponentWithPowerConsumption, IPciEComponent
 {
     public Dimension.HWDimension Dimension { get; }
     public int MemoryAmount { get; }

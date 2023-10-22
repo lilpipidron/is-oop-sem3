@@ -1,6 +1,7 @@
 using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Bioses;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.Chipsets;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Chipsets;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.WiFiAdapters;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
@@ -16,6 +17,7 @@ public class MotherboardBuilder : IMotherboardBuilder
     private int? _ramCapacity;
     private MotherBoardFormFactor? _motherBoardFormFactor;
     private IBios? _bios;
+    private IWiFiAdapter? _wifiAdapter;
 
     public IMotherboardBuilder WithSocket(PcSocket socket)
     {
@@ -65,6 +67,12 @@ public class MotherboardBuilder : IMotherboardBuilder
         return this;
     }
 
+    public IMotherboardBuilder WithWiFiAdapter(IWiFiAdapter wiFiAdapter)
+    {
+        _wifiAdapter = wiFiAdapter;
+        return this;
+    }
+
     public IMotherboard Build()
     {
         return new Motherboard(
@@ -75,6 +83,7 @@ public class MotherboardBuilder : IMotherboardBuilder
             _ddrStandard ?? throw new ArgumentNullException(nameof(_ddrStandard)),
             _ramCapacity ?? throw new ArgumentNullException(nameof(_ramCapacity)),
             _motherBoardFormFactor ?? throw new ArgumentNullException(nameof(_motherBoardFormFactor)),
-            _bios ?? throw new ArgumentNullException(nameof(_bios)));
+            _bios ?? throw new ArgumentNullException(nameof(_bios)),
+            _wifiAdapter);
     }
 }

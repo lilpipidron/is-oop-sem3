@@ -9,7 +9,7 @@ public record Result
     {
     }
 
-    public sealed record Success(IPc Pc, Collection<string> Commentaries) : Result;
+    public sealed record Success(IPc? Pc, Collection<string> Commentaries) : Result;
 
     public sealed record Compatible(string Comment) : Result;
 
