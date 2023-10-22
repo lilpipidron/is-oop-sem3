@@ -16,7 +16,7 @@ public class CompareMotherboardAndCpu<T1, T2> : IComponentCompatibility<T1, T2>
             return new Result.Failed("Sockets don't match");
         }
 
-        if (component1.Bios.SupportedCpu.FirstOrDefault(cpu => component2.Equals(cpu)) is null)
+        if (component1.Bios.SupportedCpu.FirstOrDefault(component => component2.Equals(component)) is null)
         {
             return new Result.Failed("BIOS does not support this cpu");
         }

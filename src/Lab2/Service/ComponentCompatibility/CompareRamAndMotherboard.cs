@@ -38,7 +38,7 @@ public class CompareRamAndMotherboard<T1, T2> : IComponentCompatibility<T1, T2>
                 }
             }
 
-            if (component2.Chipset.RamFrequency.FirstOrDefault(frequency => frequency > ram.JedecProfile.Frequency) ==
+            if (component2.Chipset.RamFrequency.FirstOrDefault(frequency => frequency >= ram.JedecProfile.Frequency) ==
                 0)
             {
                 slower = new Result.Compatible("Ram will run at slower frequencies");
