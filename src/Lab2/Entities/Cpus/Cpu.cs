@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
@@ -44,5 +45,36 @@ public class Cpu : ICpu
             .WithPowerConsumption(PowerConsumption);
 
         return builder;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        return Equals((Cpu)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(CoreFrequency, CoreAmount, Socket, VideoCore, RamFrequency, Tdp, PowerConsumption);
+    }
+
+    private bool Equals(ICpu? other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+
+        return CoreFrequency == other.CoreFrequency
+               && CoreAmount == other.CoreAmount
+               && Socket == other.Socket
+               && VideoCore == other.VideoCore
+               && RamFrequency.SequenceEqual(other.RamFrequency)
+               && Tdp == other.Tdp
+               && PowerConsumption == other.PowerConsumption;
     }
 }
