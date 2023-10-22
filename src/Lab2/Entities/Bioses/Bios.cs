@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Bioses;
 
-internal class Bios : IBios
+public class Bios : IBios
 {
-    public Bios(string biosType, string version, IEnumerable<ICpu> supportedCpu)
+    internal Bios(string biosType, string version, IEnumerable<ICpu> supportedCpu)
     {
         BiosType = biosType;
         Version = version;
