@@ -41,8 +41,6 @@ public class CompareAllComponents
                     .CheckCompability(pcCase, motherboard),
                 new ComparePcCaseAndCoolingSystem<IPcCase, ICoolingSystem>()
                     .CheckCompability(pcCase, coolingSystem),
-                new CompareMotherboardAndVideoCard<IMotherboard, IVideoCard>()
-                    .CheckCompability(motherboard, videoCard),
                 new CompareMotherboardAndCpu<IMotherboard, ICpu>()
                     .CheckCompability(motherboard, cpu),
                 new CompareCpuAndVideoCard<ICpu, IVideoCard>()

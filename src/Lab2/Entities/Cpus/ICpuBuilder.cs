@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Ivcs;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
@@ -11,7 +12,7 @@ public interface ICpuBuilder
 
     ICpuBuilder WithSocket(PcSocket socket);
 
-    ICpuBuilder WithVideoCore(bool videoCore);
+    ICpuBuilder WithVideoCore(IIvc? videoCore);
 
     ICpuBuilder WithRamFrequency(IEnumerable<int> ramFrequency);
 

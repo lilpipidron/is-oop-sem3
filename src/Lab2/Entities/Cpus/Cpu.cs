@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Ivcs;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Sockets;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
@@ -11,7 +12,7 @@ public class Cpu : ICpu
         int coreFrequency,
         int coreAmount,
         PcSocket pcSocket,
-        bool videoCore,
+        IIvc? videoCore,
         IEnumerable<int> ramFrequency,
         int tdp,
         int powerConsumption)
@@ -28,7 +29,7 @@ public class Cpu : ICpu
     public int CoreFrequency { get; }
     public int CoreAmount { get; }
     public PcSocket Socket { get; }
-    public bool VideoCore { get; }
+    public IIvc? VideoCore { get; }
     public IReadOnlyCollection<int> RamFrequency { get; }
     public int Tdp { get; }
     public int PowerConsumption { get; }
@@ -72,7 +73,7 @@ public class Cpu : ICpu
         return CoreFrequency == other.CoreFrequency
                && CoreAmount == other.CoreAmount
                && Socket == other.Socket
-               && VideoCore == other.VideoCore
+               && Equals(VideoCore, other.VideoCore)
                && RamFrequency.SequenceEqual(other.RamFrequency)
                && Tdp == other.Tdp
                && PowerConsumption == other.PowerConsumption;

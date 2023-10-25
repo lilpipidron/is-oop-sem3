@@ -6,9 +6,13 @@ public record MotherBoardFormFactor
     {
     }
 
-    public sealed record StandartMotherBoardForm : MotherBoardFormFactor;
+    public sealed record EAtx : MotherBoardFormFactor;
 
-    public sealed record MiniMotherBoardForm : MotherBoardFormFactor;
+    public sealed record StandartAtx : MotherBoardFormFactor;
 
-    public sealed record LowProfileMotherBoardForm : MotherBoardFormFactor;
+    public sealed record MicroAtx : MotherBoardFormFactor;
+
+    public sealed record MiniDtx : MotherBoardFormFactor;
+
+    public sealed record MiniItx : MotherBoardFormFactor;
 }

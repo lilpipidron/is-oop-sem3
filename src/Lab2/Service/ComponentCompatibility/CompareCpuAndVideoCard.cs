@@ -11,7 +11,7 @@ public class CompareCpuAndVideoCard<T1, T2> : IComponentCompatibility<T1, T2>
     public Result CheckCompability(T1 component1, T2? component2)
     {
         if (component2 is not null) return new Result.FullCompatible();
-        if (component1.VideoCore is false)
+        if (component1.VideoCore is null)
         {
             return new Result.Failed("System has no GPU");
         }
