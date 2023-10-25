@@ -11,7 +11,7 @@ public abstract class DeflectorDecorator : IDeflector
         _deflector = deflector;
     }
 
-    public virtual Result GetDamage(double damage)
+    public virtual ObstacleResults GetDamage(double damage)
     {
         return _deflector.GetDamage(damage);
     }

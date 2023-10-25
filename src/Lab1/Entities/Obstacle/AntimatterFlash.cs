@@ -6,13 +6,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Obstacle;
 
 public class AntimatterFlash : IIncreasedNebulaObstacle
 {
-    public Result DoDamage(Ship.Ship ship)
+    public ObstacleResults DoDamage(Ship.Ship ship)
     {
         if (ship.Deflector is IPhotonicDecorator photonicDecorator)
         {
             return photonicDecorator.HandlePhotonicDamage();
         }
 
-        return new Result.CrewDied();
+        return new ObstacleResults.ObstacleNotReflected(0);
     }
 }

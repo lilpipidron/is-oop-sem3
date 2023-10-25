@@ -55,10 +55,10 @@ public class Test
             fuelExchange,
             new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { increasedNebula }));
 
-        Result result1 = travel.Travel(ship1);
-        Result result2 = travel.Travel(ship2);
-        Assert.Equal(typeof(Result.LostShip), result1.GetType());
-        Assert.Equal(typeof(Result.LostShip), result2.GetType());
+        TravelResults result1 = travel.Travel(ship1);
+        TravelResults result2 = travel.Travel(ship2);
+        Assert.Equal(typeof(EnvironmentResults.LostShip), result1.GetType());
+        Assert.Equal(typeof(EnvironmentResults.LostShip), result2.GetType());
     }
 
     [Theory]
@@ -74,10 +74,10 @@ public class Test
         var travel = new TravelWay(
             fuelExchange,
             new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { increasedNebula }));
-        Result result1 = travel.Travel(ship1);
-        Result result2 = travel.Travel(ship2);
-        Assert.Same(typeof(Result.CrewDied), result1.GetType());
-        Assert.Same(typeof(Result.Success), result2.GetType());
+        TravelResults result1 = travel.Travel(ship1);
+        TravelResults result2 = travel.Travel(ship2);
+        Assert.Same(typeof(EnvironmentResults.CrewDied), result1.GetType());
+        Assert.Same(typeof(TravelResults.Success), result2.GetType());
     }
 
     [Theory]
@@ -94,13 +94,12 @@ public class Test
         var travel = new TravelWay(
             fuelExchange,
             new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { nitrineNebula }));
-        Result result1 = travel.Travel(ship1);
-        Result result2 = travel.Travel(ship2);
-        Result result3 = travel.Travel(ship3);
-        Assert.True(result1 is Result.DestroyShip && result2 is Result.Success && result3 is Result.Success);
-        Assert.Equal(typeof(Result.DestroyShip), result1.GetType());
-        Assert.Equal(typeof(Result.Success), result2.GetType());
-        Assert.Equal(typeof(Result.Success), result3.GetType());
+        TravelResults result1 = travel.Travel(ship1);
+        TravelResults result2 = travel.Travel(ship2);
+        TravelResults result3 = travel.Travel(ship3);
+        Assert.Equal(typeof(EnvironmentResults.DestroyShip), result1.GetType());
+        Assert.Equal(typeof(TravelResults.Success), result2.GetType());
+        Assert.Equal(typeof(TravelResults.Success), result3.GetType());
     }
 
     [Fact]
@@ -164,8 +163,8 @@ public class Test
         var travel = new TravelWay(
             fuelExchange,
             new ReadOnlyCollection<IEnvironment>(new List<IEnvironment> { nitrineNebula, space, increasedNebula }));
-        Result result = travel.Travel(valkas);
-        Assert.Equal(typeof(Result.Success), result.GetType());
+        TravelResults result = travel.Travel(valkas);
+        Assert.Equal(typeof(TravelResults.Success), result.GetType());
     }
 
     [Fact]

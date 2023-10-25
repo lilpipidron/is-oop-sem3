@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
 
 public interface IEnvironment
 {
-    public Result TryOvercome(Ship.Ship ship);
+    public EnvironmentResults TryOvercome(Ship.Ship ship);
 }

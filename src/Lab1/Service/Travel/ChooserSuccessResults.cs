@@ -5,14 +5,23 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Service.Travel;
 
-public static class ChooserSuccessResults
+public class ChooserSuccessResults : IChooser
 {
-    public static Collection<Result> ChooseSeccessResults(IEnumerable<Ship> ships, TravelWay travelWay)
+    private readonly IEnumerable<Ship> _ships;
+    private readonly TravelWay _travelWay;
+
+    public ChooserSuccessResults(IEnumerable<Ship> ships, TravelWay travelWay)
     {
-        var successResults = new Collection<Result>();
-        foreach (Ship ship in ships)
+        _ships = ships;
+        _travelWay = travelWay;
+    }
+
+    public IReadOnlyCollection<TravelResults> Сhoose()
+    {
+        var successResults = new Collection<TravelResults>();
+        foreach (Ship ship in _ships)
         {
-            successResults.Add(travelWay.Travel(ship));
+            successResults.Add(_travelWay.Travel(ship));
         }
 
         return successResults;

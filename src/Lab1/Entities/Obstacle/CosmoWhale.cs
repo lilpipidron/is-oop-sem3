@@ -13,14 +13,14 @@ public class CosmoWhale : INitrineNebulaObstacle
         _damage *= amount;
     }
 
-    public Result DoDamage(Ship.Ship ship)
+    public ObstacleResults DoDamage(Ship.Ship ship)
     {
         if (ship is IShipWithEmitter)
         {
-            return new Result.ObstacleReflected(0);
+            return new ObstacleResults.ObstacleReflected(0);
         }
 
-        Result result = ship.HandleDamage(_damage);
-        return result is Result.ObstacleNotReflected ? new Result.DestroyShip() : result;
+        ObstacleResults result = ship.HandleDamage(_damage);
+        return result;
     }
 }

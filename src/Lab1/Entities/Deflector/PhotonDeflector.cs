@@ -11,14 +11,14 @@ public class PhotonDeflector : DeflectorDecorator, IPhotonicDecorator
     {
     }
 
-    public Result HandlePhotonicDamage()
+    public ObstacleResults HandlePhotonicDamage()
     {
         if (_charge == 0)
         {
-            return new Result.CrewDied();
+            return new ObstacleResults.ObstacleNotReflected(-1);
         }
 
         _charge--;
-        return new Result.ObstacleReflected(0);
+        return new ObstacleResults.ObstacleReflected(0);
     }
 }

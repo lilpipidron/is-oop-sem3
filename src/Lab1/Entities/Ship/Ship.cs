@@ -17,15 +17,15 @@ public abstract class Ship
     public IDeflector? Deflector { get; protected init; }
     protected IHull? Stability { get; init; }
 
-    public Result HandleDamage(int damage)
+    public ObstacleResults HandleDamage(int damage)
     {
-        Result result = new Result.ObstacleNotReflected(0);
+        ObstacleResults result = new ObstacleResults.ObstacleNotReflected(0);
         if (Deflector is not null)
         {
             result = Deflector.GetDamage(damage);
         }
 
-        if (result is Result.ObstacleReflected)
+        if (result is ObstacleResults.ObstacleReflected)
         {
             return result;
         }

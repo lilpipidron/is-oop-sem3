@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
 public interface IDeflector
 {
-    public Result GetDamage(double damage);
+    public ObstacleResults GetDamage(double damage);
 }

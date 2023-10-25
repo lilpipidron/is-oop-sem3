@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Deflector;
 
 public interface IPhotonicDecorator
 {
-    public Result HandlePhotonicDamage();
+    public ObstacleResults HandlePhotonicDamage();
 }

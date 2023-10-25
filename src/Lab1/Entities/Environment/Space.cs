@@ -15,24 +15,24 @@ public class Space : IEnvironment
         _obstacles = obstacles;
     }
 
-    public Result TryOvercome(Ship.Ship ship)
+    public EnvironmentResults TryOvercome(Ship.Ship ship)
     {
         EngineTravelResult travelResult = ship.Engine.Travel(_distance);
         if (travelResult is EngineTravelResult.TravelFailed)
         {
-            return new Result.DestroyShip();
+            return new EnvironmentResults.DestroyShip();
         }
 
-        if (_obstacles.Select(obstacle => obstacle.DoDamage(ship)).OfType<Result.ObstacleNotReflected>().Any())
+        if (_obstacles.Select(obstacle => obstacle.DoDamage(ship)).OfType<ObstacleResults.ObstacleNotReflected>().Any())
         {
-            return new Result.DestroyShip();
+            return new EnvironmentResults.DestroyShip();
         }
 
         if (travelResult is EngineTravelResult.TravelSuccess travelSuccess)
         {
-            return new Result.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
+            return new EnvironmentResults.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
         }
 
-        return new Result.LostShip();
+        return new EnvironmentResults.LostShip();
     }
 }

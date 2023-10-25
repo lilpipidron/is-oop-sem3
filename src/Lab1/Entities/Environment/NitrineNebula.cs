@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
@@ -15,36 +16,32 @@ public class NitrineNebula : IEnvironment
         _obstacles = obstacles;
     }
 
-    public Result TryOvercome(Ship.Ship ship)
+    public EnvironmentResults TryOvercome(Ship.Ship ship)
     {
         if (ship.Engine is IEngineWithSpeedDown engineWithSpeedDown)
         {
             if (engineWithSpeedDown.SpeedDown(_distance) is false)
             {
-                return new Result.LostShip();
+                return new EnvironmentResults.LostShip();
             }
         }
 
         EngineTravelResult travelResult = ship.Engine.Travel(_distance);
         if (travelResult is EngineTravelResult.TravelFailed)
         {
-            return new Result.LostShip();
+            return new EnvironmentResults.LostShip();
         }
 
-        foreach (INitrineNebulaObstacle obstacle in _obstacles)
+        if (_obstacles.Select(obstacle => obstacle.DoDamage(ship)).OfType<ObstacleResults.ObstacleNotReflected>().Any())
         {
-            Result res = obstacle.DoDamage(ship);
-            if (res is not Result.ObstacleReflected)
-            {
-                return res;
-            }
+            return new EnvironmentResults.DestroyShip();
         }
 
         if (travelResult is EngineTravelResult.TravelSuccess travelSuccess)
         {
-            return new Result.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
+            return new EnvironmentResults.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
         }
 
-        return new Result.LostShip();
+        return new EnvironmentResults.LostShip();
     }
 }

@@ -8,12 +8,12 @@ public class Deflector3 : IDeflector
     private const int MediumDamage = 20;
     private double _healthPoints = 40;
 
-    public Result GetDamage(double damage)
+    public ObstacleResults GetDamage(double damage)
     {
         double damageReduce = 1;
         if (_healthPoints <= 0)
         {
-            return new Result.ObstacleNotReflected(damage);
+            return new ObstacleResults.ObstacleNotReflected(damage);
         }
 
         damageReduce = damage switch
@@ -28,10 +28,10 @@ public class Deflector3 : IDeflector
         if (damage > _healthPoints)
         {
             _healthPoints = 0;
-            return new Result.ObstacleNotReflected(damage - _healthPoints);
+            return new ObstacleResults.ObstacleNotReflected(damage - _healthPoints);
         }
 
         _healthPoints -= damage;
-        return new Result.ObstacleReflected(0);
+        return new ObstacleResults.ObstacleReflected(0);
     }
 }

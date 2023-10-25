@@ -7,9 +7,9 @@ public class Meteorite : ISpaceObstacle
 {
     private const int Damage = 40;
 
-    public Result DoDamage(Ship.Ship ship)
+    public ObstacleResults DoDamage(Ship.Ship ship)
     {
-        Result result = ship.HandleDamage(Damage);
-        return result is Result.ObstacleNotReflected ? new Result.DestroyShip() : result;
+        ObstacleResults result = ship.HandleDamage(Damage);
+        return result;
     }
 }

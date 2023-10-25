@@ -17,19 +17,19 @@ public class TravelWay
         _fuelExchange = fuelExchange;
     }
 
-    public Result Travel(Ship ship)
+    public TravelResults Travel(Ship ship)
     {
-        Result success = new Result.Success(new Collection<IFuel>(), new Collection<double>());
+        var allFuel = new Collection<IFuel>();
+        var allTime = new Collection<double>();
         foreach (IEnvironment environment in _environments)
         {
-            Result result = environment.TryOvercome(ship);
+            EnvironmentResults result = environment.TryOvercome(ship);
 
-            if (result is not Result.SuccessEnvironment successEnvironment ||
-                success is not Result.Success resultSuccess) return result;
-            resultSuccess.Fuel.Add(successEnvironment.Fuel);
-            resultSuccess.Time.Add(successEnvironment.Time);
+            if (result is not EnvironmentResults.SuccessEnvironment successEnvironment) return result;
+            allFuel.Add(successEnvironment.Fuel);
+            allTime.Add(successEnvironment.Time);
         }
 
-        return success;
+        return new TravelResults.Success(allFuel, allTime);
     }
 }

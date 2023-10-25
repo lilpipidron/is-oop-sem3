@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Hull;
 
 public interface IHull
 {
-    public Result HandleDamage(double damage);
+    public ObstacleResults HandleDamage(double damage);
 }

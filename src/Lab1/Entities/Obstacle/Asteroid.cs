@@ -7,9 +7,9 @@ public class Asteroid : ISpaceObstacle
 {
     private const int Damage = 10;
 
-    public Result DoDamage(Ship.Ship ship)
+    public ObstacleResults DoDamage(Ship.Ship ship)
     {
-        Result result = ship.HandleDamage(Damage);
-        return result is Result.ObstacleNotReflected ? new Result.DestroyShip() : result;
+        ObstacleResults result = ship.HandleDamage(Damage);
+        return result;
     }
 }

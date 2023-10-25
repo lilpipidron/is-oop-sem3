@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Entities.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
@@ -19,9 +20,15 @@ public class ChooserBestShip
 
     public Ship? FindBestShip()
     {
-        Collection<Ship> successShips = ChooserSuccessShips.ChooseSuccessShips(_ships, _travelWay);
-        Collection<Result> successResults = ChooserSuccessResults.ChooseSeccessResults(successShips, _travelWay);
-        Ship? bestShip = ChooserProfitableShip.ChooseProfitShip(successShips, successResults, _fuelExchange);
+        var chooserSuccessShips = new ChooserSuccessShips(_ships, _travelWay);
+        IReadOnlyCollection<Ship> successShips = chooserSuccessShips.Choose();
+
+        var chooserSuccessResults = new ChooserSuccessResults(successShips, _travelWay);
+        IReadOnlyCollection<TravelResults> successResults = chooserSuccessResults.Сhoose();
+
+        var chooserProfitableShip = new ChooserProfitableShip(successShips, successResults, _fuelExchange);
+        Ship? bestShip = chooserProfitableShip.Choose();
+
         return bestShip;
     }
 }

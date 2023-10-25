@@ -1,5 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 
@@ -16,7 +16,7 @@ public class FuelExchange : IFuelExchange
         _specialFuelCost = specialFuelCost;
     }
 
-    public double TotalCost(Collection<IFuel> allFuel)
+    public double TotalCost(IReadOnlyCollection<IFuel> allFuel)
     {
         return allFuel.Sum(fuel => fuel switch
         {

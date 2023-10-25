@@ -7,11 +7,11 @@ public class Hull2 : IHull
     private const int SmallDamage = 10;
     private double _healthPoint = 50;
 
-    public Result HandleDamage(double damage)
+    public ObstacleResults HandleDamage(double damage)
     {
         if (_healthPoint <= 0)
         {
-            return new Result.ObstacleNotReflected(damage);
+            return new ObstacleResults.ObstacleNotReflected(damage);
         }
 
         double damageReduce = 1;
@@ -25,10 +25,10 @@ public class Hull2 : IHull
         if (damage > _healthPoint)
         {
             _healthPoint = 0;
-            return new Result.ObstacleNotReflected(damage - _healthPoint);
+            return new ObstacleResults.ObstacleNotReflected(damage - _healthPoint);
         }
 
         _healthPoint -= damage;
-        return new Result.ObstacleReflected(_healthPoint);
+        return new ObstacleResults.ObstacleReflected(_healthPoint);
     }
 }

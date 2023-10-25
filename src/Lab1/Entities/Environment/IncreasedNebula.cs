@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Result;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Environment;
@@ -14,28 +15,24 @@ public class IncreasedNebula : IEnvironment
         _obstacles = obstacles;
     }
 
-    public Result TryOvercome(Ship.Ship ship)
+    public EnvironmentResults TryOvercome(Ship.Ship ship)
     {
         if (ship.JumpEngine is null)
         {
-            return new Result.LostShip();
+            return new EnvironmentResults.LostShip();
         }
 
         JumpEngineTravelResult travelResult = ship.JumpEngine.Travel(_distance);
-        foreach (IIncreasedNebulaObstacle obs in _obstacles)
+        if (_obstacles.Select(obs => obs.DoDamage(ship)).OfType<ObstacleResults.ObstacleNotReflected>().Any())
         {
-            Result obstacleResult = obs.DoDamage(ship);
-            if (obstacleResult is not Result.ObstacleReflected)
-            {
-                return obstacleResult;
-            }
+            return new EnvironmentResults.CrewDied();
         }
 
         if (travelResult is JumpEngineTravelResult.TravelSuccess travelSuccess)
         {
-            return new Result.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
+            return new EnvironmentResults.SuccessEnvironment(travelSuccess.Fuel, travelSuccess.Time);
         }
 
-        return new Result.LostShip();
+        return new EnvironmentResults.LostShip();
     }
 }
