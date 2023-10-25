@@ -39,7 +39,15 @@ public class Test
             .WithPcCase(new PcCase(new Dimension.HWDimension(100, 100), new[] { new MotherBoardFormFactor.StandartAtx() },  new Dimension.HWDDimension(100, 100, 100)))
             .WithPsu(new Psu(1000));
         Result res = pcBuild.Build();
-        Assert.True(res is Result.Success);
+        if (res is Result.Success rs)
+        {
+            Assert.NotNull(rs.Pc);
+            Assert.Equivalent(new Collection<string>(), rs.Commentaries);
+        }
+        else
+        {
+            Assert.Fail();
+        }
     }
 
     [Fact]
@@ -57,7 +65,15 @@ public class Test
             .WithPcCase(new PcCase(new Dimension.HWDimension(100, 100), new[] { new MotherBoardFormFactor.StandartAtx() },  new Dimension.HWDDimension(100, 100, 100)))
             .WithPsu(new Psu(200));
         Result res = pcBuild.Build();
-        Assert.True(res is Result.Success);
+        if (res is Result.Success rs)
+        {
+            Assert.NotNull(rs.Pc);
+            Assert.Equivalent(new Collection<string> { "Failure to comply with recommended psu power delivery capacities" }, rs.Commentaries);
+        }
+        else
+        {
+            Assert.Fail();
+        }
     }
 
     [Fact]
@@ -75,7 +91,15 @@ public class Test
             .WithPcCase(new PcCase(new Dimension.HWDimension(100, 100), new[] { new MotherBoardFormFactor.StandartAtx() },  new Dimension.HWDDimension(100, 100, 100)))
             .WithPsu(new Psu(2000));
         Result res = pcBuild.Build();
-        Assert.True(res is Result.Success);
+        if (res is Result.Success rs)
+        {
+            Assert.NotNull(rs.Pc);
+            Assert.Equivalent(new Collection<string> { "The store disclaims liability and warranty obligations" }, rs.Commentaries);
+        }
+        else
+        {
+            Assert.Fail();
+        }
     }
 
     [Fact]
@@ -93,6 +117,6 @@ public class Test
             .WithPcCase(new PcCase(new Dimension.HWDimension(100, 100), new[] { new MotherBoardFormFactor.StandartAtx() },  new Dimension.HWDDimension(100, 100, 100)))
             .WithPsu(new Psu(200));
         Result res = pcBuild.Build();
-        Assert.True(res is Result.Failed);
+        Assert.StrictEqual(res, new Result.Failed("Sockets don't match"));
     }
 }
