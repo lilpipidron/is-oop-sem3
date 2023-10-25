@@ -20,7 +20,7 @@ public class NitrineNebula : IEnvironment
     {
         if (ship.Engine is IEngineWithSpeedDown engineWithSpeedDown)
         {
-            if (engineWithSpeedDown.SpeedDown(_distance) is false)
+            if (engineWithSpeedDown.TravelWithSpeedDown(_distance) is EngineTravelResult.TravelFailed)
             {
                 return new EnvironmentResults.LostShip();
             }

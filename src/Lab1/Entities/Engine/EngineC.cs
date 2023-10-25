@@ -8,7 +8,7 @@ public class EngineC : IEngine, IEngineWithSpeedDown
     private const double Speed = 20;
     private const int StartCost = 50;
 
-    public double Time { get; private set; }
+    private double Time { get; set; }
 
     public EngineTravelResult Travel(int distance)
     {
@@ -17,14 +17,16 @@ public class EngineC : IEngine, IEngineWithSpeedDown
         return new EngineTravelResult.TravelSuccess(Time, fuel);
     }
 
-    public bool SpeedDown(int distance)
+    public EngineTravelResult TravelWithSpeedDown(int distance)
     {
-        double speed = Speed;
-        for (int i = 0; i < distance; i++)
+        double endSpeed = double.Pow(Speed, 2) - (2 * distance * (0.1 * Speed));
+        if (endSpeed <= 0)
         {
-            speed *= 0.9;
+            return new EngineTravelResult.TravelFailed();
         }
 
-        return speed > 0.1;
+        Time = (Speed - double.Sqrt(endSpeed)) / (0.1 * Speed);
+
+        return new EngineTravelResult.TravelSuccess(Time, new SimpleFuel(Time));
     }
 }

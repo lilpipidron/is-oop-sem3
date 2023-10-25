@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entities.Engine;
 public class EngineE : IEngine, IEngineWithSpeedDown
 {
     private const int StartCost = 50;
-    public double Time { get; private set; }
+    private double Time { get; set; }
 
     public EngineTravelResult Travel(int distance)
     {
@@ -16,14 +16,17 @@ public class EngineE : IEngine, IEngineWithSpeedDown
         return new EngineTravelResult.TravelSuccess(Time, fuel);
     }
 
-    public bool SpeedDown(int distance)
+    public EngineTravelResult TravelWithSpeedDown(int distance)
     {
         double speed = double.Exp(distance);
-        for (int i = 0; i < distance; i++)
+        double endSpeed = double.Pow(speed, 2) - (2 * distance * (0.1 * speed));
+        if (endSpeed <= 0)
         {
-            speed *= 0.9;
+            return new EngineTravelResult.TravelFailed();
         }
 
-        return speed > 0.1;
+        Time = (speed - double.Sqrt(endSpeed)) / (0.1 * speed);
+
+        return new EngineTravelResult.TravelSuccess(Time, new SimpleFuel(Time));
     }
 }
