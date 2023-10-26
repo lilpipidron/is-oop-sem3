@@ -17,7 +17,10 @@ public class ComparePcCaseAndCoolingSystem : IComponentCompatibility
 
     public ComponentResult CheckCompability()
     {
-        if (_pcCase.Dimension.IsCompatible(_coolingSystem.Dimension) is false)
+        if (
+            _pcCase.Height < _coolingSystem.Height ||
+            _pcCase.Width < _coolingSystem.Width ||
+            _pcCase.Depth < _coolingSystem.Depth)
         {
             return new ComponentResult.Failed("Cooling System does not fit into the case");
         }

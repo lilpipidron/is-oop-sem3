@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.Dimensions;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
@@ -8,25 +7,34 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
 public class PcCase : IPcCase
 {
     internal PcCase(
-        Dimension.HWDimension maxDimension,
+        int videoCardHeight,
+        int videoCardWidth,
         IEnumerable<MotherBoardFormFactor> motherBoardForms,
-        Dimension.HWDDimension dimension)
+        int height,
+        int width,
+        int depth)
     {
-        MaxDimension = maxDimension;
+        VideoCardHeight = videoCardHeight;
+        VideoCardWidth = videoCardWidth;
         MotherBoardForms = motherBoardForms.ToArray();
-        Dimension = dimension;
+        Height = height;
+        Width = width;
+        Depth = depth;
     }
 
-    public Dimension.HWDimension MaxDimension { get; }
+    public int VideoCardHeight { get; }
+    public int VideoCardWidth { get; }
     public IReadOnlyCollection<MotherBoardFormFactor> MotherBoardForms { get; }
-    public Dimension.HWDDimension Dimension { get; }
+    public int Height { get; }
+    public int Width { get; }
+    public int Depth { get; }
 
     public IPcCaseBuilder Director(IPcCaseBuilder builder)
     {
         builder
-            .WithMaxVideoCardDimension(MaxDimension)
+            .WithMaxVideoCardDimension(VideoCardHeight, VideoCardWidth)
             .WithMotherBoardForms(MotherBoardForms)
-            .WithDimension(Dimension);
+            .WithDimension(Height, Width, Depth);
 
         return builder;
     }

@@ -1,20 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.Dimensions;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
 
 public class PcCaseBuilder : IPcCaseBuilder
 {
-    private Dimension.HWDimension? _maxVideoCardDimension;
+    private int? _videoCardHeight;
+    private int? _videoCardWidth;
     private IReadOnlyCollection<MotherBoardFormFactor>? _motherBoardForms;
-    private Dimension.HWDDimension? _dimension;
+    private int? _height;
+    private int? _width;
+    private int? _depth;
 
-    public IPcCaseBuilder WithMaxVideoCardDimension(Dimension.HWDimension maxDimension)
+    public IPcCaseBuilder WithMaxVideoCardDimension(int videoCardHeight, int videoCardWidth)
     {
-        _maxVideoCardDimension = maxDimension;
+        _videoCardHeight = videoCardHeight;
+        _videoCardWidth = videoCardWidth;
         return this;
     }
 
@@ -24,17 +27,22 @@ public class PcCaseBuilder : IPcCaseBuilder
         return this;
     }
 
-    public IPcCaseBuilder WithDimension(Dimension.HWDDimension dimension)
+    public IPcCaseBuilder WithDimension(int height, int width, int depth)
     {
-        _dimension = dimension;
+        _height = height;
+        _width = width;
+        _depth = depth;
         return this;
     }
 
     public IPcCase Build()
     {
         return new PcCase(
-            _maxVideoCardDimension ?? throw new ArgumentNullException(nameof(_maxVideoCardDimension)),
+            _videoCardHeight ?? throw new ArgumentNullException(nameof(_videoCardHeight)),
+            _videoCardWidth ?? throw new ArgumentNullException(nameof(_videoCardHeight)),
             _motherBoardForms ?? throw new ArgumentNullException(nameof(_motherBoardForms)),
-            _dimension ?? throw new ArgumentNullException(nameof(_dimension)));
+            _height ?? throw new ArgumentNullException(nameof(_height)),
+            _width ?? throw new ArgumentNullException(nameof(_width)),
+            _depth ?? throw new ArgumentNullException(nameof(_depth)));
     }
 }

@@ -1,19 +1,20 @@
 using System;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.Dimensions;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 
 public class VideoCardBuilder : IVideoCardBuilder
 {
-    private Dimension.HWDimension? _dimension;
+    private int? _height;
+    private int? _width;
     private int? _memoryAmount;
     private string? _versionPciE;
     private double? _chipFrequency;
     private int? _powerConsumption;
 
-    public IVideoCardBuilder WithDimension(Dimension.HWDimension dimension)
+    public IVideoCardBuilder WithDimension(int height, int width)
     {
-        _dimension = dimension;
+        _height = height;
+        _width = width;
         return this;
     }
 
@@ -44,7 +45,8 @@ public class VideoCardBuilder : IVideoCardBuilder
     public IVideoCard Build()
     {
         return new VideoCard(
-            _dimension ?? throw new ArgumentNullException(nameof(_dimension)),
+            _height ?? throw new ArgumentNullException(nameof(_height)),
+            _width ?? throw new ArgumentNullException(nameof(_width)),
             _memoryAmount ?? throw new ArgumentNullException(nameof(_memoryAmount)),
             _versionPciE ?? throw new ArgumentNullException(nameof(_versionPciE)),
             _chipFrequency ?? throw new ArgumentNullException(nameof(_chipFrequency)),

@@ -22,7 +22,7 @@ public class ComparePcCaseAndVideoCard : IComponentCompatibility
             return new ComponentResult.FullCompatible();
         }
 
-        if (_pcCase.MaxDimension.IsCompatible(_videoCard.Dimension) is false)
+        if (_pcCase.VideoCardHeight < _videoCard.Height || _pcCase.VideoCardWidth < _videoCard.Width)
         {
             return new ComponentResult.Failed("The video card does not fit into the case");
         }

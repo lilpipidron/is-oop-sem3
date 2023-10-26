@@ -1,16 +1,15 @@
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Model.Dimensions;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.MotherboardFormFactors;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
 
 public interface IPcCaseBuilder
 {
-    IPcCaseBuilder WithMaxVideoCardDimension(Dimension.HWDimension maxDimension);
+    IPcCaseBuilder WithMaxVideoCardDimension(int videoCardHeight, int videoCardWidth);
 
     IPcCaseBuilder WithMotherBoardForms(IEnumerable<MotherBoardFormFactor> motherBoardForms);
 
-    IPcCaseBuilder WithDimension(Dimension.HWDDimension dimension);
+    IPcCaseBuilder WithDimension(int height, int width, int depth);
 
     IPcCase Build();
 }

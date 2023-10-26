@@ -1,11 +1,10 @@
-using Itmo.ObjectOrientedProgramming.Lab2.Model.Dimensions;
-
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 
 public interface IVideoCard : IBuilderDirector<IVideoCardBuilder>, IPcComponent,
     IPcComponentWithPowerConsumption, IPciEComponent
 {
-    public Dimension.HWDimension Dimension { get; }
+    public int Height { get; }
+    public int Width { get; }
     public int MemoryAmount { get; }
     public string VersionPciE { get; }
     public double ChipFrequency { get; }
