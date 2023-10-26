@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
@@ -6,28 +6,35 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-public class CompareMotherBoardAndPciEComponents<T1, T2> : IComponentCompatibility<T1, T2>
-    where T1 : IMotherboard
-    where T2 : Collection<IPciEComponent?>
+public class CompareMotherBoardAndPciEComponents : IComponentCompatibility
 {
-    public Result CheckCompability(T1 component1, T2 component2)
+    private readonly IMotherboard _motherboard;
+    private readonly IReadOnlyCollection<IPciEComponent?> _components;
+
+    public CompareMotherBoardAndPciEComponents(IMotherboard motherboard, IReadOnlyCollection<IPciEComponent?> components)
     {
-        int lines = component1.PciE;
-        if (component1.WiFiAdapter is not null)
+        _motherboard = motherboard;
+        _components = components;
+    }
+
+    public ComponentResult CheckCompability()
+    {
+        int lines = _motherboard.PciE;
+        if (_motherboard.WiFiAdapter is not null)
         {
             lines--;
         }
 
-        foreach (IPciEComponent? component in component2.Where(component => component is not null))
+        foreach (IPciEComponent? component in _components.Where(component => component is not null))
         {
             lines--;
         }
 
         if (lines < 0)
         {
-            return new Result.Failed("Not enough PCIE lines");
+            return new ComponentResult.Failed("Not enough PCIE lines");
         }
 
-        return new Result.FullCompatible();
+        return new ComponentResult.FullCompatible();
     }
 }

@@ -4,18 +4,25 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-public class CompareCpuAndVideoCard<T1, T2> : IComponentCompatibility<T1, T2>
-    where T1 : ICpu
-    where T2 : IVideoCard?
+public class CompareCpuAndVideoCard : IComponentCompatibility
 {
-    public Result CheckCompability(T1 component1, T2? component2)
+    private readonly ICpu _cpu;
+    private readonly IVideoCard? _videoCard;
+
+    public CompareCpuAndVideoCard(ICpu cpu, IVideoCard? videoCard)
     {
-        if (component2 is not null) return new Result.FullCompatible();
-        if (component1.VideoCore is null)
+        _cpu = cpu;
+        _videoCard = videoCard;
+    }
+
+    public ComponentResult CheckCompability()
+    {
+        if (_videoCard is not null) return new ComponentResult.FullCompatible();
+        if (_cpu.VideoCore is null)
         {
-            return new Result.Failed("System has no GPU");
+            return new ComponentResult.Failed("System has no GPU");
         }
 
-        return new Result.FullCompatible();
+        return new ComponentResult.FullCompatible();
     }
 }

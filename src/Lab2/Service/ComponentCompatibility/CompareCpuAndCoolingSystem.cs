@@ -5,22 +5,29 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-public class CompareCpuAndCoolingSystem<T1, T2> : IComponentCompatibility<T1, T2>
-    where T1 : ICpu
-    where T2 : ICoolingSystem
+public class CompareCpuAndCoolingSystem : IComponentCompatibility
 {
-    public Result CheckCompability(T1 component1, T2 component2)
+    private readonly ICpu _cpu;
+    private readonly ICoolingSystem _coolingSystem;
+
+    public CompareCpuAndCoolingSystem(ICpu cpu, ICoolingSystem coolingSystem)
     {
-        if (component2.Socket.FirstOrDefault(socket => component1.Socket.Equals(socket)) is null)
+        _cpu = cpu;
+        _coolingSystem = coolingSystem;
+    }
+
+    public ComponentResult CheckCompability()
+    {
+        if (_coolingSystem.Socket.FirstOrDefault(socket => _cpu.Socket.Equals(socket)) is null)
         {
-            return new Result.Failed("The cooling system does not support the CPU socket");
+            return new ComponentResult.Failed("The cooling system does not support the CPU socket");
         }
 
-        if (component1.Tdp > component2.MaxTdp)
+        if (_cpu.Tdp > _coolingSystem.MaxTdp)
         {
-            return new Result.Compatible("The store disclaims liability and warranty obligations");
+            return new ComponentResult.Compatible("The store disclaims liability and warranty obligations");
         }
 
-        return new Result.FullCompatible();
+        return new ComponentResult.FullCompatible();
     }
 }

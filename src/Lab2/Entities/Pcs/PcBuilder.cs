@@ -1,4 +1,5 @@
-using System.Collections.ObjectModel;
+using System;
+using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdds;
@@ -11,16 +12,14 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 using Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs
-
-;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 
 public class PcBuilder : IPcBuilder
 {
     private IMotherboard? _motherBoard;
     private ICpu? _cpu;
     private ICoolingSystem? _coolingSystem;
-    private Collection<IRam> _ram = new Collection<IRam>();
+    private IReadOnlyCollection<IRam>? _ram;
     private IVideoCard? _videoCard;
     private ISsd? _ssd;
     private IHdd? _hdd;
@@ -45,7 +44,7 @@ public class PcBuilder : IPcBuilder
         return this;
     }
 
-    public IPcBuilder WithRam(Collection<IRam> ram)
+    public IPcBuilder WithRam(IReadOnlyCollection<IRam> ram)
     {
         _ram = ram;
         return this;
@@ -81,48 +80,32 @@ public class PcBuilder : IPcBuilder
         return this;
     }
 
-    public Result Build()
+    public PcResult Build(IReadOnlyCollection<IComponentCompatibility> allCompare)
     {
-        Result res;
-        if (_motherBoard is not null &&
-            _cpu is not null &&
-            _coolingSystem is not null &&
-            _pcCase is not null &&
-            _psu is not null)
+        var compareAllComponents = new CompareAllComponents(allCompare);
+        IReadOnlyCollection<string?>? allComments = null;
+        ComponentResult res = compareAllComponents.CompareAllComponent();
+
+        switch (res)
         {
-            var cal = new CompareAllComponents();
-            res = CheckAllResults.CheckAllResult(cal.CompareAllComponent(
-                _motherBoard,
-                _cpu,
-                _coolingSystem,
-                _ram,
+            case ComponentResult.Failed rf:
+                return new PcResult.Failed(rf.Reason);
+            case ComponentResult.Compatible rc:
+                allComments = rc.Commentaries;
+                break;
+        }
+
+        return new PcResult.Success(
+            new Pc(
+                _motherBoard ?? throw new ArgumentNullException(null, nameof(_motherBoard)),
+                _cpu ?? throw new ArgumentNullException(null, nameof(_cpu)),
+                _coolingSystem ?? throw new ArgumentNullException(null, nameof(_coolingSystem)),
+                _ram ?? throw new ArgumentNullException(null, nameof(_ram)),
                 _videoCard,
                 _ssd,
                 _hdd,
-                _pcCase,
-                _psu));
-        }
-        else
-        {
-            return new Result.Success(null, new Collection<string>());
-        }
-
-        if (res is Result.Success rs)
-        {
-            return new Result.Success(
-                new Pc(
-                    _motherBoard,
-                    _cpu,
-                    _coolingSystem,
-                    _ram,
-                    _videoCard,
-                    _ssd,
-                    _hdd,
-                    _pcCase,
-                    _psu),
-                rs.Commentaries);
-        }
-
-        return res;
+                _pcCase ?? throw new ArgumentNullException(null, nameof(_pcCase)),
+                _psu ?? throw new ArgumentNullException(null, nameof(_psu))),
+            allComments);
     }
 }

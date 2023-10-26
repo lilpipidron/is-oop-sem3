@@ -5,22 +5,29 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-public class CompareMotherboardAndCpu<T1, T2> : IComponentCompatibility<T1, T2>
-    where T1 : IMotherboard
-    where T2 : ICpu
+public class CompareMotherboardAndCpu : IComponentCompatibility
 {
-    public Result CheckCompability(T1 component1, T2 component2)
+    private readonly IMotherboard _motherboard;
+    private readonly ICpu _cpu;
+
+    public CompareMotherboardAndCpu(IMotherboard motherboard, ICpu cpu)
     {
-        if (component1.Socket.Equals(component2.Socket) is false)
+        _motherboard = motherboard;
+        _cpu = cpu;
+    }
+
+    public ComponentResult CheckCompability()
+    {
+        if (_motherboard.Socket.Equals(_cpu.Socket) is false)
         {
-            return new Result.Failed("Sockets don't match");
+            return new ComponentResult.Failed("Sockets don't match");
         }
 
-        if (component1.Bios.SupportedCpu.FirstOrDefault(component => component2.Equals(component)) is null)
+        if (_motherboard.Bios.SupportedCpu.FirstOrDefault(component => _cpu.Equals(component)) is null)
         {
-            return new Result.Failed("BIOS does not support this cpu");
+            return new ComponentResult.Failed("BIOS does not support this cpu");
         }
 
-        return new Result.FullCompatible();
+        return new ComponentResult.FullCompatible();
     }
 }

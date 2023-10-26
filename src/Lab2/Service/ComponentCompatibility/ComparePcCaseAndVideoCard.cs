@@ -4,22 +4,29 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-public class ComparePcCaseAndVideoCard<T1, T2> : IComponentCompatibility<T1, T2>
-    where T1 : IPcCase
-    where T2 : IVideoCard?
+public class ComparePcCaseAndVideoCard : IComponentCompatibility
 {
-    public Result CheckCompability(T1 component1, T2? component2)
+    private readonly IPcCase _pcCase;
+    private readonly IVideoCard? _videoCard;
+
+    public ComparePcCaseAndVideoCard(IPcCase pcCase, IVideoCard? videoCard)
     {
-        if (component2 is null)
+        _pcCase = pcCase;
+        _videoCard = videoCard;
+    }
+
+    public ComponentResult CheckCompability()
+    {
+        if (_videoCard is null)
         {
-            return new Result.FullCompatible();
+            return new ComponentResult.FullCompatible();
         }
 
-        if (component1.MaxDimension.IsCompatible(component2.Dimension) is false)
+        if (_pcCase.MaxDimension.IsCompatible(_videoCard.Dimension) is false)
         {
-            return new Result.Failed("The video card does not fit into the case");
+            return new ComponentResult.Failed("The video card does not fit into the case");
         }
 
-        return new Result.FullCompatible();
+        return new ComponentResult.FullCompatible();
     }
 }

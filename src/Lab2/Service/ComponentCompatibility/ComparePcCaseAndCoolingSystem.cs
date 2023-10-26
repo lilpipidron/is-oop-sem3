@@ -4,17 +4,24 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-public class ComparePcCaseAndCoolingSystem<T1, T2> : IComponentCompatibility<T1, T2>
-    where T1 : IPcCase
-    where T2 : ICoolingSystem
+public class ComparePcCaseAndCoolingSystem : IComponentCompatibility
 {
-    public Result CheckCompability(T1 component1, T2 component2)
+    private readonly IPcCase _pcCase;
+    private readonly ICoolingSystem _coolingSystem;
+
+    public ComparePcCaseAndCoolingSystem(IPcCase pcCase, ICoolingSystem coolingSystem)
     {
-        if (component1.Dimension.IsCompatible(component2.Dimension) is false)
+        _pcCase = pcCase;
+        _coolingSystem = coolingSystem;
+    }
+
+    public ComponentResult CheckCompability()
+    {
+        if (_pcCase.Dimension.IsCompatible(_coolingSystem.Dimension) is false)
         {
-            return new Result.Failed("Cooling System does not fit into the case");
+            return new ComponentResult.Failed("Cooling System does not fit into the case");
         }
 
-        return new Result.FullCompatible();
+        return new ComponentResult.FullCompatible();
     }
 }

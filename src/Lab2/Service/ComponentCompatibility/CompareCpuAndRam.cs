@@ -1,32 +1,39 @@
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Rams;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-public class CompareCpuAndRam<T1, T2> : IComponentCompatibility<T1, T2>
-    where T1 : ICpu
-    where T2 : Collection<IRam>
+public class CompareCpuAndRam : IComponentCompatibility
 {
-    public Result CheckCompability(T1 component1, T2 component2)
+    private readonly ICpu _cpu;
+    private readonly IReadOnlyCollection<IRam> _ram;
+
+    public CompareCpuAndRam(ICpu cpu, IReadOnlyCollection<IRam> ram)
     {
-        foreach (IRam ram in component2)
+        _cpu = cpu;
+        _ram = ram;
+    }
+
+    public ComponentResult CheckCompability()
+    {
+        foreach (IRam ram in _ram)
         {
             if (ram.XmpProfile is not null)
             {
-                if (ram.XmpProfile.Frequency != component1.CoreFrequency)
+                if (ram.XmpProfile.Frequency != _cpu.CoreFrequency)
                 {
-                    return new Result.Failed("The processor does not support these frequencies");
+                    return new ComponentResult.Failed("The processor does not support these frequencies");
                 }
             }
 
-            if (ram.JedecProfile.Frequency == component1.CoreFrequency)
+            if (ram.JedecProfile.Frequency == _cpu.CoreFrequency)
             {
-                return new Result.Failed("The processor does not support these frequencies");
+                return new ComponentResult.Failed("The processor does not support these frequencies");
             }
         }
 
-        return new Result.FullCompatible();
+        return new ComponentResult.FullCompatible();
     }
 }

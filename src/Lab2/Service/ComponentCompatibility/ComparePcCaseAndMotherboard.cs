@@ -5,17 +5,24 @@ using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
-public class ComparePcCaseAndMotherboard<T1, T2> : IComponentCompatibility<T1, T2>
-    where T1 : IPcCase
-    where T2 : IMotherboard
+public class ComparePcCaseAndMotherboard : IComponentCompatibility
 {
-    public Result CheckCompability(T1 component1, T2 component2)
+    private readonly IPcCase _pcCase;
+    private readonly IMotherboard _motherboard;
+
+    public ComparePcCaseAndMotherboard(IPcCase pcCase, IMotherboard motherboard)
     {
-        if (component1.MotherBoardForms.FirstOrDefault(form => form == component2.MotherBoardFormFactor) is null)
+        _pcCase = pcCase;
+        _motherboard = motherboard;
+    }
+
+    public ComponentResult CheckCompability()
+    {
+        if (_pcCase.MotherBoardForms.FirstOrDefault(form => form == _motherboard.MotherBoardFormFactor) is null)
         {
-            return new Result.Failed("The case does not support this form factor");
+            return new ComponentResult.Failed("The case does not support this form factor");
         }
 
-        return new Result.FullCompatible();
+        return new ComponentResult.FullCompatible();
     }
 }
