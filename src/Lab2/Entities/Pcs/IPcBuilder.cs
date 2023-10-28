@@ -9,7 +9,6 @@ using Itmo.ObjectOrientedProgramming.Lab2.Entities.Rams;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Ssds;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.VideoCards;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
-using Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 
@@ -24,5 +23,5 @@ public interface IPcBuilder
     IPcBuilder WithHdd(IHdd? hdd);
     IPcBuilder WithPcCase(IPcCase pcCase);
     IPcBuilder WithPsu(IPsu psu);
-    PcResult Build(IReadOnlyCollection<IComponentCompatibility> allCompare);
+    PcResult Build();
 }

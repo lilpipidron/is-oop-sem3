@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdds;
@@ -80,8 +81,31 @@ public class PcBuilder : IPcBuilder
         return this;
     }
 
-    public PcResult Build(IReadOnlyCollection<IComponentCompatibility> allCompare)
+    public PcResult Build()
     {
+        if (_cpu is null || _motherBoard is null || _coolingSystem is null || _pcCase is null || _psu is null ||
+            _ram is null)
+        {
+            throw new ArgumentNullException($"Your PC doesn't have enough components");
+        }
+
+        IRamBuilder ramBuider = new RamBuilder();
+        ramBuider = _ram.ElementAt(0).Director(ramBuider);
+        IRam spcRam = ramBuider.WithPowerConsumption(_ram.Count * _ram.ElementAt(0).PowerConsumption).Build();
+        IReadOnlyCollection<IComponentCompatibility> allCompare = new IComponentCompatibility[]
+        {
+            new CompareCpuAndRam(_cpu, _ram),
+            new CompareMotherboardAndCpu(_motherBoard, _cpu),
+            new CompareRamAndMotherboard(_ram, _motherBoard),
+            new CompareCpuAndCoolingSystem(_cpu, _coolingSystem),
+            new CompareCpuAndVideoCard(_cpu, _videoCard),
+            new ComparePcCaseAndMotherboard(_pcCase, _motherBoard),
+            new CompareMotherBoardAndSataComponents(_motherBoard, new ISataComponent?[] { _ssd, _hdd }),
+            new ComparePcCaseAndCoolingSystem(_pcCase, _coolingSystem),
+            new ComparePcCaseAndVideoCard(_pcCase, _videoCard),
+            new ComparePsuAndFullPowerConsumption(_psu, new IPcComponentWithPowerConsumption?[] { _cpu, _videoCard, _ssd, _hdd, _motherBoard.WiFiAdapter, spcRam }),
+            new CompareMotherBoardAndPciEComponents(_motherBoard, new IPciEComponent?[] { _videoCard, _ssd, _motherBoard.WiFiAdapter }),
+        };
         var compareAllComponents = new CompareAllComponents(allCompare);
         IReadOnlyCollection<string?>? allComments = null;
         ComponentResult res = compareAllComponents.CompareAllComponent();
@@ -97,15 +121,15 @@ public class PcBuilder : IPcBuilder
 
         return new PcResult.Success(
             new Pc(
-                _motherBoard ?? throw new ArgumentNullException(null, nameof(_motherBoard)),
-                _cpu ?? throw new ArgumentNullException(null, nameof(_cpu)),
-                _coolingSystem ?? throw new ArgumentNullException(null, nameof(_coolingSystem)),
-                _ram ?? throw new ArgumentNullException(null, nameof(_ram)),
+                _motherBoard,
+                _cpu,
+                _coolingSystem,
+                _ram,
                 _videoCard,
                 _ssd,
                 _hdd,
-                _pcCase ?? throw new ArgumentNullException(null, nameof(_pcCase)),
-                _psu ?? throw new ArgumentNullException(null, nameof(_psu))),
+                _pcCase,
+                _psu),
             allComments);
     }
 }
