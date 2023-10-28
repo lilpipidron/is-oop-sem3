@@ -1,31 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
 public class CompareCpuAndCoolingSystem : IComponentCompatibility
 {
-    public ComponentResult CheckCompability(IReadOnlyCollection<IPcComponent?> pcComponents)
+    public ComponentResult CheckCompability(PcBuilder.PcValidationModel validationModel)
     {
-        var coolingSystem = pcComponents.FirstOrDefault(component => component is ICoolingSystem) as ICoolingSystem;
-        var cpu = pcComponents.FirstOrDefault(component => component is ICpu) as ICpu;
-
-        if (cpu is null)
-        {
-            throw new ArgumentNullException(null, nameof(cpu));
-        }
-
-        if (coolingSystem?.Socket.FirstOrDefault(socket => cpu.Socket.Equals(socket)) is null)
+        if (validationModel.CoolingSystem.Socket.FirstOrDefault(socket => validationModel.Cpu.Socket.Equals(socket)) is null)
         {
             return new ComponentResult.Failed("The cooling system does not support the CPU socket");
         }
 
-        if (cpu.Tdp > coolingSystem.MaxTdp)
+        if (validationModel.Cpu.Tdp > validationModel.CoolingSystem.MaxTdp)
         {
             return new ComponentResult.Compatible("The store disclaims liability and warranty obligations");
         }

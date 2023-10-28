@@ -1,25 +1,22 @@
-using System.Collections.Generic;
-using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
 public class CompareMotherBoardAndSataComponents : IComponentCompatibility
 {
-    public ComponentResult CheckCompability(IReadOnlyCollection<IPcComponent?> pcComponents)
+    public ComponentResult CheckCompability(PcBuilder.PcValidationModel validationModel)
     {
-        var pcCase = pcComponents.FirstOrDefault(component => component is IPcCase) as IPcCase;
-        var motherboard = pcComponents.FirstOrDefault(component => component is IMotherboard) as IMotherboard;
-        int? lines = motherboard?.Sata;
+        int lines = validationModel.Motherboard.Sata;
 
-        lines -= pcComponents.Count(component => component is ISataComponent);
-
-        if (lines == motherboard?.Sata)
+        if (validationModel.Ssd is not null)
         {
-            return new ComponentResult.Failed("There are no memory drives in this build.");
+            lines--;
+        }
+
+        if (validationModel.VideoCard is not null)
+        {
+            lines--;
         }
 
         if (lines < 0)

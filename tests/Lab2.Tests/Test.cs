@@ -78,7 +78,7 @@ public class Test
     public void BuildWithWarning()
     {
         var pcBuild = new PcBuilder();
-        var cpu = new Cpu(3, 5, new PcSocket.AM2(), new Ivc(20, 4000, 900), new[] { 1600 }, 30, 10);
+        var cpu = new Cpu(3, 5, new PcSocket.AM2(), new Ivc(20, 4000, 900), new[] { 1600 }, 30, 30);
         var motherboard = new Motherboard(new PcSocket.AM2(), 6, 6, new Chipset(new[] { 1600 }, null), 4, 4, new MotherBoardFormFactor.StandartAtx(), new Bios("Best", "Best", new[] { cpu }), null);
         var coolingSystem = new CoolingSystem(1, 1, 1, new[] { new PcSocket.AM2() }, 50);
         var ram = new Ram(2, new RamFormFactor.Dimm(), 4, 20, new Jedec("10-10-10-10", 20, 1600), null, 1);
@@ -115,7 +115,7 @@ public class Test
         if (res is PcResult.Success rs)
         {
             Assert.NotNull(rs.Pc);
-            Assert.Equivalent(new Collection<string> { "Failure to comply with recommended psu power delivery capacities" }, rs.Commentaries);
+            Assert.Equivalent(new Collection<string> { "Failure to comply with recommended Psu power delivery capacities" }, rs.Commentaries);
         }
         else
         {

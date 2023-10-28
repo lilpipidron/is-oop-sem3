@@ -1,44 +1,39 @@
-using System.Collections.Generic;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Motherboards;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.Rams;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
 public class CompareRamAndMotherboard : IComponentCompatibility
 {
-    public ComponentResult CheckCompability(IReadOnlyCollection<IPcComponent?> pcComponents)
+    public ComponentResult CheckCompability(PcBuilder.PcValidationModel validationModel)
     {
-        var ram = pcComponents.FirstOrDefault(component => component is IRam) as IRam;
-        var motherboard = pcComponents.FirstOrDefault(component => component is IMotherboard) as IMotherboard;
-        if (ram?.AmountBoards > motherboard?.RamCapacity)
+        if (validationModel.Ram.AmountBoards > validationModel.Motherboard.RamCapacity)
         {
             return new ComponentResult.Failed("Too many Ram boards");
         }
 
         ComponentResult slower = new ComponentResult.FullCompatible();
-        if (ram?.XmpProfile is not null && motherboard?.Chipset.SupportXmp is null)
+        if (validationModel.Ram.XmpProfile is not null && validationModel.Motherboard.Chipset.SupportXmp is null)
         {
             return new ComponentResult.Failed("Motherboard doesn't support Xmp");
         }
 
-        if (ram?.VersionDdr != motherboard?.DdrStandard)
+        if (validationModel.Ram.VersionDdr != validationModel.Motherboard.DdrStandard)
         {
             return new ComponentResult.Failed("Motherboard doesn't support this DDR version");
         }
 
-        if (ram?.XmpProfile is not null && motherboard?.Chipset.SupportXmp is not null)
+        if (validationModel.Ram.XmpProfile is not null && validationModel.Motherboard.Chipset.SupportXmp is not null)
         {
-            if (ram.XmpProfile.Frequency > motherboard?.Chipset.SupportXmp.Frequency)
+            if (validationModel.Ram.XmpProfile.Frequency > validationModel.Motherboard.Chipset.SupportXmp.Frequency)
             {
                 slower = new ComponentResult.Compatible("Ram will run at slower frequencies");
             }
         }
 
-        if (motherboard?.Chipset.RamFrequency.FirstOrDefault(frequency =>
-                frequency >= ram?.JedecProfile.Frequency) ==
+        if (validationModel.Motherboard.Chipset.RamFrequency.FirstOrDefault(frequency =>
+                frequency >= validationModel.Ram.JedecProfile.Frequency) ==
             0)
         {
             slower = new ComponentResult.Compatible("Ram will run at slower frequencies");

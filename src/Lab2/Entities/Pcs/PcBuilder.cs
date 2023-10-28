@@ -23,7 +23,9 @@ public class PcBuilder : IPcBuilder
     private IVideoCard? _videoCard;
     private ISsd? _ssd;
     private IHdd? _hdd;
+
     private IPcCase? _pcCase;
+
     private IPsu? _psu;
 
     public IPcBuilder WithMotherBoard(IMotherboard motherboard)
@@ -88,9 +90,18 @@ public class PcBuilder : IPcBuilder
             throw new ArgumentNullException(null, $"Your PC doesn't have enough components");
         }
 
+        var pcValidate = new PcValidationModel(
+            _motherBoard,
+            _cpu,
+            _coolingSystem,
+            _ram,
+            _videoCard,
+            _ssd,
+            _hdd,
+            _pcCase,
+            _psu);
         var compareAllComponents = new CompareAllComponents(
-            compatibilities,
-            new List<IPcComponent?> { _motherBoard, _cpu, _coolingSystem, _ram, _videoCard, _ssd, _hdd, _psu, _pcCase });
+            compatibilities, pcValidate);
         ComponentResult res = compareAllComponents.CompareAllComponent();
         IReadOnlyCollection<string?>? allComments = null;
         switch (res)
@@ -115,4 +126,15 @@ public class PcBuilder : IPcBuilder
                 _psu),
             allComments);
     }
+
+    public record PcValidationModel(
+        IMotherboard Motherboard,
+        ICpu Cpu,
+        ICoolingSystem CoolingSystem,
+        IRam Ram,
+        IVideoCard? VideoCard,
+        ISsd? Ssd,
+        IHdd? Hdd,
+        IPcCase PcCase,
+        IPsu Psu);
 }

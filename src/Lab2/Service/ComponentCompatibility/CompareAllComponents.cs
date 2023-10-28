@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
@@ -7,12 +7,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 public class CompareAllComponents
 {
     private readonly IReadOnlyCollection<IComponentCompatibility> _compareFunc;
-    private readonly IReadOnlyCollection<IPcComponent?> _pcComponents;
+    private readonly PcBuilder.PcValidationModel _validationModel;
 
-    public CompareAllComponents(IReadOnlyCollection<IComponentCompatibility> compareFunc, IReadOnlyCollection<IPcComponent?> pcComponents)
+    public CompareAllComponents(IReadOnlyCollection<IComponentCompatibility> compareFunc, PcBuilder.PcValidationModel validationModel)
     {
         _compareFunc = compareFunc;
-        _pcComponents = pcComponents;
+        _validationModel = validationModel;
     }
 
     public ComponentResult CompareAllComponent()
@@ -20,7 +20,7 @@ public class CompareAllComponents
         List<string?> allMessages = new();
         foreach (IComponentCompatibility compare in _compareFunc)
         {
-            ComponentResult res = compare.CheckCompability(_pcComponents);
+            ComponentResult res = compare.CheckCompability(_validationModel);
             switch (res)
             {
                 case ComponentResult.Failed:

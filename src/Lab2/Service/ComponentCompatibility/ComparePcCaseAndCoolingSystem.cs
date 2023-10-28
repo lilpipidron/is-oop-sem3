@@ -1,22 +1,16 @@
-using System.Collections.Generic;
-using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
-using Itmo.ObjectOrientedProgramming.Lab2.Entities.PcCases;
+using Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 using Itmo.ObjectOrientedProgramming.Lab2.Model.Results;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
 public class ComparePcCaseAndCoolingSystem : IComponentCompatibility
 {
-    public ComponentResult CheckCompability(IReadOnlyCollection<IPcComponent?> pcComponents)
+    public ComponentResult CheckCompability(PcBuilder.PcValidationModel validationModel)
     {
-        var pcCase = pcComponents.FirstOrDefault(component => component is IPcCase) as IPcCase;
-        var coolingSystem = pcComponents.FirstOrDefault(component => component is ICoolingSystem) as ICoolingSystem;
         if (
-            pcCase?.Height < coolingSystem?.Height ||
-            pcCase?.Width < coolingSystem?.Width ||
-            pcCase?.Depth < coolingSystem?.Depth)
+            validationModel.PcCase.Height < validationModel.CoolingSystem.Height ||
+            validationModel.PcCase.Width < validationModel.CoolingSystem.Width ||
+            validationModel.PcCase.Depth < validationModel.CoolingSystem.Depth)
         {
             return new ComponentResult.Failed("Cooling System does not fit into the case");
         }
