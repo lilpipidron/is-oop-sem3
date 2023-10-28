@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdds;
@@ -20,7 +19,7 @@ public class PcBuilder : IPcBuilder
     private IMotherboard? _motherBoard;
     private ICpu? _cpu;
     private ICoolingSystem? _coolingSystem;
-    private IReadOnlyCollection<IRam>? _ram;
+    private IRam? _ram;
     private IVideoCard? _videoCard;
     private ISsd? _ssd;
     private IHdd? _hdd;
@@ -45,7 +44,7 @@ public class PcBuilder : IPcBuilder
         return this;
     }
 
-    public IPcBuilder WithRam(IReadOnlyCollection<IRam> ram)
+    public IPcBuilder WithRam(IRam ram)
     {
         _ram = ram;
         return this;
@@ -81,35 +80,19 @@ public class PcBuilder : IPcBuilder
         return this;
     }
 
-    public PcResult Build()
+    public PcResult Build(IReadOnlyCollection<IComponentCompatibility> compatibilities)
     {
         if (_cpu is null || _motherBoard is null || _coolingSystem is null || _pcCase is null || _psu is null ||
             _ram is null)
         {
-            throw new ArgumentNullException($"Your PC doesn't have enough components");
+            throw new ArgumentNullException(null, $"Your PC doesn't have enough components");
         }
 
-        IRamBuilder ramBuider = new RamBuilder();
-        ramBuider = _ram.ElementAt(0).Director(ramBuider);
-        IRam spcRam = ramBuider.WithPowerConsumption(_ram.Count * _ram.ElementAt(0).PowerConsumption).Build();
-        IReadOnlyCollection<IComponentCompatibility> allCompare = new IComponentCompatibility[]
-        {
-            new CompareCpuAndRam(_cpu, _ram),
-            new CompareMotherboardAndCpu(_motherBoard, _cpu),
-            new CompareRamAndMotherboard(_ram, _motherBoard),
-            new CompareCpuAndCoolingSystem(_cpu, _coolingSystem),
-            new CompareCpuAndVideoCard(_cpu, _videoCard),
-            new ComparePcCaseAndMotherboard(_pcCase, _motherBoard),
-            new CompareMotherBoardAndSataComponents(_motherBoard, new ISataComponent?[] { _ssd, _hdd }),
-            new ComparePcCaseAndCoolingSystem(_pcCase, _coolingSystem),
-            new ComparePcCaseAndVideoCard(_pcCase, _videoCard),
-            new ComparePsuAndFullPowerConsumption(_psu, new IPcComponentWithPowerConsumption?[] { _cpu, _videoCard, _ssd, _hdd, _motherBoard.WiFiAdapter, spcRam }),
-            new CompareMotherBoardAndPciEComponents(_motherBoard, new IPciEComponent?[] { _videoCard, _ssd, _motherBoard.WiFiAdapter }),
-        };
-        var compareAllComponents = new CompareAllComponents(allCompare);
-        IReadOnlyCollection<string?>? allComments = null;
+        var compareAllComponents = new CompareAllComponents(
+            compatibilities,
+            new List<IPcComponent?> { _motherBoard, _cpu, _coolingSystem, _ram, _videoCard, _ssd, _hdd, _psu, _pcCase });
         ComponentResult res = compareAllComponents.CompareAllComponent();
-
+        IReadOnlyCollection<string?>? allComments = null;
         switch (res)
         {
             case ComponentResult.Failed rf:

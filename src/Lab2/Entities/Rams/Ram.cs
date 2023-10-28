@@ -12,7 +12,8 @@ public class Ram : IRam
         int versionDdr,
         int powerConsumption,
         Jedec jedecProfile,
-        Xmp? xmpProfile)
+        Xmp? xmpProfile,
+        int amountBoards)
     {
         Amount = amount;
         RamFormFactor = ramFormFactor;
@@ -20,6 +21,7 @@ public class Ram : IRam
         PowerConsumption = powerConsumption;
         JedecProfile = jedecProfile;
         XmpProfile = xmpProfile;
+        AmountBoards = amountBoards;
     }
 
     public int Amount { get; }
@@ -28,6 +30,7 @@ public class Ram : IRam
     public int PowerConsumption { get; }
     public Jedec JedecProfile { get; }
     public Xmp? XmpProfile { get; }
+    public int AmountBoards { get; }
 
     public IRamBuilder Director(IRamBuilder builder)
     {
@@ -37,7 +40,8 @@ public class Ram : IRam
             .WithVersionDdr(VersionDdr)
             .WithPowerConsumption(PowerConsumption)
             .WithJedec(JedecProfile)
-            .WithXmpProfiles(XmpProfile);
+            .WithXmpProfiles(XmpProfile)
+            .WithAmountBoards(AmountBoards);
 
         return builder;
     }

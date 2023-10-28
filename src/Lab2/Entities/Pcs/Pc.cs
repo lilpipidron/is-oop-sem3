@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdds;
@@ -16,7 +15,7 @@ public class Pc : IPc
     private readonly IMotherboard _motherboard;
     private readonly ICpu _cpu;
     private readonly ICoolingSystem _coolingSystem;
-    private readonly IReadOnlyCollection<IRam> _ram;
+    private readonly IRam _ram;
     private readonly IVideoCard? _videoCard;
     private readonly ISsd? _ssd;
     private readonly IHdd? _hdd;
@@ -27,7 +26,7 @@ public class Pc : IPc
         IMotherboard motherboard,
         ICpu cpu,
         ICoolingSystem coolingSystem,
-        IReadOnlyCollection<IRam> ram,
+        IRam ram,
         IVideoCard? videoCard,
         ISsd? ssd,
         IHdd? hdd,

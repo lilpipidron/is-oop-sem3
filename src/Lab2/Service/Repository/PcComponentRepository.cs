@@ -29,7 +29,7 @@ public class PcComponentRepository : IRepository<IPcComponent>
         _entity.Add(new Cpu(3, 5, new PcSocket.AM2(), new Ivc(20, 4000, 900), new[] { 1600 }, 30, 10));
         _entity.Add(new Motherboard(new PcSocket.AM2(), 6, 6, new Chipset(new[] { 1600 }, null), 4, 4, new MotherBoardFormFactor.StandartAtx(), new Bios("Best", "Best", new[] { new Cpu(3, 5, new PcSocket.AM2(), new Ivc(20, 4000, 900), new[] { 1600 }, 30, 10) }), null));
         _entity.Add(new CoolingSystem(1, 1, 1, new[] { new PcSocket.AM2() }, 50));
-        _entity.Add(new Ram(2, new RamFormFactor.Dimm(), 4, 20, new Jedec("10-10-10-10", 20, 1600), null));
+        _entity.Add(new Ram(2, new RamFormFactor.Dimm(), 4, 20, new Jedec("10-10-10-10", 20, 1600), null, 1));
         _entity.Add(new VideoCard(1, 1, 5000, "1", 5, 20));
         _entity.Add(new Ssd(1, 11200, 100, "SATA"));
         _entity.Add(new Hdd(1, 5600, 50));

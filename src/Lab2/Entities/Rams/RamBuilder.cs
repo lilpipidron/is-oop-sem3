@@ -13,6 +13,7 @@ public class RamBuilder : IRamBuilder
     private int? _powerConsumption;
     private Jedec? _jedecProfile;
     private Xmp? _xmpProfile;
+    private int? _amountBoards;
 
     public IRamBuilder WithAmount(int amount)
     {
@@ -50,6 +51,12 @@ public class RamBuilder : IRamBuilder
         return this;
     }
 
+    public IRamBuilder WithAmountBoards(int amount)
+    {
+        _amountBoards = amount;
+        return this;
+    }
+
     public IRam Build()
     {
         return new Ram(
@@ -58,6 +65,7 @@ public class RamBuilder : IRamBuilder
             _versionDdr ?? throw new ArgumentNullException(nameof(_versionDdr)),
             _powerConsumption ?? throw new ArgumentNullException(nameof(_powerConsumption)),
             _jedecProfile ?? throw new ArgumentNullException(nameof(_jedecProfile)),
-            _xmpProfile);
+            _xmpProfile,
+            _amountBoards ?? throw new ArgumentNullException(nameof(_amountBoards)));
     }
 }

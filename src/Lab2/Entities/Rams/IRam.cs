@@ -12,4 +12,5 @@ public interface IRam : IBuilderDirector<IRamBuilder>, IPcComponent,
     public int VersionDdr { get; }
     public Jedec JedecProfile { get; }
     public Xmp? XmpProfile { get; }
+    public int AmountBoards { get; }
 }

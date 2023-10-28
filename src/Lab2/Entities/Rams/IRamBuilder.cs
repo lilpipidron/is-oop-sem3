@@ -18,5 +18,7 @@ public interface IRamBuilder
 
     IRamBuilder WithXmpProfiles(Xmp? xmpProfile);
 
+    IRamBuilder WithAmountBoards(int amount);
+
     IRam Build();
 }

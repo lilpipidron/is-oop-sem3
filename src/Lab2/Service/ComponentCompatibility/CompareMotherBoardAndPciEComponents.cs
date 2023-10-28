@@ -8,26 +8,22 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Service.ComponentCompatibility;
 
 public class CompareMotherBoardAndPciEComponents : IComponentCompatibility
 {
-    private readonly IMotherboard _motherboard;
-    private readonly IReadOnlyCollection<IPciEComponent?> _components;
-
-    public CompareMotherBoardAndPciEComponents(IMotherboard motherboard, IReadOnlyCollection<IPciEComponent?> components)
+    public ComponentResult CheckCompability(IReadOnlyCollection<IPcComponent?> pcComponents)
     {
-        _motherboard = motherboard;
-        _components = components;
-    }
-
-    public ComponentResult CheckCompability()
-    {
-        int lines = _motherboard.PciE;
-        if (_motherboard.WiFiAdapter is not null)
+        var components = pcComponents.Where(component => component is IPciEComponent) as IReadOnlyCollection<IPciEComponent?>;
+        var motherboard = pcComponents.FirstOrDefault(component => component is IMotherboard) as IMotherboard;
+        int? lines = motherboard?.PciE;
+        if (motherboard?.WiFiAdapter is not null)
         {
             lines--;
         }
 
-        foreach (IPciEComponent? component in _components.Where(component => component is not null))
+        if (components != null)
         {
-            lines--;
+            foreach (IPciEComponent? component in components.Where(component => component is not null))
+            {
+                lines--;
+            }
         }
 
         if (lines < 0)
