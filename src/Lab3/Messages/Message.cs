@@ -1,11 +1,10 @@
 using System;
-using System.Text;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messages;
 
 public class Message : IMessage
 {
-    public Message(string title, StringBuilder body, int importanceLevel)
+    public Message(string title, string body, int importanceLevel)
     {
         Title = title;
         Body = body;
@@ -13,12 +12,12 @@ public class Message : IMessage
     }
 
     public string Title { get; }
-    public StringBuilder Body { get; }
+    public string Body { get; }
     public int ImportanceLevel { get; }
 
     public bool Equals(IMessage? other)
     {
-        return Title == other?.Title && Body.Equals(other.Body) && ImportanceLevel == other.ImportanceLevel;
+        return Title == other?.Title && Body.Equals(other.Body, StringComparison.Ordinal) && ImportanceLevel == other.ImportanceLevel;
     }
 
     public override bool Equals(object? obj)
