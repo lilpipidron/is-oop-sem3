@@ -1,9 +1,10 @@
 using System;
 using System.Drawing;
-using Itmo.ObjectOrientedProgramming.Lab3.Display.DisplayDrivers;
+using System.IO;
+using Itmo.ObjectOrientedProgramming.Lab3.Displays.DisplayDrivers;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Display;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Displays;
 
 public class Display : IDisplay
 {
@@ -15,13 +16,13 @@ public class Display : IDisplay
         _message = message;
     }
 
-    public void PrintMessage(Color? color = null)
+    public void PrintMessage(Color? color = null, StreamWriter? stream = default)
     {
         if (_message is null)
         {
             throw new ArgumentNullException(null, nameof(_message));
         }
 
-        _displayDriver.PrintMessage(color, _message);
+        _displayDriver.PrintMessage(color, stream, _message);
     }
 }
