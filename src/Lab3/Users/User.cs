@@ -1,30 +1,30 @@
+using System;
 using System.Collections.Generic;
-using System.Data;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Users;
 
 public class User : IUser
 {
-    private readonly Dictionary<IMessage, bool> _messages;
-
     public User()
     {
-        _messages = new Dictionary<IMessage, bool>();
+        Messages = new Dictionary<IMessage, bool>();
     }
+
+    public Dictionary<IMessage, bool> Messages { get; }
 
     public void ReceiveMessage(IMessage message)
     {
-        _messages.Add(message, false);
+        Messages.Add(message, false);
     }
 
     public void ReadMessage(IMessage message)
     {
-        if (_messages[message] is true)
+        if (Messages[message] is true)
         {
-            throw new EvaluateException("This message has already been read");
+            throw new InvalidOperationException("This message has already been read");
         }
 
-        _messages[message] = true;
+        Messages[message] = true;
     }
 }

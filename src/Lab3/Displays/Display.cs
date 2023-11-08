@@ -1,11 +1,10 @@
 using System;
 using System.Drawing;
 using System.IO;
-using Itmo.ObjectOrientedProgramming.Lab3.Displays;
 using Itmo.ObjectOrientedProgramming.Lab3.Displays.DisplayDrivers;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Display;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Displays;
 
 public class Display : IDisplay
 {

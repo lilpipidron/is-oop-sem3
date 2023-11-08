@@ -1,7 +1,7 @@
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees;
-using Itmo.ObjectOrientedProgramming.Lab3.Addressees.AddresseUsers;
+using Itmo.ObjectOrientedProgramming.Lab3.Addressees.AddresseMessengers;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
-using Itmo.ObjectOrientedProgramming.Lab3.Users;
+using Itmo.ObjectOrientedProgramming.Lab3.Messengers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3;
 
@@ -10,7 +10,8 @@ internal class Program
     private static void Main()
     {
         var message = new Message("233", "12qedqe", 2);
-        var adresse = new ProxyAddressee(new AddreseeUser(new User()), 5);
+        var m = new Messenger();
+        var adresse = new ProxyAddressee(new AdresseeMessenger(m), 1);
         adresse.TransferMessage(message);
     }
 }

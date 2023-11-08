@@ -1,4 +1,3 @@
-using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Loggers;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressees;
@@ -6,11 +5,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Addressees;
 public class ProxyAddressee : IAddressee
 {
     private readonly int _requiredLevel;
-    private readonly ILogger _addressee;
+    private readonly IAddressee _addressee;
 
     public ProxyAddressee(IAddressee addressee, int requiredLevel)
     {
-        _addressee = new AddresseesLogger(addressee);
+        _addressee = addressee;
         _requiredLevel = requiredLevel;
     }
 
