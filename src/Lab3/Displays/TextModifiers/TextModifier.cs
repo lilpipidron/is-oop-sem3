@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Display.TextModifiers;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Displays.TextModifiers;
 
 public class TextModifier : ITextModifier
 {

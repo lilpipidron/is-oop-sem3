@@ -7,11 +7,9 @@ public class Topic : ITopic
 {
     private readonly string _name;
 
-    private readonly Addressee _addressee;
+    private readonly IAddressee _addressee;
 
-    private IMessage? _message;
-
-    public Topic(string name, Addressee addressee)
+    public Topic(string name, IAddressee addressee)
     {
         _name = name;
         _addressee = addressee;
@@ -19,6 +17,6 @@ public class Topic : ITopic
 
     public void GetMessage(IMessage message)
     {
-        _message = message;
+        _addressee.TransferMessage(message);
     }
 }

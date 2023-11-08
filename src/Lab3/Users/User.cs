@@ -13,7 +13,7 @@ public class User : IUser
         _messages = new Dictionary<IMessage, bool>();
     }
 
-    public void GetMessage(IMessage message)
+    public void ReceiveMessage(IMessage message)
     {
         _messages.Add(message, false);
     }
