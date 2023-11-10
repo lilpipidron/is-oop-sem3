@@ -6,26 +6,33 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Users.Entity;
 
 public class User : IUser
 {
+    private readonly Dictionary<Message, MessageStatus> _messages;
+
     public User()
     {
-        Messages = new Dictionary<IMessage, bool>();
+        _messages = new Dictionary<Message, MessageStatus>();
     }
 
-    public Dictionary<IMessage, bool> Messages { get; }
-
-    public void ReceiveMessage(IMessage message)
+    public void ReceiveMessage(Message message)
     {
-        Messages.Add(message, false);
+        _messages.Add(message, new MessageStatus.StatusRead());
     }
 
-    public ReadResult ReadMessage(IMessage message)
+    public ReadResult ReadMessage(Message message)
     {
-        if (Messages[message] is true)
+        MessageStatus? status = FindMessage(message);
+        if (status is null or MessageStatus.StatusRead)
         {
             return new ReadResult.ReadFailed();
         }
 
-        Messages[message] = true;
+        _messages[message] = new MessageStatus.StatusRead();
         return new ReadResult.ReadSuccess();
+    }
+
+    public MessageStatus? FindMessage(Message message)
+    {
+        _messages.TryGetValue(message, out MessageStatus? status);
+        return status;
     }
 }

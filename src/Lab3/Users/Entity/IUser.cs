@@ -5,7 +5,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Users.Entity;
 
 public interface IUser
 {
-    void ReceiveMessage(IMessage message);
+    void ReceiveMessage(Message message);
 
-    ReadResult ReadMessage(IMessage message);
+    ReadResult ReadMessage(Message message);
+
+    MessageStatus? FindMessage(Message message);
 }
