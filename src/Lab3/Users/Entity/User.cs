@@ -15,7 +15,7 @@ public class User : IUser
 
     public void ReceiveMessage(Message message)
     {
-        _messages.Add(message, new MessageStatus.StatusRead());
+        _messages.Add(message, new MessageStatus.StatusUnread());
     }
 
     public ReadResult ReadMessage(Message message)
