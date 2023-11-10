@@ -1,5 +1,5 @@
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
-using Itmo.ObjectOrientedProgramming.Lab3.Users;
+using Itmo.ObjectOrientedProgramming.Lab3.Users.Entity;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressees.AddresseUsers;
 

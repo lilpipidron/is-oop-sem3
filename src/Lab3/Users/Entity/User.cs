@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
+using Itmo.ObjectOrientedProgramming.Lab3.Users.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Users;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Users.Entity;
 
 public class User : IUser
 {
@@ -18,13 +18,14 @@ public class User : IUser
         Messages.Add(message, false);
     }
 
-    public void ReadMessage(IMessage message)
+    public ReadResult ReadMessage(IMessage message)
     {
         if (Messages[message] is true)
         {
-            throw new InvalidOperationException("This message has already been read");
+            return new ReadResult.ReadFailed();
         }
 
         Messages[message] = true;
+        return new ReadResult.ReadSuccess();
     }
 }

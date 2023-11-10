@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.AddresseMessengers;
@@ -6,7 +5,8 @@ using Itmo.ObjectOrientedProgramming.Lab3.Addressees.AddresseUsers;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Loggers;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
 using Itmo.ObjectOrientedProgramming.Lab3.Messengers;
-using Itmo.ObjectOrientedProgramming.Lab3.Users;
+using Itmo.ObjectOrientedProgramming.Lab3.Users.Entity;
+using Itmo.ObjectOrientedProgramming.Lab3.Users.Models;
 using NSubstitute;
 using Xunit;
 
@@ -36,14 +36,15 @@ public class Test
     }
 
     [Fact]
-    public void TryReadMessageSecondTime_GetException()
+    public void TryReadMessageSecondTime_GetFailedResult()
     {
         var message = new Message("233", "12qedqe", 2);
         var user = new User();
         var adressee = new ProxyAddressee(new AddreseeUser(user), 1);
         adressee.TransferMessage(message);
         user.ReadMessage(message);
-        Assert.Throws<InvalidOperationException>(() => user.ReadMessage(message));
+        ReadResult res = user.ReadMessage(message);
+        Assert.Equal(new ReadResult.ReadFailed(), res);
     }
 
     [Fact]
