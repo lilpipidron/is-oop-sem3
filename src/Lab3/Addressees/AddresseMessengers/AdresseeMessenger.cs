@@ -12,8 +12,8 @@ public class AdresseeMessenger : IAddressee
         _messenger = messenger;
     }
 
-    public void TransferMessage(IMessage message)
+    public void TransferMessage(Message message)
     {
-        _messenger.ReceiveMessage(message);
+        _messenger.PrintMessage($"Title:{message.Title}\nBody:{message.Body}\n");
     }
 }

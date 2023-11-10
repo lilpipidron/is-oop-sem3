@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab3.Displays.TextModifiers;
-using Itmo.ObjectOrientedProgramming.Lab3.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Displays.DisplayDrivers;
 
@@ -19,17 +18,17 @@ public class DisplayDriverFile : IDisplayDriver
         File.Create(_filePath).Dispose();
     }
 
-    public string ModifyString(string str, Color? color)
+    public string ModifyString(string str, Color color)
     {
-        var modifier = new TextModifier(color);
+        var modifier = new TextColorModifier(color);
         return modifier.Modify(str);
     }
 
-    public void PrintMessage(Color? color, IMessage message)
+    public void PrintMessage(Color color, string message)
     {
         ClearOutput();
-        string modifiedMessage = ModifyString(message.Body, color);
+        string modifiedMessage = ModifyString(message, color);
 
-        File.AppendText(_filePath).Write($"Title:\n{message.Title}\nBody:\n{modifiedMessage}");
+        File.AppendText(_filePath).Write(modifiedMessage);
     }
 }

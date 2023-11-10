@@ -12,7 +12,7 @@ public class AddreseeUser : IAddressee
         _user = user;
     }
 
-    public void TransferMessage(IMessage message)
+    public void TransferMessage(Message message)
     {
         _user.ReceiveMessage(message);
     }

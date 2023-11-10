@@ -13,9 +13,10 @@ public class AddresseesLogger : IAddressee
         _logger = logger;
     }
 
-    public void TransferMessage(IMessage message)
+    public void TransferMessage(Message message)
     {
-        _logger.Log(message);
+        _logger.Log(
+            $"Message received\nTitle:\n{message.Title}\nBody:\n{message.Body}\nImportance level:\n{message.ImportanceLevel}\n");
         _addressee.TransferMessage(message);
     }
 }

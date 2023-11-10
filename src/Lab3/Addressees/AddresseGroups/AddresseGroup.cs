@@ -12,7 +12,7 @@ public class AddresseGroup : IAddressee
         _addressee = addressee;
     }
 
-    public void TransferMessage(IMessage message)
+    public void TransferMessage(Message message)
     {
         foreach (IAddressee addressee in _addressee)
         {

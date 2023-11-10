@@ -2,11 +2,11 @@ using System.Drawing;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Displays.TextModifiers;
 
-public class TextModifier : ITextModifier
+public class TextColorModifier : ITextModifier
 {
     private readonly Color? _color;
 
-    public TextModifier(Color? color)
+    public TextColorModifier(Color? color)
     {
         _color = color;
     }

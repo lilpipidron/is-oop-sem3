@@ -15,7 +15,7 @@ public class Topic : ITopic
         _addressee = addressee;
     }
 
-    public void GetMessage(IMessage message)
+    public void GetMessage(Message message)
     {
         _addressee.TransferMessage(message);
     }
