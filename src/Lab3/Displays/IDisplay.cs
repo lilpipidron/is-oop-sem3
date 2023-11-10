@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Displays;
 public interface IDisplay
 {
     void ReceiveMessage(IMessage message);
-    void PrintMessage(Color? color = null);
+    PrintResult PrintMessage(Color? color = null);
 }

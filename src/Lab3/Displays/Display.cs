@@ -1,4 +1,3 @@
-using System;
 using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.Displays.DisplayDrivers;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
@@ -20,13 +19,14 @@ public class Display : IDisplay
         _message = message;
     }
 
-    public void PrintMessage(Color? color = null)
+    public PrintResult PrintMessage(Color? color = null)
     {
         if (_message is null)
         {
-            throw new ArgumentNullException(null, nameof(_message));
+            return new PrintResult.PrintFailed();
         }
 
         _displayDriver.PrintMessage(color, _message);
+        return new PrintResult.PrintSuccess();
     }
 }
