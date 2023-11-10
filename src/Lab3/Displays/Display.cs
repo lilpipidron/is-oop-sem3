@@ -27,6 +27,7 @@ public class Display : IDisplay
         }
 
         _displayDriver.PrintMessage(color, _message);
+        _message = null;
         return new PrintResult.PrintSuccess();
     }
 }
