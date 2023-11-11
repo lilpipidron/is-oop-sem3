@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Bioses;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Chipsets;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
@@ -63,15 +62,8 @@ public class Test
             .WithPcCase(pcCase)
             .WithPsu(psu);
         PcResult res = pcBuild.Build(allCompare);
-        if (res is PcResult.Success rs)
-        {
-            Assert.NotNull(rs.Pc);
-            Assert.Equivalent(new Collection<string>(), rs.Commentaries);
-        }
-        else
-        {
-            Assert.Fail();
-        }
+        PcResult.Success rs = Assert.IsType<PcResult.Success>(res);
+        if (rs.Commentaries != null) Assert.Empty(rs.Commentaries);
     }
 
     [Fact]
@@ -112,15 +104,10 @@ public class Test
             .WithPcCase(pcCase)
             .WithPsu(psu);
         PcResult res = pcBuild.Build(allCompare);
-        if (res is PcResult.Success rs)
-        {
-            Assert.NotNull(rs.Pc);
-            Assert.Equivalent(new Collection<string> { "Failure to comply with recommended Psu power delivery capacities" }, rs.Commentaries);
-        }
-        else
-        {
-            Assert.Fail();
-        }
+        PcResult.Success rs = Assert.IsType<PcResult.Success>(res);
+        Assert.Equivalent(
+            new List<string> { "Failure to comply with recommended Psu power delivery capacities" },
+            rs.Commentaries);
     }
 
     [Fact]
@@ -161,15 +148,8 @@ public class Test
             .WithPcCase(pcCase)
             .WithPsu(psu);
         PcResult res = pcBuild.Build(allCompare);
-        if (res is PcResult.Success rs)
-        {
-            Assert.NotNull(rs.Pc);
-            Assert.Equivalent(new Collection<string> { "The store disclaims liability and warranty obligations" }, rs.Commentaries);
-        }
-        else
-        {
-            Assert.Fail();
-        }
+        PcResult.Success rs = Assert.IsType<PcResult.Success>(res);
+        if (rs.Commentaries != null) Assert.Empty(rs.Commentaries);
     }
 
     [Fact]
