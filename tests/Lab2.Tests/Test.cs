@@ -24,10 +24,24 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Tests;
 
 public class Test
 {
+    private static readonly PcBuilder PcBuild = new PcBuilder(new IComponentCompatibility[]
+    {
+        new CompareCpuAndRam(),
+        new CompareMotherboardAndCpu(),
+        new CompareRamAndMotherboard(),
+        new CompareCpuAndCoolingSystem(),
+        new CompareCpuAndVideoCard(),
+        new ComparePcCaseAndMotherboard(),
+        new CompareMotherBoardAndSataComponents(),
+        new ComparePcCaseAndCoolingSystem(),
+        new ComparePcCaseAndVideoCard(),
+        new ComparePsuAndFullPowerConsumption(),
+        new CompareMotherBoardAndPciEComponents(),
+    });
+
     [Fact]
     public void FullSuccessBuild()
     {
-        var pcBuild = new PcBuilder();
         var cpu = new Cpu(3, 5, new PcSocket.AM2(), new Ivc(20, 4000, 900), new[] { 1600 }, 30, 10);
         var motherboard = new Motherboard(new PcSocket.AM2(), 6, 6, new Chipset(new[] { 1600 }, null), 4, 4, new MotherBoardFormFactor.StandartAtx(), new Bios("Best", "Best", new[] { cpu }), null);
         var coolingSystem = new CoolingSystem(1, 1, 1, new[] { new PcSocket.AM2() }, 50);
@@ -37,21 +51,7 @@ public class Test
         var hdd = new Hdd(1, 5600, 50);
         var pcCase = new PcCase(100, 100, new[] { new MotherBoardFormFactor.StandartAtx() }, 100, 100, 100);
         var psu = new Psu(1000);
-        IReadOnlyCollection<IComponentCompatibility> allCompare = new IComponentCompatibility[]
-        {
-            new CompareCpuAndRam(),
-            new CompareMotherboardAndCpu(),
-            new CompareRamAndMotherboard(),
-            new CompareCpuAndCoolingSystem(),
-            new CompareCpuAndVideoCard(),
-            new ComparePcCaseAndMotherboard(),
-            new CompareMotherBoardAndSataComponents(),
-            new ComparePcCaseAndCoolingSystem(),
-            new ComparePcCaseAndVideoCard(),
-            new ComparePsuAndFullPowerConsumption(),
-            new CompareMotherBoardAndPciEComponents(),
-        };
-        pcBuild
+        PcBuild
             .WithCpu(cpu)
             .WithMotherBoard(motherboard)
             .WithCoolingSystem(coolingSystem)
@@ -61,7 +61,7 @@ public class Test
             .WithHdd(hdd)
             .WithPcCase(pcCase)
             .WithPsu(psu);
-        PcResult res = pcBuild.Build(allCompare);
+        PcResult res = PcBuild.Build();
         PcResult.Success rs = Assert.IsType<PcResult.Success>(res);
         if (rs.Commentaries != null) Assert.Empty(rs.Commentaries);
     }
@@ -69,7 +69,6 @@ public class Test
     [Fact]
     public void BuildWithWarning()
     {
-        var pcBuild = new PcBuilder();
         var cpu = new Cpu(3, 5, new PcSocket.AM2(), new Ivc(20, 4000, 900), new[] { 1600 }, 30, 30);
         var motherboard = new Motherboard(new PcSocket.AM2(), 6, 6, new Chipset(new[] { 1600 }, null), 4, 4, new MotherBoardFormFactor.StandartAtx(), new Bios("Best", "Best", new[] { cpu }), null);
         var coolingSystem = new CoolingSystem(1, 1, 1, new[] { new PcSocket.AM2() }, 50);
@@ -79,21 +78,7 @@ public class Test
         var hdd = new Hdd(1, 5600, 50);
         var pcCase = new PcCase(100, 100, new[] { new MotherBoardFormFactor.StandartAtx() }, 100, 100, 100);
         var psu = new Psu(200);
-        IReadOnlyCollection<IComponentCompatibility> allCompare = new IComponentCompatibility[]
-        {
-            new CompareCpuAndRam(),
-            new CompareMotherboardAndCpu(),
-            new CompareRamAndMotherboard(),
-            new CompareCpuAndCoolingSystem(),
-            new CompareCpuAndVideoCard(),
-            new ComparePcCaseAndMotherboard(),
-            new CompareMotherBoardAndSataComponents(),
-            new ComparePcCaseAndCoolingSystem(),
-            new ComparePcCaseAndVideoCard(),
-            new ComparePsuAndFullPowerConsumption(),
-            new CompareMotherBoardAndPciEComponents(),
-        };
-        pcBuild
+        PcBuild
             .WithCpu(cpu)
             .WithMotherBoard(motherboard)
             .WithCoolingSystem(coolingSystem)
@@ -103,7 +88,7 @@ public class Test
             .WithHdd(hdd)
             .WithPcCase(pcCase)
             .WithPsu(psu);
-        PcResult res = pcBuild.Build(allCompare);
+        PcResult res = PcBuild.Build();
         PcResult.Success rs = Assert.IsType<PcResult.Success>(res);
         Assert.Equivalent(
             new List<string> { "Failure to comply with recommended Psu power delivery capacities" },
@@ -113,7 +98,6 @@ public class Test
     [Fact]
     public void BuildWithoutGuarantee()
     {
-        var pcBuild = new PcBuilder();
         var cpu = new Cpu(3, 5, new PcSocket.AM2(), new Ivc(20, 4000, 900), new[] { 1600 }, 30, 10);
         var motherboard = new Motherboard(new PcSocket.AM2(), 6, 6, new Chipset(new[] { 1600 }, null), 4, 4, new MotherBoardFormFactor.StandartAtx(), new Bios("Best", "Best", new[] { cpu }), null);
         var coolingSystem = new CoolingSystem(1, 1, 1, new[] { new PcSocket.AM2() }, 5);
@@ -123,21 +107,8 @@ public class Test
         var hdd = new Hdd(1, 5600, 50);
         var pcCase = new PcCase(100, 100, new[] { new MotherBoardFormFactor.StandartAtx() }, 100, 100, 100);
         var psu = new Psu(1000);
-        IReadOnlyCollection<IComponentCompatibility> allCompare = new IComponentCompatibility[]
-        {
-            new CompareCpuAndRam(),
-            new CompareMotherboardAndCpu(),
-            new CompareRamAndMotherboard(),
-            new CompareCpuAndCoolingSystem(),
-            new CompareCpuAndVideoCard(),
-            new ComparePcCaseAndMotherboard(),
-            new CompareMotherBoardAndSataComponents(),
-            new ComparePcCaseAndCoolingSystem(),
-            new ComparePcCaseAndVideoCard(),
-            new ComparePsuAndFullPowerConsumption(),
-            new CompareMotherBoardAndPciEComponents(),
-        };
-        pcBuild
+
+        PcBuild
             .WithCpu(cpu)
             .WithMotherBoard(motherboard)
             .WithCoolingSystem(coolingSystem)
@@ -147,15 +118,16 @@ public class Test
             .WithHdd(hdd)
             .WithPcCase(pcCase)
             .WithPsu(psu);
-        PcResult res = pcBuild.Build(allCompare);
+        PcResult res = PcBuild.Build();
         PcResult.Success rs = Assert.IsType<PcResult.Success>(res);
-        if (rs.Commentaries != null) Assert.Empty(rs.Commentaries);
+        Assert.Equivalent(
+            new List<string> { "The store disclaims liability and warranty obligations" },
+            rs.Commentaries);
     }
 
     [Fact]
     public void FailedBuild()
     {
-        var pcBuild = new PcBuilder();
         var cpu = new Cpu(3, 5, new PcSocket.AM2(), new Ivc(20, 4000, 900), new[] { 1600 }, 30, 10);
         var motherboard = new Motherboard(new PcSocket.AM3(), 6, 6, new Chipset(new[] { 1600 }, null), 4, 4, new MotherBoardFormFactor.StandartAtx(), new Bios("Best", "Best", new[] { cpu }), null);
         var coolingSystem = new CoolingSystem(1, 1, 1, new[] { new PcSocket.AM2() }, 50);
@@ -165,21 +137,8 @@ public class Test
         var hdd = new Hdd(1, 5600, 50);
         var pcCase = new PcCase(100, 100, new[] { new MotherBoardFormFactor.StandartAtx() }, 100, 100, 100);
         var psu = new Psu(1000);
-        IReadOnlyCollection<IComponentCompatibility> allCompare = new IComponentCompatibility[]
-        {
-            new CompareCpuAndRam(),
-            new CompareMotherboardAndCpu(),
-            new CompareRamAndMotherboard(),
-            new CompareCpuAndCoolingSystem(),
-            new CompareCpuAndVideoCard(),
-            new ComparePcCaseAndMotherboard(),
-            new CompareMotherBoardAndSataComponents(),
-            new ComparePcCaseAndCoolingSystem(),
-            new ComparePcCaseAndVideoCard(),
-            new ComparePsuAndFullPowerConsumption(),
-            new CompareMotherBoardAndPciEComponents(),
-        };
-        pcBuild
+
+        PcBuild
             .WithCpu(cpu)
             .WithMotherBoard(motherboard)
             .WithCoolingSystem(coolingSystem)
@@ -189,7 +148,7 @@ public class Test
             .WithHdd(hdd)
             .WithPcCase(pcCase)
             .WithPsu(psu);
-        PcResult res = pcBuild.Build(allCompare);
+        PcResult res = PcBuild.Build();
         Assert.StrictEqual(res, new PcResult.Failed("Sockets don't match"));
     }
 }

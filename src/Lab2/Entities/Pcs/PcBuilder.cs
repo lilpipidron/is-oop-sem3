@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.CoolingSystems;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Cpus;
 using Itmo.ObjectOrientedProgramming.Lab2.Entities.Hdds;
@@ -16,6 +17,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Entities.Pcs;
 
 public class PcBuilder : IPcBuilder
 {
+    private readonly IReadOnlyCollection<IComponentCompatibility> _componentCompatibilities;
     private IMotherboard? _motherBoard;
     private ICpu? _cpu;
     private ICoolingSystem? _coolingSystem;
@@ -23,10 +25,13 @@ public class PcBuilder : IPcBuilder
     private IVideoCard? _videoCard;
     private ISsd? _ssd;
     private IHdd? _hdd;
-
     private IPcCase? _pcCase;
-
     private IPsu? _psu;
+
+    public PcBuilder(IEnumerable<IComponentCompatibility> componentCompatibilities)
+    {
+        _componentCompatibilities = componentCompatibilities.ToArray();
+    }
 
     public IPcBuilder WithMotherBoard(IMotherboard motherboard)
     {
@@ -82,7 +87,7 @@ public class PcBuilder : IPcBuilder
         return this;
     }
 
-    public PcResult Build(IReadOnlyCollection<IComponentCompatibility> compatibilities)
+    public PcResult Build()
     {
         if (_cpu is null || _motherBoard is null || _coolingSystem is null || _pcCase is null || _psu is null ||
             _ram is null)
@@ -101,7 +106,7 @@ public class PcBuilder : IPcBuilder
             _pcCase,
             _psu);
         var compareAllComponents = new CompareAllComponents(
-            compatibilities, pcValidate);
+            _componentCompatibilities, pcValidate);
         ComponentResult res = compareAllComponents.CompareAllComponent();
         IReadOnlyCollection<string?>? allComments = null;
         switch (res)
