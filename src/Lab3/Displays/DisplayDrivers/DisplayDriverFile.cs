@@ -25,8 +25,6 @@ public class DisplayDriverFile : IDisplayDriver
 
     public void PrintMessage(string message)
     {
-        ClearOutput();
-
         if (_modifier is not null)
         {
             message = _modifier.Modify(message);

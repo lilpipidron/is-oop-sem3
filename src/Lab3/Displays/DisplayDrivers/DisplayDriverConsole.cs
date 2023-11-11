@@ -19,7 +19,6 @@ public class DisplayDriverConsole : IDisplayDriver
 
     public void PrintMessage(string message)
     {
-        ClearOutput();
         if (_modifier is not null)
         {
             message = _modifier.Modify(message);

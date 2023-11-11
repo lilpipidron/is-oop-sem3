@@ -14,6 +14,7 @@ public class Display : IDisplay
 
     public PrintResult PrintMessage(ITextModifier modifier, string message)
     {
+        _displayDriver.ClearOutput();
         _displayDriver.SetModifier(modifier);
         _displayDriver.PrintMessage(message);
         return new PrintResult.PrintSuccess();
