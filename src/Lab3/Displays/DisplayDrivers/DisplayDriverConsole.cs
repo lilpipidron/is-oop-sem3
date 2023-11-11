@@ -1,27 +1,30 @@
 using System;
-using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.Displays.TextModifiers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Displays.DisplayDrivers;
 
 public class DisplayDriverConsole : IDisplayDriver
 {
+    private ITextModifier? _modifier;
+
     public void ClearOutput()
     {
         Console.Clear();
     }
 
-    public string ModifyString(string str, Color color)
+    public void SetModifier(ITextModifier textModifier)
     {
-        var modifier = new TextColorModifier(color);
-        return modifier.Modify(str);
+        _modifier = textModifier;
     }
 
-    public void PrintMessage(Color color, string message)
+    public void PrintMessage(string message)
     {
         ClearOutput();
-        string modifiedMessage = ModifyString(message, color);
+        if (_modifier is not null)
+        {
+            message = _modifier.Modify(message);
+        }
 
-        Console.Write(modifiedMessage);
+        Console.Write(message);
     }
 }

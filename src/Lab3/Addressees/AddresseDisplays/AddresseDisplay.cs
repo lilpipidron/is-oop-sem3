@@ -1,5 +1,5 @@
-using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.Displays;
+using Itmo.ObjectOrientedProgramming.Lab3.Displays.TextModifiers;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressees.AddresseDisplays;
@@ -7,16 +7,16 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Addressees.AddresseDisplays;
 public class AddresseDisplay : IAddressee
 {
     private readonly IDisplay _display;
-    private readonly Color _color;
+    private readonly ITextModifier _modifier;
 
-    public AddresseDisplay(IDisplay display, Color color)
+    public AddresseDisplay(IDisplay display, ITextModifier modifier)
     {
         _display = display;
-        _color = color;
+        _modifier = modifier;
     }
 
     public void TransferMessage(Message message)
     {
-        _display.PrintMessage(_color, $"Title:{message.Title}\nBody:{message.Body}\n");
+        _display.PrintMessage(_modifier, $"Title:{message.Title}\nBody:{message.Body}\n");
     }
 }

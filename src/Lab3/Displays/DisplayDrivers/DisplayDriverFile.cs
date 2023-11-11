@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab3.Displays.TextModifiers;
 
@@ -7,6 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Displays.DisplayDrivers;
 public class DisplayDriverFile : IDisplayDriver
 {
     private readonly string _filePath;
+    private ITextModifier? _modifier;
 
     public DisplayDriverFile(string filePath)
     {
@@ -18,17 +18,20 @@ public class DisplayDriverFile : IDisplayDriver
         File.Create(_filePath).Dispose();
     }
 
-    public string ModifyString(string str, Color color)
+    public void SetModifier(ITextModifier textModifier)
     {
-        var modifier = new TextColorModifier(color);
-        return modifier.Modify(str);
+        _modifier = textModifier;
     }
 
-    public void PrintMessage(Color color, string message)
+    public void PrintMessage(string message)
     {
         ClearOutput();
-        string modifiedMessage = ModifyString(message, color);
 
-        File.AppendText(_filePath).Write(modifiedMessage);
+        if (_modifier is not null)
+        {
+            message = _modifier.Modify(message);
+        }
+
+        File.AppendText(_filePath).Write(message);
     }
 }

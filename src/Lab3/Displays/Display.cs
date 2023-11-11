@@ -1,5 +1,5 @@
-using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.Displays.DisplayDrivers;
+using Itmo.ObjectOrientedProgramming.Lab3.Displays.TextModifiers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Displays;
 
@@ -12,9 +12,10 @@ public class Display : IDisplay
         _displayDriver = displayDriver;
     }
 
-    public PrintResult PrintMessage(Color color, string message)
+    public PrintResult PrintMessage(ITextModifier modifier, string message)
     {
-        _displayDriver.PrintMessage(color, message);
+        _displayDriver.SetModifier(modifier);
+        _displayDriver.PrintMessage(message);
         return new PrintResult.PrintSuccess();
     }
 }

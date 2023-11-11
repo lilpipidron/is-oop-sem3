@@ -1,8 +1,8 @@
-using System.Drawing;
+using Itmo.ObjectOrientedProgramming.Lab3.Displays.TextModifiers;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Displays;
 
 public interface IDisplay
 {
-    PrintResult PrintMessage(Color color, string message);
+    PrintResult PrintMessage(ITextModifier modifier, string message);
 }
