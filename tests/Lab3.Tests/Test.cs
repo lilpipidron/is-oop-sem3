@@ -59,7 +59,7 @@ public class Test
     }
 
     [Fact]
-    public void ForwardMessage_ShouldWriteLogInFile_WhenLoggingIsEnable()
+    public void TransferMessage_ShouldWriteLogInFile_WhenLoggingIsEnable()
     {
         var message = new Message("Title", "Body", 2);
         var user = new User();
@@ -70,12 +70,13 @@ public class Test
     }
 
     [Fact]
-    public void ForwardMessage_ShouldWriteMessageInConsole_WhenAddresseIsMessenger()
+    public void TransferMessage_ShouldWriteMessageInConsole_WhenAddresseIsMessenger()
     {
         var message = new Message("Title", "Body", 2);
-        IMessenger? messenger = Substitute.For<IMessenger>();
-        var addressee = new ProxyFilterAddressee(new AdresseeMessenger(messenger), 2);
+        IWriter? writerMock = Substitute.For<IWriter>();
+        var messenger = new Messenger(writerMock);
+        var addressee = new AdresseeMessenger(messenger);
         addressee.TransferMessage(message);
-        messenger.Received().PrintMessage(Arg.Any<string>());
+        writerMock.Received().Write(Arg.Any<string>());
     }
 }
