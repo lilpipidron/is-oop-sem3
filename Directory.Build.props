@@ -1,10 +1,12 @@
-<Project>
+﻿<Project>
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-
+	<PropertyGroup>    
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>	
+	</PropertyGroup>
     <PropertyGroup>
         <AnalysisLevel>latest</AnalysisLevel>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -33,6 +35,7 @@
     <ItemGroup>
         <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
     </ItemGroup>
+
     <PropertyGroup>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
