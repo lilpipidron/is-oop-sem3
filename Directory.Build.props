@@ -24,15 +24,20 @@
 
     <!-- ITMO is DEV code style analyzers -->
     <ItemGroup>
-        <PackageReference Include="SourceKit.Analyzers.Collections" />
-        <PackageReference Include="SourceKit.Analyzers.Enumerable" />
-        <PackageReference Include="SourceKit.Analyzers.MemberAccessibility" />
-        <PackageReference Include="SourceKit.Analyzers.Nullable" />
-        <PackageReference Include="SourceKit.Analyzers.Properties" />
+        <PackageReference Include="SourceKit.Analyzers.Collections"/>
+        <PackageReference Include="SourceKit.Analyzers.Enumerable"/>
+        <PackageReference Include="SourceKit.Analyzers.MemberAccessibility"/>
+        <PackageReference Include="SourceKit.Analyzers.Nullable"/>
+        <PackageReference Include="SourceKit.Analyzers.Properties"/>
     </ItemGroup>
 
     <!-- Make project internal classes visible to test projects with same name -->
     <ItemGroup>
-        <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+        <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
     </ItemGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
 </Project>
