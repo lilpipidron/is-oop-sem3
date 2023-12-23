@@ -74,6 +74,7 @@ dotnet_diagnostic.CA1725.severity = warning
 dotnet_diagnostic.CA1724.severity = suggestion
 dotnet_diagnostic.CA1716.severity = warning
 dotnet_diagnostic.CA1720.severity = warning
+dotnet_diagnostic.CA1062.severity = none
 
 # IDE0040: Add accessibility modifiers
 dotnet_diagnostic.IDE0040.severity = warning
@@ -93,5 +94,7 @@ dotnet_diagnostic.CS1591.severity = none
 dotnet_diagnostic.CA1040.severity = none
 
 dotnet_diagnostic.CA1062.severity = none
-
 dotnet_diagnostic.CA1034.severity = none
+dotnet_diagnostic.CA1062.severity = none
+
+dotnet_diagnostic.CA1707.severity = none

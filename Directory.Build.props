@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
@@ -35,4 +35,9 @@
     <ItemGroup>
         <InternalsVisibleTo Include="$(AssemblyName).Tests"/>
     </ItemGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
 </Project>
