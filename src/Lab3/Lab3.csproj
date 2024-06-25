@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <PackageReference Include="Crayon"/>
+        <PackageReference Include="NSubstitute" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <RootNamespace>Itmo.ObjectOrientedProgramming.Lab3</RootNamespace>
+
+
+    </PropertyGroup>
+
+
+</Project>
