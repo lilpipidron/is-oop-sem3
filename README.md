@@ -1,4 +1,4 @@
-# IS-OOP-SEM3
+# is-oop-sem3
 
 # Lab1
 <details><summary>Task</summary>
